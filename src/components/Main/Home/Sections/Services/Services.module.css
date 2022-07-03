@@ -21,6 +21,7 @@
   justify-content: center;
   padding: 1rem;
   overflow: hidden;
+  color: white;
 }
 
 .list-item::after {
@@ -43,7 +44,6 @@
 .list-item span {
   z-index: 3;
   width: fit-content;
-  color: white;
   position: relative;
   text-align: center;
 }
@@ -66,7 +66,7 @@
   top: 0;
   left: 0;
   z-index: 3;
-  background-color: rgba(253, 176, 111, 1);
+  background-color: #594e4c;
   transform: translateX(-100%);
   transition: transform 200ms ease;
   display: flex;
@@ -81,8 +81,7 @@
 
 .backdrop button {
   background: transparent;
-  color: black;
-  font-size: 1.3em;
+  font-size: inherit;;
 }
 
 @media screen and (max-width: 830px) {
