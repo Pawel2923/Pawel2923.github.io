@@ -38,7 +38,7 @@ const SignUpModal = (props) => {
             <Logo className={styles.logo} />
             <hr className={styles["horizontal-line"]} />
           </header>
-          <form onSubmit={submitHandler}>
+          <form onSubmit={submitHandler} className={styles.form}>
             <Input
               id="login"
               type="text"
