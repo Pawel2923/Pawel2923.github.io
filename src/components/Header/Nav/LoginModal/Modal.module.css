@@ -1,0 +1,37 @@
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  background-color: white;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.header {
+  width: 30%;
+  height: fit-content;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+.horizontal-line {
+  width: 100vw;
+  height: 1px;
+  background: #c4c4c4;
+  border: 0;
+  position: absolute;
+  left: 0;
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 700px) {
+  .header {
+    width: 50%;
+  }
+}

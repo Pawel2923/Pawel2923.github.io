@@ -1,0 +1,36 @@
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 4;
+  padding: 3rem;
+}
+
+.nav {
+  width: 100vw;
+  height: 100vh;
+  font-size: 1.5em;
+}
+
+.list {
+  list-style-type: none;
+}
+
+.list > li {
+  margin-bottom: 1rem;
+}
+
+.list > li:last-child {
+  margin-bottom: 0;
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: fit-content;
+  font-size: 2em;
+}
