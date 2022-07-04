@@ -14,7 +14,7 @@
 
 .about::before {
   content: "";
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   top: 0;
   left: 0;
@@ -70,7 +70,6 @@
 
 @media screen and (max-width: 830px) {
   .bottom button {
-    font-size: 1em;
     padding: 0.5rem 1rem;
   }
 

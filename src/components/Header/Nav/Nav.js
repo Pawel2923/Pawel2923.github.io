@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SignUpModal from "./LoginModal/SignUpModal";
-import SignInModal from "./LoginModal/SignInModal";
 import MobileNav from "./MobileNav";
 import styles from "./Nav.module.css";
 import optionStyles from "./Option.module.css";
@@ -8,8 +6,6 @@ import optionStyles from "./Option.module.css";
 const Nav = () => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [isMNavClosed, setIsMNavClosed] = useState(true);
-  const [showSignUp, setShowSignUp] = useState(false);
-  const [showSignIn, setShowSignIn] = useState(false);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -29,23 +25,14 @@ const Nav = () => {
     const section = document.getElementById(sectionId);
 
     if (section !== null) {
+      if (window.innerWidth <= 700) {
+        closeHandler(true);
+      }
+
       section.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
       console.error(`Sekcja o id ${sectionId} nie istnieje`);
     }
-  };
-
-  const signUpClickHandler = () => {
-    setShowSignUp(true);
-  };
-
-  const signInClickHandler = () => {
-    setShowSignIn(true);
-  };
-
-  const loginModalCloseHandler = () => {
-    setShowSignUp(false);
-    setShowSignIn(false);
   };
 
   let navContent = (
@@ -65,16 +52,6 @@ const Nav = () => {
         <button
           className={optionStyles["option-btn"]}
           onClick={() => {
-            scrollToSection("services");
-          }}
-        >
-          Usługi
-        </button>
-      </li>
-      <li className={optionStyles.option}>
-        <button
-          className={optionStyles["option-btn"]}
-          onClick={() => {
             scrollToSection("about");
           }}
         >
@@ -85,10 +62,20 @@ const Nav = () => {
         <button
           className={optionStyles["option-btn"]}
           onClick={() => {
-            scrollToSection("pricing");
+            scrollToSection("services");
           }}
         >
-          Cennik
+          Usługi
+        </button>
+      </li>
+      <li className={optionStyles.option}>
+        <button
+          className={optionStyles["option-btn"]}
+          onClick={() => {
+            scrollToSection("products");
+          }}
+        >
+          Produkty
         </button>
       </li>
       <li className={optionStyles.option}>
@@ -101,27 +88,6 @@ const Nav = () => {
           Kontakt
         </button>
       </li>
-      <li>
-        <div className={styles["vertical-line"]}></div>
-      </li>
-      <li>
-        <button
-          className={`${styles["sign-btn"]} ${styles["signup-btn"]}`}
-          onClick={signUpClickHandler}
-        >
-          Zarejestruj się
-        </button>
-      </li>
-      <li>
-        <button
-          className={`${styles["sign-btn"]} ${styles["signin-btn"]}`}
-          onClick={signInClickHandler}
-        >
-          Zaloguj się
-        </button>
-      </li>
-      {showSignUp && <SignUpModal onClose={loginModalCloseHandler} />}
-      {showSignIn && <SignInModal onClose={loginModalCloseHandler} />}
     </React.Fragment>
   );
 
@@ -129,9 +95,9 @@ const Nav = () => {
     navContent = (
       <React.Fragment>
         <li>
-          <i className="fa-solid fa-user" onClick={openHandler}></i>
+          <i className="fa-solid fa-bars" onClick={openHandler}></i>
         </li>
-        {!isMNavClosed && <MobileNav onClose={closeHandler} />}
+        {!isMNavClosed && <MobileNav onClose={closeHandler} scrollToSection={scrollToSection} closeHandler={closeHandler} />}
       </React.Fragment>
     );
   }

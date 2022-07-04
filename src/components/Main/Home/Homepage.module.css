@@ -1,4 +1,12 @@
 .section {
-  padding-left: 10vw;
-  padding-right: 10vw;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.section:not(:first-of-type) {
+  padding-top: 5%;
+}
+
+.section:last-of-type {
+  padding-bottom: 5%;
 }

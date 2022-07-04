@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   background-color: white;
@@ -10,8 +10,8 @@
 }
 
 .nav {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   font-size: 1.5em;
 }
 
@@ -29,8 +29,8 @@
 
 .close {
   position: absolute;
-  right: 1rem;
+  right: 5%;
   top: 1rem;
   width: fit-content;
-  font-size: 2em;
+  font-size: 1.5em;
 }

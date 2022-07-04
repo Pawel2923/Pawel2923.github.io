@@ -8,7 +8,6 @@ const Button = (props) => {
       className={`${styles.button} ${
         props.className !== undefined ? props.className : ""
       }`}
-      title={props.title !== undefined ? props.title : ""}
     >
       {props.children}
     </button>
