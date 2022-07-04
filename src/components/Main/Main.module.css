@@ -18,7 +18,7 @@
   letter-spacing: 1px;
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 700px) {
   .main {
     font-size: 0.9em;
   }

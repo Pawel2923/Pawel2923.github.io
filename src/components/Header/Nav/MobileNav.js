@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import styles from "./MobileNav.module.css";
 import optionStyles from "./Option.module.css";
 
-const MobileNav = (props) => {
+export const NavOverlay = (props) => {
   return ReactDOM.createPortal(
     <div className={styles.overlay}>
       <nav className={styles.nav}>
@@ -65,6 +65,38 @@ const MobileNav = (props) => {
       </nav>
     </div>,
     document.getElementById("mobile-nav-root")
+  );
+};
+
+const MobileNav = () => {
+  const [isMNavClosed, setIsMNavClosed] = useState(true);
+
+  const openHandler = () => {
+    setIsMNavClosed(false);
+  };
+
+  const closeHandler = (closeState) => {
+    setIsMNavClosed(closeState);
+  };
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+
+    if (section !== null) {
+      closeHandler(true);
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      console.error(`Sekcja o id ${sectionId} nie istnieje`);
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <li>
+        <i className="fa-solid fa-bars" onClick={openHandler}></i>
+      </li>
+      {!isMNavClosed && <NavOverlay scrollToSection={scrollToSection} closeHandler={closeHandler} />}
+    </React.Fragment>
   );
 };
 

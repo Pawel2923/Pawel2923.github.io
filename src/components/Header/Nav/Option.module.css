@@ -50,22 +50,12 @@
   transition: 200ms ease;
 }
 
-.option:hover::after {
-  width: 100%;
-}
-
 .option-btn:hover {
   cursor: pointer;
 }
 
-@media screen and (max-width: 830px) {
-  .option {
-    margin-right: 0.5rem;
-  }
-}
-
-@media screen and (max-width: 700px) {
+@media screen and (min-width: 700px) {
   .option:hover::after {
-    width: 0;
+    width: 100%;
   }
 }
