@@ -18,7 +18,6 @@ const Nav = () => {
         <button
           className={optionStyles["option-btn"]}
           onClick={() => {
-            alert("Naciśnięto Strona główna");
             window.location = "index.html";
           }}
         >

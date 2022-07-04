@@ -31,12 +31,12 @@
 }
 
 .option {
-  margin-right: 1rem;
   position: relative;
+  margin: 1rem 0 0 0;
 }
 
 .option:last-child {
-  margin-right: 0;
+  margin: 0;
 }
 
 .option::after {
@@ -55,6 +55,10 @@
 }
 
 @media screen and (min-width: 700px) {
+  .option {
+    margin: 0 1rem 0 0;
+  }
+
   .option:hover::after {
     width: 100%;
   }

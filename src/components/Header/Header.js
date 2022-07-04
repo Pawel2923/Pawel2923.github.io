@@ -22,14 +22,11 @@ const Header = () => {
       >
         <Logo className={styles.logo} />
       </a>
-      <nav>
+      <nav className={styles.nav}>
         <ul className={styles.list}>
-          {screenSize > 700 ? (
-            <Nav />
-          ) : (
-            <MobileNav />
-          )}
+          {screenSize > 700 ? <Nav /> : <MobileNav />}
         </ul>
+        <span>Strona główna</span>
       </nav>
     </header>
   );

@@ -13,24 +13,16 @@
   width: 100%;
   height: 100%;
   font-size: 1.5em;
+  margin-top: 1rem;
 }
 
 .list {
   list-style-type: none;
 }
 
-.list > li {
-  margin-bottom: 1rem;
-}
-
-.list > li:last-child {
-  margin-bottom: 0;
-}
-
 .close {
   position: absolute;
-  right: 5%;
-  top: 1rem;
+  inset: 1rem 0 0 5%;
   width: fit-content;
   font-size: 1.5em;
 }
