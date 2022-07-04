@@ -1,0 +1,8 @@
+.input {
+  padding: 0.3rem;
+  outline: inherit;
+}
+
+.input:focus {
+  outline-color: black;
+}

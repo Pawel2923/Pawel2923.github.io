@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.css";
-import Input from "components/UI/Form/Input";
+import Input from "components/UI/Input/Input";
 import Button from "components/UI/Button/Button";
 import { ReactComponent as Logo } from "components/Header/img/logo.svg";
 

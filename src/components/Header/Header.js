@@ -22,8 +22,8 @@ const Header = () => {
       >
         <Logo className={styles.logo} />
       </a>
-      <nav className={styles["nav-bar"]}>
-        <ul>
+      <nav>
+        <ul className={styles.list}>
           {screenSize > 700 ? (
             <Nav />
           ) : (
