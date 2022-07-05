@@ -32,11 +32,11 @@
 
 .option {
   position: relative;
-  margin: 1rem 0 0 0;
+  margin-bottom: 1rem;
 }
 
 .option:last-child {
-  margin: 0;
+  margin-bottom: 0;
 }
 
 .option::after {

@@ -1,24 +1,28 @@
 .header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 3% 5%;
+  padding-top: 1rem;
+  padding-bottom: 60px;
   font-size: 1.5em;
   background-color: white;
+  position: relative;
 }
 
 .nav {
-  align-self: flex-start;
-  height: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
-  background-color: white;
-  position: sticky;
-  position: -webkit-sticky;
+}
+
+.nav-Fixed {
+  position: fixed;
   top: 0;
-  left: 0;
+  background-color: white;
   z-index: 3;
+  padding: 2rem;
 }
 
 .nav > span {
@@ -30,7 +34,8 @@
   display: block;
   width: 20%;
   min-width: 40%;
-  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .logo {
@@ -50,10 +55,19 @@
 
 @media screen and (min-width: 700px) {
   .header {
-    padding: 1rem 10%;
+    padding: 1rem 10% 60px;
     font-size: 1em;
   }
+
   .image-wrapper {
     min-width: 15%;
+  }
+
+  .nav {
+    padding: 0 10%;
+  }
+
+  .nav > span {
+    display: none;
   }
 }
