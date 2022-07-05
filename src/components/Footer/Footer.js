@@ -1,8 +1,8 @@
 import styles from "./Footer.module.css";
 
-const Footer = (props) => {
+const Footer = () => {
     return (
-        <footer className={styles.footer} style={props.style}>
+        <footer className={styles.footer}>
             <p>Wszelkie prawa zastrzeżone &copy; 2022</p>
         </footer>
     );

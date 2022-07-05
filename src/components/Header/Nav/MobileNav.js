@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-
-import Footer from "components/Footer/Footer";
 import styles from "./MobileNav.module.css";
 import optionStyles from "./Option.module.css";
 
@@ -65,7 +63,9 @@ export const NavOverlay = (props) => {
           </li>
         </ul>
       </nav>
-      <Footer style={{backgroundColor: "transparent"}} />
+      <footer className={styles.footer}>
+        <p>Wszelkie prawa zastrzeżone &copy; 2022</p>
+      </footer>
     </div>,
     document.getElementById("mobile-nav-root")
   );

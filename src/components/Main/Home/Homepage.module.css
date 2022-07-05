@@ -6,7 +6,3 @@
 .section:not(:first-of-type) {
   padding-top: 5rem;
 }
-
-.section:last-of-type {
-  padding-bottom: 5rem;
-}

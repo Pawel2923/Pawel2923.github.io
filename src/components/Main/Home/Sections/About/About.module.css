@@ -7,8 +7,8 @@
   background-size: cover;
   background-position: center;
   color: white;
-  padding-top: 10vw;
-  padding-bottom: calc(10vw + 7rem);
+  padding-top: 10%;
+  padding-bottom: calc(10% + 7rem);
   position: relative;
 }
 
@@ -96,6 +96,8 @@
   }
 
   .about {
+    padding-top: 20%;
+    padding-bottom: calc(20% + 7rem);
     grid-template-columns: 1fr;
   }
 }
