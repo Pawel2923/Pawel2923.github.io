@@ -34,9 +34,9 @@
   margin-bottom: 0.5rem;
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 709px) {
   .list {
-    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
   }
 }
