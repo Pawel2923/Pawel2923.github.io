@@ -1,6 +1,7 @@
 .section {
   padding-left: 10%;
   padding-right: 10%;
+  background-color: #f6f6f6;
 }
 
 .section:not(:first-of-type) {

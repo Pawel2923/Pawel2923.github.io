@@ -8,7 +8,7 @@ const About = (props) => {
   };
 
   return (
-    <section className={`${styles.about} ${props.className}`} id="about">
+    <section className={`${styles.about} ${props.className}`}>
       <div className={styles.top}>
         <h1>O nas</h1>
         <h3>

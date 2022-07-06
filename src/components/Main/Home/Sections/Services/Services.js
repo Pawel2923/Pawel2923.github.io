@@ -8,7 +8,7 @@ import products from "./img/products.jpg";
 
 const Services = (props) => {
   return (
-    <section className={`${props.className} ${styles.services}`} id="services">
+    <section className={props.className}>
       <h1>Nasze usługi</h1>
       <ul className={styles.list}>
         <li className={styles["list-item"]}>

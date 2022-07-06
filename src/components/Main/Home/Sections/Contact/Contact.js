@@ -18,7 +18,7 @@ const Contact = (props) => {
   };
 
   return (
-    <section className={`${props.className} ${styles.contact}`} id="contact">
+    <section className={props.className}>
       <h1>Skontaktuj się z nami</h1>
       <ul className={styles.list}>
         <li className={styles["list-item"]}>
