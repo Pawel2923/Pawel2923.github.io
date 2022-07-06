@@ -13,10 +13,23 @@ const Services = (props) => {
       <ul className={styles.list}>
         <li className={styles["list-item"]}>
           <img src={trim} alt="Zarost zdjęcie" className={styles.image} />
-          <h3>Strzyżenie i modelowanie zarostu</h3>
+          <div className={styles["service-description"]}>
+            <h3>Strzyżenie i modelowanie brody</h3>
+            <br />
+            <p>
+              Strzyżenie i modelowanie brody w naszym to salonie to najlepszy
+              wybór, aby zadbać o swoją brodę.
+            </p>
+          </div>
         </li>
         <li className={styles["list-item"]}>
-          <h3>Strzyżenie i stylizowanie fryzury</h3>
+          <div className={styles["service-description"]}>
+            <h3>Strzyżenie i stylizowanie fryzury</h3>
+            <br />
+            <p>
+              Każdego klienta traktujemy indywidualnie, pomagamy dobrać fryzurę w zależności od typu urody, rodzajów włosów oraz panujących trendów.
+            </p>
+          </div>
           <img src={haircut} alt="Fryzura zdjęcie" className={styles.image} />
         </li>
         <li className={styles["list-item"]}>
