@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import styles from "./MobileNav.module.css";
+import { ReactComponent as Logo } from "../img/logo.svg";
 import optionStyles from "./Option.module.css";
 
 export const NavOverlay = (props) => {
@@ -9,6 +10,13 @@ export const NavOverlay = (props) => {
       <nav className={styles.nav}>
         <div className={styles.close}>
           <i className="fa-solid fa-xmark" onClick={props.closeHandler}></i>
+          <a
+            className={styles["image-wrapper"]}
+            href="index.html"
+            title="Przejdź na stronę główną"
+          >
+            <Logo className={styles.logo} />
+          </a>
         </div>
         <ul className={styles.list}>
           <li className={optionStyles.option}>

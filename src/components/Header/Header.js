@@ -23,43 +23,21 @@ const Header = () => {
     }, 100);
   }, []);
 
-  useEffect(() => {
-    const navBar = document.getElementById("navigation-bar");
-    let rect = navBar.getBoundingClientRect();
-
-    let scrolling = false;
-
-    window.addEventListener("scroll", () => {
-      scrolling = true;
-    });
-
-    setInterval(() => {
-      if (scrolling) {
-        scrolling = false;
-
-        if (window.scrollY >= rect.top) {
-          navBar.classList.add(styles["nav-Fixed"]);
-        } else {
-          navBar.classList.remove(styles["nav-Fixed"]);
-        }
-      }
-    }, 100);
-  }, []);
-
   return (
     <header className={styles.header}>
-      <a
-        className={styles["image-wrapper"]}
-        href="index.html"
-        title="Przejdź na stronę główną"
-      >
-        <Logo className={styles.logo} />
-      </a>
       <nav className={styles.nav} id="navigation-bar">
         <ul className={styles.list}>
           {screenSize > 700 ? <Nav /> : <MobileNav />}
         </ul>
-        <span>Strona główna</span>
+        <span>
+          <a
+            className={styles["image-wrapper"]}
+            href="index.html"
+            title="Przejdź na stronę główną"
+          >
+            <Logo className={styles.logo} />
+          </a>
+        </span>
       </nav>
     </header>
   );

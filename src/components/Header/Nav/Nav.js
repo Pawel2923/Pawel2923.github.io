@@ -1,25 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
+import PageContext from "components/store/page-context";
+import { ReactComponent as Logo } from "../img/logo.svg";
+import styles from "../Header.module.css";
 import optionStyles from "./Option.module.css";
 
 const Nav = () => {
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
+  const pageName = useContext(PageContext);
 
-    if (section !== null) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      console.error(`Sekcja o id ${sectionId} nie istnieje`);
-    }
+  const buttonClickHandler = (ev) => {
+    pageName.changeHandler(ev.target.name);
   };
 
   return (
     <React.Fragment>
+      <li className={optionStyles.logo}>
+        <a
+          className={styles["image-wrapper"]}
+          href="index.html"
+          title="Przejdź na stronę główną"
+        >
+          <Logo className={styles.logo} />
+        </a>
+      </li>
       <li className={optionStyles.option}>
         <button
           className={optionStyles["option-btn"]}
-          onClick={() => {
-            window.location = "index.html";
-          }}
+          name="home"
+          onClick={buttonClickHandler}
         >
           Strona główna
         </button>
@@ -27,9 +34,8 @@ const Nav = () => {
       <li className={optionStyles.option}>
         <button
           className={optionStyles["option-btn"]}
-          onClick={() => {
-            scrollToSection("about");
-          }}
+          name="home"
+          onClick={buttonClickHandler}
         >
           O nas
         </button>
@@ -37,9 +43,8 @@ const Nav = () => {
       <li className={optionStyles.option}>
         <button
           className={optionStyles["option-btn"]}
-          onClick={() => {
-            scrollToSection("services");
-          }}
+          name="home"
+          onClick={buttonClickHandler}
         >
           Usługi
         </button>
@@ -47,9 +52,8 @@ const Nav = () => {
       <li className={optionStyles.option}>
         <button
           className={optionStyles["option-btn"]}
-          onClick={() => {
-            scrollToSection("products");
-          }}
+          name="products"
+          onClick={buttonClickHandler}
         >
           Produkty
         </button>
@@ -57,9 +61,8 @@ const Nav = () => {
       <li className={optionStyles.option}>
         <button
           className={optionStyles["option-btn"]}
-          onClick={() => {
-            scrollToSection("contact");
-          }}
+          name="home"
+          onClick={buttonClickHandler}
         >
           Kontakt
         </button>
