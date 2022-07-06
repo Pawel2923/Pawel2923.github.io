@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ReactDOM from "react-dom";
-import styles from "./MobileNav.module.css";
+import PageContext from "components/store/page-context";
 import { ReactComponent as Logo } from "../img/logo.svg";
+import styles from "./MobileNav.module.css";
 import optionStyles from "./Option.module.css";
 
 export const NavOverlay = (props) => {
+  const pageName = useContext(PageContext);
+
+  const buttonClickHandler = (ev) => {
+    props.closeHandler();
+    pageName.changeHandler(ev.target.name);
+  };
+
   return ReactDOM.createPortal(
     <div className={styles.overlay}>
       <nav className={styles.nav}>
@@ -22,19 +30,17 @@ export const NavOverlay = (props) => {
           <li className={optionStyles.option}>
             <button
               className={optionStyles["option-btn"]}
-              onClick={() => {
-                window.location = "index.html";
-              }}
-            >
+              name="home"
+              onClick={buttonClickHandler}
+              >
               Strona główna
             </button>
           </li>
           <li className={optionStyles.option}>
             <button
               className={optionStyles["option-btn"]}
-              onClick={() => {
-                props.scrollToSection("about");
-              }}
+              name="about"
+              onClick={buttonClickHandler}
             >
               O nas
             </button>
@@ -42,9 +48,8 @@ export const NavOverlay = (props) => {
           <li className={optionStyles.option}>
             <button
               className={optionStyles["option-btn"]}
-              onClick={() => {
-                props.scrollToSection("services");
-              }}
+              name="products"
+              onClick={buttonClickHandler}
             >
               Usługi
             </button>
@@ -52,9 +57,8 @@ export const NavOverlay = (props) => {
           <li className={optionStyles.option}>
             <button
               className={optionStyles["option-btn"]}
-              onClick={() => {
-                props.scrollToSection("products");
-              }}
+              name="asd"
+              onClick={buttonClickHandler}
             >
               Produkty
             </button>
@@ -62,9 +66,8 @@ export const NavOverlay = (props) => {
           <li className={optionStyles.option}>
             <button
               className={optionStyles["option-btn"]}
-              onClick={() => {
-                props.scrollToSection("contact");
-              }}
+              name="home"
+              onClick={buttonClickHandler}
             >
               Kontakt
             </button>
@@ -87,25 +90,14 @@ const MobileNav = () => {
     setIsMNavClosed(false);
   };
 
-  const closeHandler = (closeState) => {
+  const closeHandler = () => {
     document.body.style.overflow = "initial";
     document.getElementsByClassName(
       `${styles.overlay}`
     )[0].style.animationName = styles.hideOverlay;
     setTimeout(() => {
-      setIsMNavClosed(closeState);
+      setIsMNavClosed(true);
     }, 200);
-  };
-
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-
-    if (section !== null) {
-      closeHandler(true);
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      console.error(`Sekcja o id ${sectionId} nie istnieje`);
-    }
   };
 
   return (
@@ -115,7 +107,6 @@ const MobileNav = () => {
       </li>
       {!isMNavClosed && (
         <NavOverlay
-          scrollToSection={scrollToSection}
           closeHandler={closeHandler}
         />
       )}
