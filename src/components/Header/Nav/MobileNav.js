@@ -48,7 +48,7 @@ export const NavOverlay = (props) => {
           <li className={optionStyles.option}>
             <button
               className={optionStyles["option-btn"]}
-              name="products"
+              name="services"
               onClick={buttonClickHandler}
             >
               Usługi
@@ -57,7 +57,7 @@ export const NavOverlay = (props) => {
           <li className={optionStyles.option}>
             <button
               className={optionStyles["option-btn"]}
-              name="asd"
+              name="products"
               onClick={buttonClickHandler}
             >
               Produkty
@@ -66,7 +66,7 @@ export const NavOverlay = (props) => {
           <li className={optionStyles.option}>
             <button
               className={optionStyles["option-btn"]}
-              name="home"
+              name="contact"
               onClick={buttonClickHandler}
             >
               Kontakt

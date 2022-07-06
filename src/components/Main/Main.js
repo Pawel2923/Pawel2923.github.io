@@ -11,6 +11,7 @@ const Main = () => {
     <main className={styles.main}>
       {pageName === "home" && <Homepage />}
       {pageName === "products" && <ProductsCatalog />}
+      {(pageName !== "home" && pageName !== "products") && <p>Ta strona jest w budowie. Prosimy wrócić później.</p>}
     </main>
   );
 };

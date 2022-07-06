@@ -7,8 +7,10 @@ import PageContext from "components/store/page-context";
 const App = () => {
   const [pageName, setPageName] = useState("home");
 
-  const pageNameChangeHandler = (value) => {
-    setPageName(value);
+  const pageNameChangeHandler = (value) => {   
+    if (value.trim() !== "") {
+      setPageName(value.toLowerCase());
+    }
   };
 
   return (

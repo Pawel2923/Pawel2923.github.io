@@ -5,10 +5,10 @@ import styles from "../Header.module.css";
 import optionStyles from "./Option.module.css";
 
 const Nav = () => {
-  const pageName = useContext(PageContext);
+  const pageCtx = useContext(PageContext);
 
   const buttonClickHandler = (ev) => {
-    pageName.changeHandler(ev.target.name);
+    pageCtx.changeHandler(ev.target.name);
   };
 
   return (
@@ -34,7 +34,7 @@ const Nav = () => {
       <li className={optionStyles.option}>
         <button
           className={optionStyles["option-btn"]}
-          name="home"
+          name="about"
           onClick={buttonClickHandler}
         >
           O nas
@@ -43,7 +43,7 @@ const Nav = () => {
       <li className={optionStyles.option}>
         <button
           className={optionStyles["option-btn"]}
-          name="home"
+          name="services"
           onClick={buttonClickHandler}
         >
           Usługi
@@ -61,7 +61,7 @@ const Nav = () => {
       <li className={optionStyles.option}>
         <button
           className={optionStyles["option-btn"]}
-          name="home"
+          name="contact"
           onClick={buttonClickHandler}
         >
           Kontakt
