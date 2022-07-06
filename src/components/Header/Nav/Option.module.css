@@ -1,35 +1,3 @@
-/* Reset button styles */
-.option-btn {
-  border: none;
-  outline: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  text-align: inherit;
-  background: transparent;
-
-  /* inherit font & color from ancestor */
-  color: inherit;
-  font: inherit;
-
-  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
-  line-height: normal;
-
-  /* Corrects font smoothing for webkit */
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-
-  /* Corrects inability to style clickable `input` types in iOS */
-  -webkit-appearance: none;
-}
-
-/* Remove excess padding and border in Firefox 4+ */
-.option-btn::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-
 .option {
   position: relative;
   margin-bottom: 1rem;
@@ -51,7 +19,12 @@
   transition: 200ms ease;
 }
 
-.option-btn:hover {
+.option a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.option a:hover {
   cursor: pointer;
 }
 
@@ -60,13 +33,8 @@
     margin: 0 1rem 0 0;
   }
 
-  .option:hover::after {
+  .option:hover::after,
+  .option:hover::after a.active {
     width: 100%;
-  }
-
-  .logo {
-    width: 20%;
-    max-width: 40%;
-    margin-right: 2rem;
   }
 }

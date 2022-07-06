@@ -1,71 +1,35 @@
-import React, { useContext } from "react";
-import PageContext from "components/store/page-context";
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as Logo } from "../img/logo.svg";
 import styles from "../Header.module.css";
 import optionStyles from "./Option.module.css";
 
 const Nav = () => {
-  const pageCtx = useContext(PageContext);
-
-  const buttonClickHandler = (ev) => {
-    pageCtx.changeHandler(ev.target.name);
-  };
-
   return (
     <React.Fragment>
-      <li className={optionStyles.logo}>
-        <a
+      <li>
+        <Link
+          to="/home"
           className={styles["image-wrapper"]}
-          href="index.html"
           title="Przejdź na stronę główną"
         >
-          <Logo className={styles.logo} />
-        </a>
+          <Logo />
+        </Link>
       </li>
       <li className={optionStyles.option}>
-        <button
-          className={optionStyles["option-btn"]}
-          name="home"
-          onClick={buttonClickHandler}
-        >
-          Strona główna
-        </button>
+        <NavLink to="/home">Strona główna</NavLink>
       </li>
       <li className={optionStyles.option}>
-        <button
-          className={optionStyles["option-btn"]}
-          name="about"
-          onClick={buttonClickHandler}
-        >
-          O nas
-        </button>
+        <NavLink to="/about">O nas</NavLink>
       </li>
       <li className={optionStyles.option}>
-        <button
-          className={optionStyles["option-btn"]}
-          name="services"
-          onClick={buttonClickHandler}
-        >
-          Usługi
-        </button>
+        <NavLink to="/services">Usługi</NavLink>
       </li>
       <li className={optionStyles.option}>
-        <button
-          className={optionStyles["option-btn"]}
-          name="products"
-          onClick={buttonClickHandler}
-        >
-          Produkty
-        </button>
+        <NavLink to="/products">Produkty</NavLink>
       </li>
       <li className={optionStyles.option}>
-        <button
-          className={optionStyles["option-btn"]}
-          name="contact"
-          onClick={buttonClickHandler}
-        >
-          Kontakt
-        </button>
+        <NavLink to="/contact">Kontakt</NavLink>
       </li>
     </React.Fragment>
   );

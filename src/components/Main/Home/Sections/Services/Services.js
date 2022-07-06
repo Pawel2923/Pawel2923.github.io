@@ -8,10 +8,10 @@ import products from "./img/products.jpg";
 
 const Services = (props) => {
   return (
-    <section className={props.className}>
+    <section className={`${props.className} ${styles.services}`}>
       <h1>Nasze usługi</h1>
-      <ul className={styles.list}>
-        <li className={styles["list-item"]}>
+      <ul>
+        <li>
           <img src={trim} alt="Zarost zdjęcie" className={styles.image} />
           <div className={styles["service-description"]}>
             <h3>Strzyżenie i modelowanie brody</h3>
@@ -22,7 +22,7 @@ const Services = (props) => {
             </p>
           </div>
         </li>
-        <li className={styles["list-item"]}>
+        <li>
           <div className={styles["service-description"]}>
             <h3>Strzyżenie i stylizowanie fryzury</h3>
             <br />
@@ -32,15 +32,15 @@ const Services = (props) => {
           </div>
           <img src={haircut} alt="Fryzura zdjęcie" className={styles.image} />
         </li>
-        <li className={styles["list-item"]}>
+        <li>
           <img src={procedure} alt="Zabiegi zdjęcie" className={styles.image} />
           <h3>Zabiegi pielęgnacyjne</h3>
         </li>
-        <li className={styles["list-item"]}>
+        <li>
           <h3>Doradztwo w zakresie pielęgnacji i stylizacji zarostu</h3>
           <img src={barber} alt="Doradztwo zdjęcie" className={styles.image} />
         </li>
-        <li className={styles["list-item"]}>
+        <li>
           <img src={products} alt="Produkty zdjęcie" className={styles.image} />
           <h3>Produkty pielęgnacyjne</h3>
         </li>

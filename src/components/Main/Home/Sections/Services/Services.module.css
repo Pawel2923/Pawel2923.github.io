@@ -1,11 +1,11 @@
-.list {
+.services ul {
   list-style-type: none;
   display: grid;
   margin-top: 1rem;
   row-gap: 3rem;
 }
 
-.list-item {
+.services ul li {
   width: 100%;
   position: relative;
   display: grid;
@@ -24,8 +24,13 @@
 }
 
 .service-description {
+  display: block;
   max-width: 80%;
   margin: 0 auto;
+}
+
+.service-description p {
+  display: none;
 }
 
 @media screen and (min-width: 700px) {
@@ -43,5 +48,9 @@
 
   .list-item:nth-child(2n) h3 {
     text-align: center;
+  }
+
+  .service-description p {
+    display: block;
   }
 }

@@ -1,76 +1,67 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import PageContext from "components/store/page-context";
+import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as Logo } from "../img/logo.svg";
 import styles from "./MobileNav.module.css";
 import optionStyles from "./Option.module.css";
 
 export const NavOverlay = (props) => {
-  const pageName = useContext(PageContext);
-
-  const buttonClickHandler = (ev) => {
+  const closeHandler = () => {
     props.closeHandler();
-    pageName.changeHandler(ev.target.name);
   };
 
   return ReactDOM.createPortal(
     <div className={styles.overlay}>
-      <nav className={styles.nav}>
+      <nav>
         <div className={styles.close}>
-          <i className="fa-solid fa-xmark" onClick={props.closeHandler}></i>
-          <a
+          <i className="fa-solid fa-xmark" onClick={closeHandler}></i>
+          <Link
+            to="/home"
             className={styles["image-wrapper"]}
-            href="index.html"
-            title="Przejdź na stronę główną"
           >
-            <Logo className={styles.logo} />
-          </a>
+            <Logo />
+          </Link>
         </div>
-        <ul className={styles.list}>
+        <ul>
           <li className={optionStyles.option}>
-            <button
-              className={optionStyles["option-btn"]}
-              name="home"
-              onClick={buttonClickHandler}
+            <NavLink
+              to="/home"
+              onClick={closeHandler}
               >
               Strona główna
-            </button>
+            </NavLink>
           </li>
           <li className={optionStyles.option}>
-            <button
-              className={optionStyles["option-btn"]}
-              name="about"
-              onClick={buttonClickHandler}
+            <NavLink
+              to="/about"
+              onClick={closeHandler}
             >
               O nas
-            </button>
+            </NavLink>
           </li>
           <li className={optionStyles.option}>
-            <button
-              className={optionStyles["option-btn"]}
-              name="services"
-              onClick={buttonClickHandler}
+            <NavLink
+              to="/services"
+              onClick={closeHandler}
             >
               Usługi
-            </button>
+            </NavLink>
           </li>
           <li className={optionStyles.option}>
-            <button
-              className={optionStyles["option-btn"]}
-              name="products"
-              onClick={buttonClickHandler}
+            <NavLink
+              to="/products"
+              onClick={closeHandler}
             >
               Produkty
-            </button>
+            </NavLink>
           </li>
           <li className={optionStyles.option}>
-            <button
-              className={optionStyles["option-btn"]}
-              name="contact"
-              onClick={buttonClickHandler}
+            <NavLink
+              to="/contact"
+              onClick={closeHandler}
             >
               Kontakt
-            </button>
+            </NavLink>
           </li>
         </ul>
       </nav>

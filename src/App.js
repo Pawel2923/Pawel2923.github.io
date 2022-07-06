@@ -1,29 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header/Header";
+import BackToTop from "components/UI/BackToTop/BackToTop";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
-import PageContext from "components/store/page-context";
+import PageInfoCtx from "components/store/page-size";
 
 const App = () => {
-  const [pageName, setPageName] = useState("home");
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  const [scrollPos, setScrollPos] = useState(window.scrollY);
 
-  const pageNameChangeHandler = (value) => {   
-    if (value.trim() !== "") {
-      setPageName(value.toLowerCase());
-    }
-  };
+  useEffect(() => {
+    let resizing = false;
+
+    window.addEventListener("resize", () => {
+      resizing = true;
+    });
+
+    setInterval(() => {
+      if (resizing) {
+        resizing = false;
+
+        setScreenSize(window.innerWidth);
+      }
+    }, 100);
+  }, []);
+
+  useEffect(() => {
+    let scrolling = false;
+
+    window.addEventListener("scroll", () => {
+      scrolling = true;
+    });
+
+    setInterval(() => {
+      if (scrolling) {
+        scrolling = false;
+
+        setScrollPos(window.scrollY);
+      }
+    }, 100);
+  }, []);
 
   return (
-    <PageContext.Provider
+    <PageInfoCtx.Provider
       value={{
-        pageName: pageName,
-        changeHandler: pageNameChangeHandler,
+        screenWidth: screenSize,
+        scrollFromTop: scrollPos,
       }}
     >
       <Header />
+      <BackToTop />
       <Main />
       <Footer />
-    </PageContext.Provider>
+    </PageInfoCtx.Provider>
   );
 };
 

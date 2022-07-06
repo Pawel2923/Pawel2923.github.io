@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
-import PageContext from "components/store/page-context";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import Button from "components/UI/Button/Button";
 import styles from "./Products.module.css";
 
 const Products = (props) => {
-  const pageCtx = useContext(PageContext);
+  const history = useHistory();
 
   const buttonClickHandler = () => {
-    pageCtx.changeHandler("products");
+    history.push("/products");
   };
-
+  // Wymiary logotypu w mobilnej wersji do poprawy
   return (
     <section className={`${props.className} ${styles.products}`}>
       <h1>Produkty</h1>
