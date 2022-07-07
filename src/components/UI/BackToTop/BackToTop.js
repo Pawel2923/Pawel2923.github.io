@@ -10,6 +10,8 @@ const BackToTop = () => {
     if (pageInfo.screenWidth > 700) {
       if (pageInfo.scrollFromTop > 400) {
         document.getElementsByClassName(styles.back)[0].style.display = "flex";
+      } else {
+        document.getElementsByClassName(styles.back)[0].style.display = "none";
       }
     }
   }, [pageInfo.screenWidth, pageInfo.scrollFromTop]);

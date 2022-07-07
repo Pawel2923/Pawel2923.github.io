@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../img/logo.svg";
 import styles from "../Header.module.css";
 import optionStyles from "./Option.module.css";
@@ -16,20 +16,20 @@ const Nav = () => {
           <Logo />
         </Link>
       </li>
-      <li className={optionStyles.option}>
-        <NavLink to="/home">Strona główna</NavLink>
+      <li>
+        <Link to="/home" className={optionStyles.option}>Strona główna</Link>
       </li>
-      <li className={optionStyles.option}>
-        <NavLink to="/about">O nas</NavLink>
+      <li>
+        <Link to="/about" className={optionStyles.option}>O nas</Link>
       </li>
-      <li className={optionStyles.option}>
-        <NavLink to="/services">Usługi</NavLink>
+      <li>
+        <Link to="/services" className={optionStyles.option}>Usługi</Link>
       </li>
-      <li className={optionStyles.option}>
-        <NavLink to="/products">Produkty</NavLink>
+      <li>
+        <Link to="/products" className={optionStyles.option}>Produkty</Link>
       </li>
-      <li className={optionStyles.option}>
-        <NavLink to="/contact">Kontakt</NavLink>
+      <li>
+        <Link to="/contact" className={optionStyles.option}>Kontakt</Link>
       </li>
     </React.Fragment>
   );

@@ -9,7 +9,7 @@ const Products = (props) => {
   const buttonClickHandler = () => {
     history.push("/products");
   };
-  // Wymiary logotypu w mobilnej wersji do poprawy
+  
   return (
     <section className={`${props.className} ${styles.products}`}>
       <h1>Produkty</h1>

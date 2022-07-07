@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../img/logo.svg";
 import styles from "./MobileNav.module.css";
 import optionStyles from "./Option.module.css";
@@ -23,45 +23,50 @@ export const NavOverlay = (props) => {
           </Link>
         </div>
         <ul>
-          <li className={optionStyles.option}>
-            <NavLink
+          <li>
+            <Link
               to="/home"
               onClick={closeHandler}
+              className={optionStyles.option}
               >
               Strona główna
-            </NavLink>
+            </Link>
           </li>
-          <li className={optionStyles.option}>
-            <NavLink
+          <li>
+            <Link
               to="/about"
               onClick={closeHandler}
+              className={optionStyles.option}
             >
               O nas
-            </NavLink>
+            </Link>
           </li>
-          <li className={optionStyles.option}>
-            <NavLink
+          <li>
+            <Link
               to="/services"
               onClick={closeHandler}
+              className={optionStyles.option}
             >
               Usługi
-            </NavLink>
+            </Link>
           </li>
-          <li className={optionStyles.option}>
-            <NavLink
+          <li>
+            <Link
               to="/products"
               onClick={closeHandler}
+              className={optionStyles.option}
             >
               Produkty
-            </NavLink>
+            </Link>
           </li>
-          <li className={optionStyles.option}>
-            <NavLink
+          <li>
+            <Link
               to="/contact"
               onClick={closeHandler}
+              className={optionStyles.option}
             >
               Kontakt
-            </NavLink>
+            </Link>
           </li>
         </ul>
       </nav>
