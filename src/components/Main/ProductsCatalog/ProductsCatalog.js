@@ -1,4 +1,5 @@
 import React from "react";
+// import image from "./img/products.jpg";
 import styles from "./ProductsCatalog.module.css";
 
 const ProductsCatalog = () => {
@@ -6,39 +7,63 @@ const ProductsCatalog = () => {
     <React.Fragment>
       <div className={styles["products-catalog"]}>
         <div className={styles.card}>
-          <img src="" alt="Zdjęcie produktu" />
-          <h3 className={styles["product-name"]}>Maszynka do przycinania</h3>
-          <p className={styles["product-desc"]}>Opis produktu</p>
+          <div className={styles["image-wrapper"]}>
+            {/* <img src={image} alt="Zdjęcie produktu" /> */}
+          </div>
+          <div className={styles["desc-wrapper"]}>
+            <h3>Maszynka do przycinania</h3>
+            <p>Opis produktu</p>
+          </div>
         </div>
+
         <div className={styles.card}>
-          <img src="" alt="Zdjęcie produktu" />
-          <h3 className={styles["product-name"]}>Maszynka do przycinania</h3>
-          <p className={styles["product-desc"]}>Opis produktu</p>
+          <div className={styles["image-wrapper"]}>
+            {/* <img src={image} alt="Zdjęcie produktu" /> */}
+          </div>
+          <div className={styles["desc-wrapper"]}>
+            <h3>Maszynka do przycinania</h3>
+            <p>Opis produktu</p>
+          </div>
         </div>
+
         <div className={styles.card}>
-          <img src="" alt="Zdjęcie produktu" />
-          <h3 className={styles["product-name"]}>Maszynka do przycinania</h3>
-          <p className={styles["product-desc"]}>Opis produktu</p>
+          <div className={styles["image-wrapper"]}>
+            {/* <img src={image} alt="Zdjęcie produktu" /> */}
+          </div>
+          <div className={styles["desc-wrapper"]}>
+            <h3>Maszynka do przycinania</h3>
+            <p>Opis produktu</p>
+          </div>
         </div>
+
         <div className={styles.card}>
-          <img src="" alt="Zdjęcie produktu" />
-          <h3 className={styles["product-name"]}>Maszynka do przycinania</h3>
-          <p className={styles["product-desc"]}>Opis produktu</p>
+          <div className={styles["image-wrapper"]}>
+            {/* <img src={image} alt="Zdjęcie produktu" /> */}
+          </div>
+          <div className={styles["desc-wrapper"]}>
+            <h3>Maszynka do przycinania</h3>
+            <p>Opis produktu</p>
+          </div>
         </div>
+
         <div className={styles.card}>
-          <img src="" alt="Zdjęcie produktu" />
-          <h3 className={styles["product-name"]}>Maszynka do przycinania</h3>
-          <p className={styles["product-desc"]}>Opis produktu</p>
+          <div className={styles["image-wrapper"]}>
+            {/* <img src={image} alt="Zdjęcie produktu" /> */}
+          </div>
+          <div className={styles["desc-wrapper"]}>
+            <h3>Maszynka do przycinania</h3>
+            <p>Opis produktu</p>
+          </div>
         </div>
+
         <div className={styles.card}>
-          <img src="" alt="Zdjęcie produktu" />
-          <h3 className={styles["product-name"]}>Maszynka do przycinania</h3>
-          <p className={styles["product-desc"]}>Opis produktu</p>
-        </div>
-        <div className={styles.card}>
-          <img src="" alt="Zdjęcie produktu" />
-          <h3 className={styles["product-name"]}>Maszynka do przycinania</h3>
-          <p className={styles["product-desc"]}>Opis produktu</p>
+          <div className={styles["image-wrapper"]}>
+            {/* <img src={image} alt="Zdjęcie produktu" /> */}
+          </div>
+          <div className={styles["desc-wrapper"]}>
+            <h3>Maszynka do przycinania</h3>
+            <p>Opis produktu</p>
+          </div>
         </div>
       </div>
     </React.Fragment>

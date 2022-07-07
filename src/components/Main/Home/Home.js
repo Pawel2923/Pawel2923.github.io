@@ -3,9 +3,9 @@ import About from "./Sections/About/About";
 import Products from "./Sections/Products/Products";
 import Services from "./Sections/Services/Services";
 import Contact from "./Sections/Contact/Contact";
-import styles from "./Homepage.module.css";
+import styles from "./Home.module.css";
 
-const Homepage = () => {
+const Home = () => {
   return (
     <React.Fragment>
       <About className={styles.section} />
@@ -16,4 +16,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Home;

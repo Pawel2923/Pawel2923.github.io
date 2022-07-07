@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Homepage from "./Home/Homepage";
+import Home from "./Home/Home";
 import ProductsCatalog from "./ProductsCatalog/ProductsCatalog";
 import styles from "./Main.module.css";
 
@@ -12,7 +12,7 @@ const Main = () => {
           <Redirect to="/home" />
         </Route>
         <Route path="/home">
-          <Homepage />
+          <Home />
         </Route>
         <Route path="/products">
           <ProductsCatalog />
