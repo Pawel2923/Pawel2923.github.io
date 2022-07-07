@@ -16,20 +16,20 @@ const Nav = () => {
           <Logo />
         </Link>
       </li>
-      <li>
-        <Link to="/home" className={optionStyles.option}>Strona główna</Link>
+      <li className={optionStyles.option}>
+        <Link to="/home">Strona główna</Link>
       </li>
-      <li>
-        <Link to="/about" className={optionStyles.option}>O nas</Link>
+      <li className={optionStyles.option}>
+        <Link to="/about">O nas</Link>
       </li>
-      <li>
-        <Link to="/services" className={optionStyles.option}>Usługi</Link>
+      <li className={optionStyles.option}>
+        <Link to="/services">Usługi</Link>
       </li>
-      <li>
-        <Link to="/products" className={optionStyles.option}>Produkty</Link>
+      <li className={optionStyles.option}>
+        <Link to="/products">Produkty</Link>
       </li>
-      <li>
-        <Link to="/contact" className={optionStyles.option}>Kontakt</Link>
+      <li className={optionStyles.option}>
+        <Link to="/contact">Kontakt</Link>
       </li>
     </React.Fragment>
   );

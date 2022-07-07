@@ -15,56 +15,33 @@ export const NavOverlay = (props) => {
       <nav>
         <div className={styles.close}>
           <i className="fa-solid fa-xmark" onClick={closeHandler}></i>
-          <Link
-            to="/home"
-            className={styles["image-wrapper"]}
-          >
+          <Link to="/home" className={styles["image-wrapper"]}>
             <Logo />
           </Link>
         </div>
         <ul>
-          <li>
-            <Link
-              to="/home"
-              onClick={closeHandler}
-              className={optionStyles.option}
-              >
+          <li className={optionStyles.option}>
+            <Link to="/home" onClick={closeHandler}>
               Strona główna
             </Link>
           </li>
-          <li>
-            <Link
-              to="/about"
-              onClick={closeHandler}
-              className={optionStyles.option}
-            >
+          <li className={optionStyles.option}>
+            <Link to="/about" onClick={closeHandler}>
               O nas
             </Link>
           </li>
-          <li>
-            <Link
-              to="/services"
-              onClick={closeHandler}
-              className={optionStyles.option}
-            >
+          <li className={optionStyles.option}>
+            <Link to="/services" onClick={closeHandler}>
               Usługi
             </Link>
           </li>
-          <li>
-            <Link
-              to="/products"
-              onClick={closeHandler}
-              className={optionStyles.option}
-            >
+          <li className={optionStyles.option}>
+            <Link to="/products" onClick={closeHandler}>
               Produkty
             </Link>
           </li>
-          <li>
-            <Link
-              to="/contact"
-              onClick={closeHandler}
-              className={optionStyles.option}
-            >
+          <li className={optionStyles.option}>
+            <Link to="/contact" onClick={closeHandler}>
               Kontakt
             </Link>
           </li>
@@ -101,11 +78,7 @@ const MobileNav = () => {
       <li>
         <i className="fa-solid fa-bars" onClick={openHandler}></i>
       </li>
-      {!isMNavClosed && (
-        <NavOverlay
-          closeHandler={closeHandler}
-        />
-      )}
+      {!isMNavClosed && <NavOverlay closeHandler={closeHandler} />}
     </React.Fragment>
   );
 };
