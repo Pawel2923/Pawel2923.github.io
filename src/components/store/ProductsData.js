@@ -5,6 +5,7 @@ const ProductsData = [
     description: "Opis produktu",
     image: "product1.jpg",
     details: "LOrem ipsum solor sit amet",
+    price: 345.235667535,
   },
   {
     id: "maszynka-do-przycinania2",
@@ -12,6 +13,7 @@ const ProductsData = [
     description: "Maszynka do przycinania",
     image: "product2.jpg",
     details: "Test2",
+    price: 345.00,
   },
   {
     id: "maszynka-do-przycinania3",
@@ -19,6 +21,7 @@ const ProductsData = [
     description: "Maszynka do przycinania",
     image: "product2.jpg",
     details: "Test2",
+    price: 345.00,
   },
   {
     id: "maszynka-do-przycinania4",
@@ -26,6 +29,7 @@ const ProductsData = [
     description: "Maszynka do przycinania",
     image: "product2.jpg",
     details: "Test2",
+    price: 345.00,
   },
   {
     id: "maszynka-do-przycinania5",
@@ -33,6 +37,7 @@ const ProductsData = [
     description: "Maszynka do przycinania",
     image: "product2.jpg",
     details: "Test2",
+    price: 345.00,
   },
   {
     id: "maszynka-do-przycinania6",
@@ -40,6 +45,7 @@ const ProductsData = [
     description: "Maszynka do przycinania",
     image: "product2.jpg",
     details: "Test2",
+    price: 345.02,
   },
   {
     id: "maszynka-do-przycinania7",
@@ -47,6 +53,7 @@ const ProductsData = [
     description: "Maszynka do przycinania",
     image: "product2.jpg",
     details: "Test2",
+    price: 345.00,
   },
   {
     id: "maszynka-do-przycinania8",
@@ -54,6 +61,7 @@ const ProductsData = [
     description: "Maszynka do przycinania",
     image: "product2.jpg",
     details: "Test2",
+    price: 345.00,
   },
 ];
 

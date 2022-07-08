@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./Home/Home";
 import ProductsCatalog from "./ProductsCatalog/ProductsCatalog";
-import ProductDetail from "./ProductsCatalog/ProductDetail";
+import ProductDetail from "./ProductsCatalog/ProductDetails/ProductDetail";
 import styles from "./Main.module.css";
 import ContactPage from "./ContactPage/ContactPage";
 
