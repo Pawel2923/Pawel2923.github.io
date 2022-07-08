@@ -20,9 +20,6 @@ const Nav = () => {
         <Link to="/home">Strona główna</Link>
       </li>
       <li className={optionStyles.option}>
-        <Link to="/about">O nas</Link>
-      </li>
-      <li className={optionStyles.option}>
         <Link to="/services">Usługi</Link>
       </li>
       <li className={optionStyles.option}>

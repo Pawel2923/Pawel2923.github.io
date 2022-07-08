@@ -1,23 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import image from "./img/products.jpg";
+import ProductsData from "./ProductsData";
 import styles from "./ProductsCatalog.module.css";
 
 const ProductsCatalog = () => {
   return (
     <React.Fragment>
       <div className={styles["products-catalog"]}>
-        <Link to="/products/test">
-          <div className={styles.card}>
-            <div className={styles["image-wrapper"]}>
-              <img src={image} alt="Zdjęcie produktu" />
+        {ProductsData.map((product) => (
+          <Link to={`products/${product.id}`} key={product.id}>
+            <div className={styles.card}>
+              <div className={styles["image-wrapper"]}>
+                {/* <img src={product.image} alt="Zdjęcie produktu" /> */}
+                <div className={styles.image} style={{backgroundImage: `url('/product-img/${product.image}')`}}></div>
+              </div>
+              <div className={styles["desc-wrapper"]}>
+                <h3>{product.name}</h3>
+                <p>{product.description}</p>
+              </div>
             </div>
-            <div className={styles["desc-wrapper"]}>
-              <h3>Maszynka do przycinania</h3>
-              <p>Opis produktu</p>
-            </div>
-          </div>
-        </Link>
+          </Link>
+        ))}
       </div>
     </React.Fragment>
   );

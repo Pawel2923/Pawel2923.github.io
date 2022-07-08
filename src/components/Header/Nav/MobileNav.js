@@ -26,11 +26,6 @@ export const NavOverlay = (props) => {
             </Link>
           </li>
           <li className={optionStyles.option}>
-            <Link to="/about" onClick={closeHandler}>
-              O nas
-            </Link>
-          </li>
-          <li className={optionStyles.option}>
             <Link to="/services" onClick={closeHandler}>
               Usługi
             </Link>
