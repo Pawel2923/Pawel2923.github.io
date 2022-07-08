@@ -37,14 +37,11 @@ const ProductDetail = () => {
       <div className={styles.description}>
         {isDataFound ? (
           <React.Fragment>
-            <div className="left">
+            <div className={styles.left}>
               <h1>{data.name}</h1>
-              <div
-                className={styles.image}
-                style={{ backgroundImage: `url('/product-img/${data.image}')` }}
-              ></div>
+              <img src={require(`../img/${data.image}`)} className={styles.image} alt="Zdjęcie produktu" />
             </div>
-            <div className="right">
+            <div className={styles.right}>
               <div>
                 {data.price.toFixed(2).toString().replace(/\./g, ",")} zł
               </div>

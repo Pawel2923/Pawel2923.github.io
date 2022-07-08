@@ -12,12 +12,22 @@
   display: grid;
   width: 100%;
   grid-template-columns: 2fr 1fr;
+  grid-template-rows: minmax(200px, 1fr);
   align-items: center;
   margin: 1rem 0;
 }
 
 .image {
   background-size: 100% 100%;
-  width: 20rem;
-  height: 30rem;
+  height: 100%;
+  width: 100%;
+}
+
+.description > div {
+  width: 100%;
+  height: 100%;
+}
+
+.right {
+  background: #ffffff;
 }

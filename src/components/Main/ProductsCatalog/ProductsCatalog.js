@@ -10,12 +10,7 @@ const ProductsCatalog = () => {
         <Link to={`products/${product.id}`} key={product.id}>
           <div className={styles.card}>
             <div className={styles["image-wrapper"]}>
-              <div
-                className={styles.image}
-                style={{
-                  backgroundImage: `url('/product-img/${product.image}')`,
-                }}
-              ></div>
+              <img src={require(`./img/${product.image}`)} alt="Zdjęcie produktu" className={styles.image} />
             </div>
             <div className={styles["desc-wrapper"]}>
               <h3>{product.name}</h3>
