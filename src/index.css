@@ -11,3 +11,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f6f6f6;
 }
+
+a {
+  color: #594e4c;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+a:hover,
+a:active {
+  color: black;
+}
