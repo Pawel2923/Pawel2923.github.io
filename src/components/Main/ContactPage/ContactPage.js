@@ -2,7 +2,9 @@ import Contact from "../Home/Sections/Contact/Contact";
 
 const ContactPage = () => {
     return (
-        <Contact />
+        <section style={{padding: "1rem 10%"}}>
+            <Contact />
+        </section>
     );
 };
 

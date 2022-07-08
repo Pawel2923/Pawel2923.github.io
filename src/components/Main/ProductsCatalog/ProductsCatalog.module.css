@@ -11,11 +11,12 @@
   height: 20rem;
   background-color: gainsboro;
   border: 1px solid black;
+  overflow: hidden;
 }
 
 .image-wrapper {
   width: 100%;
-  height: calc(80% - 2rem);
+  height: 10rem;
   overflow: hidden;
 }
 

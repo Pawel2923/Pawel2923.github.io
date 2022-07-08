@@ -1,5 +1,23 @@
+.products {
+  padding: 1rem 10%;
+}
+
+.products nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.description {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  margin: 1rem 0;
+}
+
 .image {
-    background-size: 100% 100%;
-    width: 20rem;
-    height: 30rem;
-  }
+  background-size: 100% 100%;
+  width: 20rem;
+  height: 30rem;
+}
