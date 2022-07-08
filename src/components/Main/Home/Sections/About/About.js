@@ -1,10 +1,13 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styles from "./About.module.css";
 import Button from "components/UI/Button/Button";
 
 const About = (props) => {
-  const btnClickHandler = () => {
-    console.log("Kliknięto");
+  const history = useHistory();
+
+  const buttonClickHandler = () => {
+    history.push("/services");
   };
 
   return (
@@ -23,7 +26,7 @@ const About = (props) => {
           <h3>Już teraz skorzystaj z naszej oferty</h3>
         </div>
         <div className={styles.right}>
-          <Button type="button" onClick={btnClickHandler}>
+          <Button type="button" onClick={buttonClickHandler}>
             Umów wizytę
           </Button>
         </div>

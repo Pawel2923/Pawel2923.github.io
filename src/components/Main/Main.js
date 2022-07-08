@@ -5,6 +5,7 @@ import ProductsCatalog from "./ProductsCatalog/ProductsCatalog";
 import ProductDetail from "./ProductsCatalog/ProductDetails/ProductDetail";
 import styles from "./Main.module.css";
 import ContactPage from "./ContactPage/ContactPage";
+import NotFound from "./NotFound/NotFound";
 
 const Main = () => {
   return (
@@ -24,6 +25,9 @@ const Main = () => {
         </Route>
         <Route path="/contact">
           <ContactPage />
+        </Route>
+        <Route path="*">
+          <NotFound />
         </Route>
       </Switch>
     </main>
