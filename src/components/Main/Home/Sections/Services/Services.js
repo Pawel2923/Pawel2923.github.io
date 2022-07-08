@@ -27,22 +27,43 @@ const Services = (props) => {
             <h3>Strzyżenie i stylizowanie fryzury</h3>
             <br />
             <p>
-              Każdego klienta traktujemy indywidualnie, pomagamy dobrać fryzurę w zależności od typu urody, rodzajów włosów oraz panujących trendów.
+              Każdego klienta traktujemy indywidualnie, pomagamy dobrać fryzurę
+              w zależności od typu urody, rodzajów włosów oraz panujących
+              trendów.
             </p>
           </div>
           <img src={haircut} alt="Fryzura zdjęcie" className={styles.image} />
         </li>
         <li>
           <img src={procedure} alt="Zabiegi zdjęcie" className={styles.image} />
-          <h3>Zabiegi pielęgnacyjne</h3>
+          <div className={styles["service-description"]}>
+            <h3>Zabiegi pielęgnacyjne</h3>
+            <br />
+            <p>
+              Pielęgnacja zarostu jest bardzo ważna dla zachowania
+              nieskazitelnego wyglądu.
+            </p>
+          </div>
         </li>
         <li>
-          <h3>Doradztwo w zakresie pielęgnacji i stylizacji zarostu</h3>
+          <div className={styles["service-description"]}>
+            <h3>Doradztwo w zakresie pielęgnacji i stylizacji zarostu</h3>
+            <br />
+            <p>
+              Masz kilka pytań? Nasi pracownicy pełni wiedzy odpowiedzą na nie.
+            </p>
+          </div>
           <img src={barber} alt="Doradztwo zdjęcie" className={styles.image} />
         </li>
         <li>
           <img src={products} alt="Produkty zdjęcie" className={styles.image} />
-          <h3>Produkty pielęgnacyjne</h3>
+          <div className={styles["service-description"]}>
+            <h3>Produkty pielęgnacyjne</h3>
+            <br />
+            <p>
+              Zakup potrzebne rzeczy do pielęgnacji twojej brody w domu.
+            </p>
+          </div>
         </li>
       </ul>
     </section>
