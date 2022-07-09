@@ -1,8 +1,14 @@
+.products-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+}
+
 .products-catalog {
   width: 80%;
-  margin: 2rem auto 0;
   display: grid;
   gap: 2rem;
+  margin: 0 auto;
 }
 
 .card {
@@ -33,4 +39,10 @@
 
 .desc-wrapper {
   padding: 1rem;
+}
+
+@media screen and (min-width: 700px) {
+  .products-container {
+    flex-direction: row;
+  }
 }

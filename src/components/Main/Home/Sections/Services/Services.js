@@ -61,7 +61,7 @@ const Services = (props) => {
             <h3>Produkty pielęgnacyjne</h3>
             <br />
             <p>
-              Zakup potrzebne rzeczy do pielęgnacji twojej brody w domu.
+              Zakup potrzebne produkty do pielęgnacji twojej brody w domu.
             </p>
           </div>
         </li>

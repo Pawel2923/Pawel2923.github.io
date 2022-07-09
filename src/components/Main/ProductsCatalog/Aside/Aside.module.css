@@ -1,0 +1,24 @@
+.aside {
+    height: fit-content;
+    padding: 2rem;
+    background-color: white;
+    margin-bottom: 2rem;
+}
+
+.aside ul {
+   list-style: none;
+}
+
+.aside ul li {
+    margin-bottom: 0.5rem;
+}
+
+.aside ul li:last-child {
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 700px) {
+    .aside {
+        margin-bottom: 0;
+    }
+}
