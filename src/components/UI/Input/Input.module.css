@@ -1,14 +1,15 @@
-.input input {
+.input {
   padding: 0.3rem;
   outline: none;
   border: 1px solid #767676;
   border-radius: 20px;
+  display: block;
 }
 
-.input input:focus {
+.input:focus {
   border-color: black;
 }
 
-.input label {
+.label {
   margin: 0.5rem;
 }

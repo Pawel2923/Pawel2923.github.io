@@ -13,14 +13,23 @@
     margin-bottom: 0;
 }
 
+.aside form input {
+    margin-bottom: 0.5rem;
+}
+
+.aside form input:last-child {
+    margin-bottom: 0;
+}
+
 .submit-btn {
-    background: #FDB06F;
-    color: #000;
     margin-top: 1rem;
 }
 
 @media screen and (min-width: 700px) {
     .aside {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 2rem;
         margin-bottom: 0;
     }
 }

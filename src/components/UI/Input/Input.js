@@ -9,16 +9,17 @@ const Input = (props) => {
   };
 
   return (
-    <div className={styles.input}>
-      <label htmlFor={props.id}>{props.inputName}</label>
+    <React.Fragment>
+      <label htmlFor={props.id} className={styles.label}>{props.inputName}</label>
       <input
         type={props.type}
         id={props.id}
         value={props.value}
         onChange={validateInput}
+        className={styles.input}
         required={!props.required && "disabled"}
       />
-    </div>
+    </React.Fragment>
   );
 };
 
