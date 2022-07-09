@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.69fa4ac0.css",
-    "main.js": "/static/js/main.061b2cf4.js",
+    "main.js": "/static/js/main.09eac35b.js",
     "static/media/products.jpg": "/static/media/products.4cfa8ebd41d2a7ec459c.jpg",
     "static/media/barber.jpg": "/static/media/barber.e8b55bec66b11a874c2b.jpg",
     "static/media/procedure.jpg": "/static/media/procedure.08b92a526c5ee558908f.jpg",
@@ -10,13 +10,13 @@
     "static/media/product2.jpg": "/static/media/product2.1d47c838c55177f6892b.jpg",
     "static/media/background.jpg": "/static/media/background.27c276e72cd30ce09db9.jpg",
     "static/media/trim.jpg": "/static/media/trim.aee7e7e740aabd20438f.jpg",
-    "static/media/logo.svg": "/static/media/logo.0e509937095292cd30cb5b05e4114d8e.svg",
+    "static/media/logo.svg": "/static/media/logo.e41054a6a8f10e8b82afe6792f80650e.svg",
     "index.html": "/index.html",
     "main.69fa4ac0.css.map": "/static/css/main.69fa4ac0.css.map",
-    "main.061b2cf4.js.map": "/static/js/main.061b2cf4.js.map"
+    "main.09eac35b.js.map": "/static/js/main.09eac35b.js.map"
   },
   "entrypoints": [
     "static/css/main.69fa4ac0.css",
-    "static/js/main.061b2cf4.js"
+    "static/js/main.09eac35b.js"
   ]
 }
