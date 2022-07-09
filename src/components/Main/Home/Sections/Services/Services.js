@@ -12,7 +12,7 @@ const Services = (props) => {
       <h1>Nasze usługi</h1>
       <ul>
         <li>
-          <img src={trim} alt="Zarost zdjęcie" className={styles.image} />
+          <img src={trim} alt="Zarost zdjęcie" className={styles.image} width="100%" height="auto" />
           <div className={styles["service-description"]}>
             <h3>Strzyżenie i modelowanie brody</h3>
             <br />
@@ -32,10 +32,10 @@ const Services = (props) => {
               trendów.
             </p>
           </div>
-          <img src={haircut} alt="Fryzura zdjęcie" className={styles.image} />
+          <img src={haircut} alt="Fryzura zdjęcie" className={styles.image} width="100%" height="auto" />
         </li>
         <li>
-          <img src={procedure} alt="Zabiegi zdjęcie" className={styles.image} />
+          <img src={procedure} alt="Zabiegi zdjęcie" className={styles.image} width="100%" height="auto" />
           <div className={styles["service-description"]}>
             <h3>Zabiegi pielęgnacyjne</h3>
             <br />
@@ -53,10 +53,10 @@ const Services = (props) => {
               Masz kilka pytań? Nasi pracownicy pełni wiedzy odpowiedzą na nie.
             </p>
           </div>
-          <img src={barber} alt="Doradztwo zdjęcie" className={styles.image} />
+          <img src={barber} alt="Doradztwo zdjęcie" className={styles.image} width="100%" height="auto" />
         </li>
         <li>
-          <img src={products} alt="Produkty zdjęcie" className={styles.image} />
+          <img src={products} alt="Produkty zdjęcie" className={styles.image} width="100%" height="auto" />
           <div className={styles["service-description"]}>
             <h3>Produkty pielęgnacyjne</h3>
             <br />
