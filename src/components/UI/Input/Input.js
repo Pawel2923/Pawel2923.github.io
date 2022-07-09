@@ -3,23 +3,22 @@ import styles from "./Input.module.css";
 
 const Input = (props) => {
   const validateInput = (ev) => {
-    if (ev.target.value.trim()) {
-      
+    if (ev.target.value.trim() !== "") {
+      props.onChange(ev);
     }
   };
 
   return (
-    <React.Fragment>
+    <div className={styles.input}>
       <label htmlFor={props.id}>{props.inputName}</label>
       <input
         type={props.type}
         id={props.id}
         value={props.value}
-        onChange={props.onChange}
-        className={styles.input}
+        onChange={validateInput}
         required={!props.required && "disabled"}
       />
-    </React.Fragment>
+    </div>
   );
 };
 

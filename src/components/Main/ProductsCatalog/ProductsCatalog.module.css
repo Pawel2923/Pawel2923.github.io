@@ -41,8 +41,29 @@
   padding: 1rem;
 }
 
+.sort select {
+  padding: 0.6em 1em;
+  outline: none;
+  border: 1px solid #767676;
+  border-radius: 20px;
+}
+
+.sort select:focus {
+  border-color: black;
+}
+
+.sort button[type="submit"] {
+  background: #fdb06f;
+  color: #000;
+  margin: 0 1rem;
+}
+
 @media screen and (min-width: 700px) {
   .products-container {
     flex-direction: row;
+  }
+
+  .products-catalog {
+    margin: 0 2rem;
   }
 }

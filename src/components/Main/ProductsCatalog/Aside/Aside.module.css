@@ -5,16 +5,18 @@
     margin-bottom: 2rem;
 }
 
-.aside ul {
-   list-style: none;
-}
-
-.aside ul li {
+.aside > * {
     margin-bottom: 0.5rem;
 }
 
-.aside ul li:last-child {
+.aside > *:last-child {
     margin-bottom: 0;
+}
+
+.submit-btn {
+    background: #FDB06F;
+    color: #000;
+    margin-top: 1rem;
 }
 
 @media screen and (min-width: 700px) {
