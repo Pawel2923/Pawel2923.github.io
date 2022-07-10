@@ -42,7 +42,8 @@ const Contact = (props) => {
         <li className={styles["list-item"]}>
           <div>
             <i className={`fa-solid fa-clock ${styles.icon}`}></i>
-            <span>Pon-Pią 9:00 - 19:00 Sob-Niedz: 10:00 - 20:00</span>
+            <p>Pon-Pią 9:00 - 19:00</p>
+            <p>Sob-Niedz: 10:00 - 20:00</p>
           </div>
         </li>
       </ul>

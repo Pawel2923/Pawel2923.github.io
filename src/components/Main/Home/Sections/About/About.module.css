@@ -7,8 +7,8 @@
   background-size: cover;
   background-position: center;
   color: white;
-  padding-top: 10%;
-  padding-bottom: calc(10% + 7rem);
+  padding-top: 10% !important;
+  padding-bottom: calc(10% + 7rem) !important;
   position: relative;
 }
 

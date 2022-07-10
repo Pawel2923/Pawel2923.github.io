@@ -5,6 +5,10 @@
   font-size: 0.9em;
 }
 
+.main section {
+  padding: 1rem 10%;
+}
+
 .main h3 {
   font-size: 1.1em;
   letter-spacing: 0.3px;
