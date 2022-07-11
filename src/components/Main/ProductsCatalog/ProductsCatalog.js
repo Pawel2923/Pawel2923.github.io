@@ -88,6 +88,8 @@ const ProductsCatalog = () => {
               <div className={styles["desc-wrapper"]}>
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
+                <p>Cena: {product.price.toFixed(2).toString().replace(/\./g, ",")} zł</p>
+                <p>Oceny: {product.score}</p>
               </div>
             </div>
           </Link>
