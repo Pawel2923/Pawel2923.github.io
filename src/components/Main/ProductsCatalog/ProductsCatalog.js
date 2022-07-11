@@ -7,8 +7,9 @@ import styles from "./ProductsCatalog.module.css";
 import ProductsData from "components/store/ProductsData";
 
 const ProductsCatalog = () => {
-  const [sortBy, setSortBy] = useState("none");
   const [productsList, setProductsList] = useState([...ProductsData]);
+  const [sortBy, setSortBy] = useState("none");
+  const [filter, setFilter] = useState(false);
 
   const sortProducts = () => {
     if (sortBy === "nameA") {
@@ -40,6 +41,10 @@ const ProductsCatalog = () => {
         return [...prevState.sort(SortFunctions.reviews)];
       });
     }
+
+    if (sortBy === "none") {
+      setProductsList([...ProductsData]);
+    }
   };
 
   const sortSelectChangeHandler = (ev) => {
@@ -52,9 +57,13 @@ const ProductsCatalog = () => {
     sortProducts();
   };
 
+  const filterProducts = () => {
+    setFilter(true);
+  };
+
   return (
     <div className={styles["products-container"]}>
-      <Aside />
+      <Aside onFilter={filterProducts} />
       <section className={styles["products-catalog"]}>
         <div className={styles.sort}>
           <form onSubmit={sortSubmitHandler}>
@@ -63,9 +72,7 @@ const ProductsCatalog = () => {
               onChange={sortSelectChangeHandler}
               defaultValue={sortBy}
             >
-              <option value="none" hidden={true} aria-hidden={true}>
-                Wybierz rodzaj
-              </option>
+              <option value="none">Trafność - największa</option>
               <option value="nameA">Nazwa (A-Z)</option>
               <option value="nameZ">Nazwa (Z-A)</option>
               <option value="priceMax">Cena - malejąco</option>
@@ -75,25 +82,58 @@ const ProductsCatalog = () => {
             <Button type="submit">Sortuj</Button>
           </form>
         </div>
-        {productsList.map((product) => (
-          <Link to={`products/${product.id}`} key={product.id}>
-            <div className={styles.card}>
-              <div className={styles["image-wrapper"]}>
-                <img
-                  src={require(`./img/${product.image}`)}
-                  alt="Zdjęcie produktu"
-                  className={styles.image}
-                />
+        {!filter &&
+          productsList.map((product) => (
+            <Link to={`products/${product.id}`} key={product.id}>
+              <div className={styles.card}>
+                <div className={styles["image-wrapper"]}>
+                  <img
+                    src={require(`./img/${product.image}`)}
+                    alt="Zdjęcie produktu"
+                    className={styles.image}
+                  />
+                </div>
+                <div className={styles["desc-wrapper"]}>
+                  <h3>{product.name}</h3>
+                  <div>{product.description}</div>
+                  <div>
+                    Cena:{" "}
+                    {product.price.toFixed(2).toString().replace(/\./g, ",")} zł
+                  </div>
+                  <div>
+                    Opinie:
+                    <div className={styles.rating}>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          product.score >= 20 && styles.checked
+                        }`}
+                      ></i>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          product.score >= 40 && styles.checked
+                        }`}
+                      ></i>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          product.score >= 60 && styles.checked
+                        }`}
+                      ></i>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          product.score >= 80 && styles.checked
+                        }`}
+                      ></i>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          product.score >= 95 && styles.checked
+                        }`}
+                      ></i>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className={styles["desc-wrapper"]}>
-                <h3>{product.name}</h3>
-                <p>{product.description}</p>
-                <p>Cena: {product.price.toFixed(2).toString().replace(/\./g, ",")} zł</p>
-                <p>Oceny: {product.score}</p>
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
       </section>
     </div>
   );

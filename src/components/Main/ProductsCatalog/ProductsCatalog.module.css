@@ -15,15 +15,28 @@
 .card {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  background-color: gainsboro;
-  border: 1px solid black;
+  grid-template-columns: auto 1fr;
+  background-color: #ffffff;
   overflow: hidden;
 }
 
+.rating {
+  font-size: 0.9em;
+}
+
+.star {
+  color: black;
+  -webkit-text-stroke: 1px black;
+  margin-left: 0.2rem;
+}
+
+.star.checked {
+  color: #fdb06f;
+}
+
 .image-wrapper {
-  width: 100%;
-  height: 10rem;
+  aspect-ratio: 1 / 1;
+  max-height: 10rem;
   overflow: hidden;
 }
 
@@ -46,6 +59,7 @@
   padding: 0.6em 1em;
   outline: none;
   border: 1px solid #767676;
+  background: #fff;
   border-radius: 20px;
 }
 
@@ -64,5 +78,10 @@
 
   .products-catalog {
     margin: 0 2rem;
+  }
+
+  .rating {
+    display: inline-block;
+    font-size: 1em;
   }
 }
