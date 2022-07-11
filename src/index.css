@@ -31,6 +31,8 @@ form label {
 
 form label > .text {
   position: relative;
+  display: block;
+  width: calc(100% - (0.5rem + 25px));
   left: calc(25px + 0.5rem);
 }
 
@@ -49,8 +51,8 @@ form input:focus {
 
 form input[type="checkbox"] {
   position: absolute;
-  opacity: 0;
   cursor: pointer;
+  opacity: 0;
   height: 0;
   width: 0;
 }
@@ -59,8 +61,8 @@ form label span.checkmark {
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   background: #fff;
   border: 1px solid black;
 }
@@ -80,8 +82,8 @@ form input[type="checkbox"]:checked ~ span.checkmark::after {
 }
 
 form label span.checkmark::after {
-  left: 35%;
-  top: 20%;
+  left: 5px;
+  top: 1px;
   width: 5px;
   height: 10px;
   border: solid white;

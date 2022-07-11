@@ -6,10 +6,18 @@
 
 .products-catalog {
   width: 80%;
-  display: grid;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   padding: 0 !important;
+}
+
+.products-catalog > * {
+  margin-bottom: 2rem;
+}
+
+.products-catalog > *:last-child {
+  margin-bottom: 0;
 }
 
 .card {

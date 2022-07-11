@@ -9,7 +9,6 @@ import ProductsData from "components/store/ProductsData";
 const ProductsCatalog = () => {
   const [productsList, setProductsList] = useState([...ProductsData]);
   const [sortBy, setSortBy] = useState("none");
-  const [filter, setFilter] = useState(false);
 
   const sortProducts = () => {
     if (sortBy === "nameA") {
@@ -47,6 +46,16 @@ const ProductsCatalog = () => {
     }
   };
 
+  const filterList = (filterBy, filterValue) => {
+    if (filterBy === "price") {
+      setProductsList([
+        ...ProductsData.filter((value) => {
+          return value.price >= filterValue;
+        }),
+      ]);
+    }
+  };
+
   const sortSelectChangeHandler = (ev) => {
     setSortBy(ev.target.value);
   };
@@ -57,8 +66,8 @@ const ProductsCatalog = () => {
     sortProducts();
   };
 
-  const filterProducts = () => {
-    setFilter(true);
+  const filterProducts = (filterBy, filterValue) => {
+    filterList(filterBy, filterValue);
   };
 
   return (
@@ -82,58 +91,57 @@ const ProductsCatalog = () => {
             <Button type="submit">Sortuj</Button>
           </form>
         </div>
-        {!filter &&
-          productsList.map((product) => (
-            <Link to={`products/${product.id}`} key={product.id}>
-              <div className={styles.card}>
-                <div className={styles["image-wrapper"]}>
-                  <img
-                    src={require(`./img/${product.image}`)}
-                    alt="Zdjęcie produktu"
-                    className={styles.image}
-                  />
+        {productsList.map((product) => (
+          <Link to={`products/${product.id}`} key={product.id}>
+            <div className={styles.card}>
+              <div className={styles["image-wrapper"]}>
+                <img
+                  src={require(`./img/${product.image}`)}
+                  alt="Zdjęcie produktu"
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles["desc-wrapper"]}>
+                <h3>{product.name}</h3>
+                <div>{product.description}</div>
+                <div>
+                  Cena:{" "}
+                  {product.price.toFixed(2).toString().replace(/\./g, ",")} zł
                 </div>
-                <div className={styles["desc-wrapper"]}>
-                  <h3>{product.name}</h3>
-                  <div>{product.description}</div>
-                  <div>
-                    Cena:{" "}
-                    {product.price.toFixed(2).toString().replace(/\./g, ",")} zł
-                  </div>
-                  <div>
-                    Opinie:
-                    <div className={styles.rating}>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          product.score >= 20 && styles.checked
-                        }`}
-                      ></i>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          product.score >= 40 && styles.checked
-                        }`}
-                      ></i>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          product.score >= 60 && styles.checked
-                        }`}
-                      ></i>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          product.score >= 80 && styles.checked
-                        }`}
-                      ></i>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          product.score >= 95 && styles.checked
-                        }`}
-                      ></i>
-                    </div>
+                <div>
+                  Opinie:
+                  <div className={styles.rating}>
+                    <i
+                      className={`fa-solid fa-star ${styles.star} ${
+                        product.score >= 20 && styles.checked
+                      }`}
+                    ></i>
+                    <i
+                      className={`fa-solid fa-star ${styles.star} ${
+                        product.score >= 40 && styles.checked
+                      }`}
+                    ></i>
+                    <i
+                      className={`fa-solid fa-star ${styles.star} ${
+                        product.score >= 60 && styles.checked
+                      }`}
+                    ></i>
+                    <i
+                      className={`fa-solid fa-star ${styles.star} ${
+                        product.score >= 80 && styles.checked
+                      }`}
+                    ></i>
+                    <i
+                      className={`fa-solid fa-star ${styles.star} ${
+                        product.score >= 95 && styles.checked
+                      }`}
+                    ></i>
                   </div>
                 </div>
               </div>
-            </Link>
-          ))}
+            </div>
+          </Link>
+        ))}
       </section>
     </div>
   );
