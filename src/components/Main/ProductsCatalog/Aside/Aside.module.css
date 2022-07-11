@@ -1,9 +1,9 @@
 .aside {
   width: fit-content;
   height: fit-content;
-  padding: 2rem;
-  background-color: white;
+  background: transparent;
   margin-bottom: 2rem;
+  margin-left: 2rem;
 }
 
 .aside h3 {
@@ -24,15 +24,23 @@
 }
 
 .price span {
-    display: block;
+  display: block;
 }
 
-.submit-btn {
-  margin-top: 1rem;
+.form-content-btn {
+  margin-right: 1rem;
+  background: #000;
+  color: #fff;
 }
 
 @media screen and (min-width: 700px) {
   .aside {
-    margin-bottom: 0;
+    background: #fff;
+    padding: 2rem;
+    margin: 0;
+  }
+
+  .submit-btn {
+    margin-top: 1rem;
   }
 }
