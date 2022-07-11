@@ -6,6 +6,7 @@ const ProductsData = [
     image: "product1.jpg",
     details: "LOrem ipsum solor sit amet",
     price: 824.2302,
+    score: 0,
   },
   {
     id: "maszynka-do-przycinania2",
@@ -14,6 +15,7 @@ const ProductsData = [
     image: "product2.jpg",
     details: "Test2",
     price: 2324.00,
+    score: 0,
   },
   {
     id: "maszynka-do-przycinania3",
@@ -22,6 +24,7 @@ const ProductsData = [
     image: "product2.jpg",
     details: "Test2",
     price: 354.30,
+    score: 0,
   },
   {
     id: "maszynka-do-przycinania4",
@@ -30,6 +33,7 @@ const ProductsData = [
     image: "product2.jpg",
     details: "Test2",
     price: 354.00,
+    score: 0,
   },
   {
     id: "maszynka-do-przycinania5",
@@ -46,6 +50,7 @@ const ProductsData = [
     image: "product2.jpg",
     details: "Test2",
     price: 345.02,
+    score: 0,
   },
   {
     id: "maszynka-do-przycinania7",
@@ -54,6 +59,7 @@ const ProductsData = [
     image: "product2.jpg",
     details: "Test2",
     price: 345.00,
+    score: 0,
   },
   {
     id: "maszynka-do-przycinania8",
@@ -62,6 +68,7 @@ const ProductsData = [
     image: "product2.jpg",
     details: "Test2",
     price: 345.00,
+    score: 0,
   },
 ];
 

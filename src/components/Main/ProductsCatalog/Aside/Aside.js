@@ -6,7 +6,7 @@ import styles from "./Aside.module.css";
 const Aside = (props) => {
   const filterSubmitHandler = (ev) => {
     ev.preventDefault();
-    props.onFilter();
+    // props.onFilter();
   };
 
   const inputChangeHandler = (ev) => {

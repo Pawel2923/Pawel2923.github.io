@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Aside from "./Aside/Aside";
 import Button from "components/UI/Button/Button";
@@ -7,72 +7,61 @@ import styles from "./ProductsCatalog.module.css";
 import ProductsData from "components/store/ProductsData";
 
 const ProductsCatalog = () => {
-  const [productsList, setProductsList] = useState([]);
-  const [sortBy, setSortBy] = useState(
-    localStorage.getItem("productsListSortBy")
-  );
-  const [filter, setFilter] = useState(false);
+  const [sortBy, setSortBy] = useState("none");
+  const [productsList, setProductsList] = useState([...ProductsData]);
 
   const sortProducts = () => {
-    if (
-      sortBy === "nameA" ||
-      localStorage.getItem("productsListSortBy") === "nameA"
-    ) {
-      setProductsList((prevList) => {
-        return prevList.sort(SortFunctions.nameA);
+    if (sortBy === "nameA") {
+      setProductsList((prevState) => {
+        return [...prevState.sort(SortFunctions.nameA)];
       });
     }
-    if (
-      sortBy === "nameZ" ||
-      localStorage.getItem("productsListSortBy") === "nameZ"
-    ) {
-      setProductsList((prevList) => {
-        return prevList.sort(SortFunctions.nameZ);
-      });
-    }
-    if (
-      sortBy === "priceMax" ||
-      localStorage.getItem("productsListSortBy") === "priceMax"
-    ) {
-      setProductsList((prevList) => {
-        return prevList.sort(SortFunctions.priceMax);
-      });
-    }
-  };
 
-  useEffect(() => {
-    if (localStorage.getItem("productsListSortBy") === null) {
-      localStorage.setItem("productsListSortBy", "none");
-      setProductsList([...ProductsData]);
+    if (sortBy === "nameZ") {
+      setProductsList((prevState) => {
+        return [...prevState.sort(SortFunctions.nameZ)];
+      });
     }
-  }, []);
 
-  const filterHandler = () => {
-    setFilter(true);
+    if (sortBy === "priceMax") {
+      setProductsList((prevState) => {
+        return [...prevState.sort(SortFunctions.priceMax)];
+      });
+    }
+
+    if (sortBy === "priceMin") {
+      setProductsList((prevState) => {
+        return [...prevState.sort(SortFunctions.priceMin)];
+      });
+    }
+
+    if (sortBy === "reviews") {
+      setProductsList((prevState) => {
+        return [...prevState.sort(SortFunctions.reviews)];
+      });
+    }
   };
 
   const sortSelectChangeHandler = (ev) => {
-    if (ev.target.value.trim() !== "") {
-      setSortBy(ev.target.value);
-    }
+    setSortBy(ev.target.value);
   };
 
   const sortSubmitHandler = (ev) => {
     ev.preventDefault();
-    localStorage.setItem("productsListSortBy", sortBy);
+
     sortProducts();
   };
 
   return (
     <div className={styles["products-container"]}>
-      <Aside onFilter={filterHandler} />
+      <Aside />
       <section className={styles["products-catalog"]}>
         <div className={styles.sort}>
           <form onSubmit={sortSubmitHandler}>
             <select
               id="sortBy"
               onChange={sortSelectChangeHandler}
-              defaultValue="none"
+              defaultValue={sortBy}
             >
               <option value="none" hidden={true} aria-hidden={true}>
                 Wybierz rodzaj
@@ -86,24 +75,23 @@ const ProductsCatalog = () => {
             <Button type="submit">Sortuj</Button>
           </form>
         </div>
-        {!filter &&
-          productsList.map((product) => (
-            <Link to={`products/${product.id}`} key={product.id}>
-              <div className={styles.card}>
-                <div className={styles["image-wrapper"]}>
-                  <img
-                    src={require(`./img/${product.image}`)}
-                    alt="Zdjęcie produktu"
-                    className={styles.image}
-                  />
-                </div>
-                <div className={styles["desc-wrapper"]}>
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                </div>
+        {productsList.map((product) => (
+          <Link to={`products/${product.id}`} key={product.id}>
+            <div className={styles.card}>
+              <div className={styles["image-wrapper"]}>
+                <img
+                  src={require(`./img/${product.image}`)}
+                  alt="Zdjęcie produktu"
+                  className={styles.image}
+                />
               </div>
-            </Link>
-          ))}
+              <div className={styles["desc-wrapper"]}>
+                <h3>{product.name}</h3>
+                <p>{product.description}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
       </section>
     </div>
   );
