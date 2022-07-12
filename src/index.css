@@ -6,7 +6,7 @@
 
 body {
   margin: 0;
-  font-family: 'Merriweather Sans', sans-serif;
+  font-family: "Merriweather Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f6f6f6;
@@ -48,19 +48,17 @@ form textarea {
   color: #000;
   border: 1px solid #5b5b5b;
   outline: none;
-}
-
-form input:invalid,
-form textarea:invalid {
-  border-color: #e10000;
+  transition: border-color 200ms ease;
+  position: relative;
 }
 
 .invalid {
   border-color: #e10000;
 }
 
-form input:focus {
-  border-color: #000;
+form input:focus,
+form textarea:focus {
+  border-color: #bfaea8;
 }
 
 form input[type="checkbox"] {
@@ -106,4 +104,3 @@ form label span.checkmark::after {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-
