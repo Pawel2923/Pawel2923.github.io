@@ -30,7 +30,7 @@ const Contact = (props) => {
         <li className={styles["list-item"]}>
           <a title="Wyślij email" href="mailto:wypoztczalnia123@domena.pl">
             <i className={`fa-solid fa-envelope ${styles.icon}`}></i>
-            <span>wypozyczalnia123@domena.pl</span>
+            <span>barber-shop21@domain.pl</span>
           </a>
         </li>
         <li className={styles["list-item"]}>
@@ -47,7 +47,7 @@ const Contact = (props) => {
           </div>
         </li>
       </ul>
-      {showMap && (
+      {(showMap || (props.showMap !== undefined && props.showMap)) && (
         <div className="map">
           <iframe
             title="Mapa"
@@ -59,7 +59,7 @@ const Contact = (props) => {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
-          <Button onClick={hideMapClickHandler}>Schowaj mapę</Button>
+          {!(props.showMap !== undefined && props.showMap) && <Button onClick={hideMapClickHandler}>Schowaj mapę</Button>}
         </div>
       )}
     </section>

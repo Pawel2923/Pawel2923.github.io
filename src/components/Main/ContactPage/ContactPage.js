@@ -1,10 +1,11 @@
-import Contact from "../Home/Sections/Contact/Contact";
+import Contact from "components/UI/Contact/Contact";
+import "./ContactPage.css";
 
 const ContactPage = () => {
     return (
-        <section>
-            <Contact />
-        </section>
+        <div className="contact-page">
+            <Contact showMap={true} />
+        </div>
     );
 };
 

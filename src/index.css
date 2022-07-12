@@ -50,6 +50,11 @@ form textarea {
   outline: none;
 }
 
+form input:invalid,
+form textarea:invalid {
+  border-color: #e10000;
+}
+
 .invalid {
   border-color: #e10000;
 }

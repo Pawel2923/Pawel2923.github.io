@@ -1,10 +1,10 @@
 import Button from "components/UI/Button/Button";
 import { useState } from "react";
-import styles from "./Services.module.css";
+import styles from "./Appointments.module.css";
 
 const checkValidity = (type, value) => {
   if (type === "text") {
-    if (value.trim() !== "") {
+    if (value.trim() !== "" && value.trim().length >= 3) {
       return true;
     } else {
       return false;
@@ -25,8 +25,11 @@ const checkValidity = (type, value) => {
 
   if (type === "phoneNumber") {
     if (value.trim() !== "") {
-      const re = /[0-9]{3} [0-9]{3} [0-9]{3}/g;
-      if (re.test(value)) {
+      const re1 = /[0-9]{3} [0-9]{3} [0-9]{3}/g;
+      const re2 = /[0-9]{3}[0-9]{3}[0-9]{3}/g;
+      const re3 = /[0-9]{3}-[0-9]{3}-[0-9]{3}/g;
+
+      if (re1.test(value) || re2.test(value) || re3.test(value)) {
         return true;
       } else {
         return false;
@@ -65,10 +68,69 @@ const Services = () => {
     setMessage(ev.target.value);
   };
 
+  const validateForm = () => {
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phoneNumber");
+    const messageInput = document.getElementById("message");
+
+    if (checkValidity("text", message)) {
+      if (messageInput.classList.contains("invalid")) {
+        messageInput.classList.remove("invalid");
+      }
+      console.log("Poprawne dane");
+    } else {
+      if (!messageInput.classList.contains("invalid")) {
+        messageInput.classList.add("invalid");
+        messageInput.focus();
+      }
+      console.warn("Niepoprawne dane");
+    }
+
+    if (checkValidity("phoneNumber", phoneNumber)) {
+      if (phoneInput.classList.contains("invalid")) {
+        phoneInput.classList.remove("invalid");
+      }
+      console.log("Poprawne dane");
+    } else {
+      if (!phoneInput.classList.contains("invalid")) {
+        phoneInput.classList.add("invalid");
+        phoneInput.focus();
+      }
+      console.warn("Niepoprawne dane");
+    }
+
+    if (checkValidity("email", email)) {
+      if (emailInput.classList.contains("invalid")) {
+        emailInput.classList.remove("invalid");
+      }
+      console.log("Poprawne dane");
+    } else {
+      if (!emailInput.classList.contains("invalid")) {
+        emailInput.classList.add("invalid");
+        emailInput.focus();
+      }
+      console.warn("Niepoprawne dane");
+    }
+
+    if (checkValidity("text", name)) {
+      if (nameInput.classList.contains("invalid")) {
+        nameInput.classList.remove("invalid");
+      }
+      console.log("Poprawne dane");
+    } else {
+      if (!nameInput.classList.contains("invalid")) {
+        nameInput.classList.add("invalid");
+        nameInput.focus();
+      }
+      console.warn("Niepoprawne dane");
+    }
+  };
+
   const submitHandler = (ev) => {
     ev.preventDefault();
 
-    console.log(name, email, phoneNumber, message);
+    validateForm();
 
     setName("");
     setEmail("");
@@ -88,8 +150,9 @@ const Services = () => {
             type="text"
             id="name"
             value={name}
+            // minLength="3"
             onChange={nameChangeHandler}
-            required
+            // required
           />
         </label>
         <label>
@@ -97,11 +160,12 @@ const Services = () => {
             E-mail <span className={styles.asterisk}>*</span>
           </p>
           <input
-            type="email"
+            // type="email"
+            type="text"
             id="email"
             value={email}
             onChange={emailChangeHandler}
-            required
+            // required
           />
         </label>
         <label>
@@ -109,12 +173,13 @@ const Services = () => {
             Nr telefonu <span className={styles.asterisk}>*</span>
           </p>
           <input
+            // type="tel"
             type="text"
             id="phoneNumber"
             value={phoneNumber}
-            pattern="[0-9]{3} [0-9]{3} [0-9]{3}"
+            // pattern="[0-9]{3} [0-9]{3} [0-9]{3}|[0-9]{3}[0-9]{3}[0-9]{3}|[0-9]{3}-[0-9]{3}-[0-9]{3}"
             onChange={phoneChangeHandler}
-            required
+            // required
           />
         </label>
         <label className={styles.message}>
@@ -123,6 +188,7 @@ const Services = () => {
           </p>
           <textarea
             id="message"
+            // minLength="3"
             onChange={messageChangeHandler}
             value={message}
           ></textarea>

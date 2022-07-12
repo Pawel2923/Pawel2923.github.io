@@ -26,7 +26,7 @@ export const NavOverlay = (props) => {
             </Link>
           </li>
           <li className={optionStyles.option}>
-            <Link to="/services" onClick={closeHandler}>
+            <Link to="/appointments" onClick={closeHandler}>
             Wizyty
             </Link>
           </li>

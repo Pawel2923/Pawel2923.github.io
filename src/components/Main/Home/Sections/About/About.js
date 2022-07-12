@@ -7,7 +7,7 @@ const About = (props) => {
   const history = useHistory();
 
   const buttonClickHandler = () => {
-    history.push("/services");
+    history.push("/appointments");
   };
 
   return (
