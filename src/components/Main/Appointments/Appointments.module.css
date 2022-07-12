@@ -28,11 +28,8 @@
 
 .message textarea {
     width: 100%;
-    min-width: calc(50% - 0.5rem);
-    max-width: 100%;
-    min-height: 50px;
     height: 250px;
-    max-height: 100vh;
+    resize: none;
 }
 
 .asterisk {

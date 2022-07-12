@@ -54,18 +54,42 @@ const Services = () => {
 
   const nameChangeHandler = (ev) => {
     setName(ev.target.value);
+
+    if (!ev.target.validity.valid) {
+      ev.target.classList.add("invalid");
+    } else {
+      ev.target.classList.remove("invalid");
+    }
   };
 
   const emailChangeHandler = (ev) => {
     setEmail(ev.target.value);
+
+    if (!ev.target.validity.valid) {
+      ev.target.classList.add("invalid");
+    } else {
+      ev.target.classList.remove("invalid");
+    }
   };
 
   const phoneChangeHandler = (ev) => {
     setPhoneNumber(ev.target.value);
+    
+    if (!ev.target.validity.valid) {
+      ev.target.classList.add("invalid");
+    } else {
+      ev.target.classList.remove("invalid");
+    }
   };
 
   const messageChangeHandler = (ev) => {
     setMessage(ev.target.value);
+    
+    if (!ev.target.validity.valid) {
+      ev.target.classList.add("invalid");
+    } else {
+      ev.target.classList.remove("invalid");
+    }
   };
 
   const validateForm = () => {
@@ -78,52 +102,44 @@ const Services = () => {
       if (messageInput.classList.contains("invalid")) {
         messageInput.classList.remove("invalid");
       }
-      console.log("Poprawne dane");
     } else {
       if (!messageInput.classList.contains("invalid")) {
         messageInput.classList.add("invalid");
         messageInput.focus();
       }
-      console.warn("Niepoprawne dane");
     }
 
     if (checkValidity("phoneNumber", phoneNumber)) {
       if (phoneInput.classList.contains("invalid")) {
         phoneInput.classList.remove("invalid");
       }
-      console.log("Poprawne dane");
     } else {
       if (!phoneInput.classList.contains("invalid")) {
         phoneInput.classList.add("invalid");
         phoneInput.focus();
       }
-      console.warn("Niepoprawne dane");
     }
 
     if (checkValidity("email", email)) {
       if (emailInput.classList.contains("invalid")) {
         emailInput.classList.remove("invalid");
       }
-      console.log("Poprawne dane");
     } else {
       if (!emailInput.classList.contains("invalid")) {
         emailInput.classList.add("invalid");
         emailInput.focus();
       }
-      console.warn("Niepoprawne dane");
     }
 
     if (checkValidity("text", name)) {
       if (nameInput.classList.contains("invalid")) {
         nameInput.classList.remove("invalid");
       }
-      console.log("Poprawne dane");
     } else {
       if (!nameInput.classList.contains("invalid")) {
         nameInput.classList.add("invalid");
         nameInput.focus();
       }
-      console.warn("Niepoprawne dane");
     }
   };
 
@@ -150,9 +166,9 @@ const Services = () => {
             type="text"
             id="name"
             value={name}
-            // minLength="3"
+            minLength="3"
             onChange={nameChangeHandler}
-            // required
+            required
           />
         </label>
         <label>
@@ -160,12 +176,11 @@ const Services = () => {
             E-mail <span className={styles.asterisk}>*</span>
           </p>
           <input
-            // type="email"
-            type="text"
+            type="email"
             id="email"
             value={email}
             onChange={emailChangeHandler}
-            // required
+            required
           />
         </label>
         <label>
@@ -173,13 +188,12 @@ const Services = () => {
             Nr telefonu <span className={styles.asterisk}>*</span>
           </p>
           <input
-            // type="tel"
-            type="text"
+            type="tel"
             id="phoneNumber"
             value={phoneNumber}
-            // pattern="[0-9]{3} [0-9]{3} [0-9]{3}|[0-9]{3}[0-9]{3}[0-9]{3}|[0-9]{3}-[0-9]{3}-[0-9]{3}"
+            pattern="[0-9]{3} [0-9]{3} [0-9]{3}|[0-9]{3}[0-9]{3}[0-9]{3}|[0-9]{3}-[0-9]{3}-[0-9]{3}"
             onChange={phoneChangeHandler}
-            // required
+            required
           />
         </label>
         <label className={styles.message}>
@@ -188,7 +202,7 @@ const Services = () => {
           </p>
           <textarea
             id="message"
-            // minLength="3"
+            minLength="3"
             onChange={messageChangeHandler}
             value={message}
           ></textarea>
