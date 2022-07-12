@@ -41,6 +41,7 @@ form label > .text {
 }
 
 form input,
+form select,
 form textarea {
   border-radius: 20px;
   padding: 0.6em 1em;
@@ -57,6 +58,7 @@ form textarea {
 }
 
 form input:focus,
+form select:focus,
 form textarea:focus {
   border-color: #bfaea8;
 }

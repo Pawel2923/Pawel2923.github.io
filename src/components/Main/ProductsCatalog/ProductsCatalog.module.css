@@ -63,18 +63,6 @@
   padding: 1rem;
 }
 
-.sort select {
-  padding: 0.6em 1em;
-  outline: none;
-  border: 1px solid #767676;
-  background: #fff;
-  border-radius: 20px;
-}
-
-.sort select:focus {
-  border-color: black;
-}
-
 .sort button[type="submit"] {
   display: block;
   margin-top: 1rem;
