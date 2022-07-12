@@ -40,13 +40,18 @@ form label > .text {
   left: calc(25px + 0.5rem);
 }
 
-form input {
+form input,
+form textarea {
   border-radius: 20px;
   padding: 0.6em 1em;
   background: #fff;
   color: #000;
   border: 1px solid #5b5b5b;
   outline: none;
+}
+
+.invalid {
+  border-color: #e10000;
 }
 
 form input:focus {
