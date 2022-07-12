@@ -46,12 +46,12 @@ const ProductsCatalog = () => {
     }
   };
 
-  const filterList = (filterBy, filterValue) => {
-    if (filterBy === "price") {
+  const filterProducts = (type, minValue, maxValue) => {
+    if (type === "price") {
       setProductsList([
-        ...ProductsData.filter((value) => {
-          return value.price >= filterValue;
-        }),
+        ...ProductsData.filter(
+          (value) => value.price >= minValue && value.price <= maxValue
+        ),
       ]);
     }
   };
@@ -64,10 +64,6 @@ const ProductsCatalog = () => {
     ev.preventDefault();
 
     sortProducts();
-  };
-
-  const filterProducts = (filterBy, filterValue) => {
-    filterList(filterBy, filterValue);
   };
 
   return (
