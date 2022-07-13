@@ -1,0 +1,43 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
+
+.card {
+    min-width: 50%;
+    min-height: 50%;
+    background: #f6f6f6;
+    border: 2px solid #594e4c;
+    border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 6;
+}
+
+.card h1 {
+    margin-bottom: 2rem;
+}
+
+.error {
+    border-color: #e10000;
+    color: #e10000;
+}   
+
+.close {
+    position: absolute;
+    font-size: 2em;
+    cursor: pointer;
+    top: 2rem;
+    right: 2rem;
+}

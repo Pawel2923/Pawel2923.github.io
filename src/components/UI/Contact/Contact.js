@@ -28,9 +28,9 @@ const Contact = (props) => {
           </Button>
         </li>
         <li className={styles["list-item"]}>
-          <a title="Wyślij email" href="mailto:wypoztczalnia123@domena.pl">
+          <a title="Wyślij email" href="mailto:barber-shop-react@outlook.com">
             <i className={`fa-solid fa-envelope ${styles.icon}`}></i>
-            <span>barber-shop21@domain.pl</span>
+            <span>barber-shop-react@outlook.com</span>
           </a>
         </li>
         <li className={styles["list-item"]}>

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import Button from "components/UI/Button/Button";
+import Message from "components/UI/Message/Message";
 import styles from "./Appointments.module.css";
 
 const checkValidity = (type, value) => {
@@ -52,6 +53,14 @@ const Services = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
+
+  const [messageState, setMessageState] = useState({
+    show: false,
+    error: false,
+    title: "",
+    message: "",
+  });
+  const [showLoading, setShowLoading] = useState(false);
 
   const nameChangeHandler = (ev) => {
     setName(ev.target.value);
@@ -159,23 +168,45 @@ const Services = () => {
   const submitHandler = (ev) => {
     ev.preventDefault();
 
+    
+    setShowLoading(true);
+
+    setTimeout(() => {
+      setShowLoading(false);
+    }, 6000);
+
     if (validateForm()) {
-      emailjs.send(
-        "service_mt81aag",
-        "template_j69osgm",
-        {
-          from_name: name,
-          from_email: email,
-          reply_to: email,
-          message: message,
-          phone_number: phoneNumber
-        },
-        "vSOVWrVLzBl721pXk"
-      ).then((result) => {
-        console.log(result.text);
-      }, (error) => {
-        console.error(error.text);
-      });
+      emailjs
+        .send(
+          "service_mt81aag",
+          "template_j69osgm",
+          {
+            from_name: name,
+            from_email: email,
+            reply_to: email,
+            message: message,
+            phone_number: phoneNumber,
+          },
+          "vSOVWrVLzBl721pXk"
+        )
+        .then(
+          () => {
+            setMessageState({
+              show: true,
+              error: false,
+              title: "Wysłano wiadomość",
+              message: "Twoja wiadomość została pomyślnie przesłana.",
+            });
+          },
+          (error) => {
+            setMessage({
+              show: true,
+              error: true,
+              title: `Wystąpił błąd ${error.status}`,
+              message: "Nie udało się wysłać twojej wiadomości. Sprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie później."
+            })
+          }
+        );
     } else {
       console.warn("Błąd walidacji maila");
     }
@@ -186,63 +217,82 @@ const Services = () => {
     setMessage("");
   };
 
+  const messageCloseHandler = () => {
+    setMessageState((prevState) => {
+      let newState = { ...prevState };
+      newState.show = false;
+      return newState;
+    });
+  };
+
   return (
-    <section className={styles.services}>
-      <h1>Umów się na wizytę</h1>
-      <form onSubmit={submitHandler}>
-        <label className={styles.name}>
-          <p>
-            Imię i nazwisko <span className={styles.asterisk}>*</span>
-          </p>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            minLength="3"
-            onChange={nameChangeHandler}
-            required
-          />
-        </label>
-        <label>
-          <p>
-            E-mail <span className={styles.asterisk}>*</span>
-          </p>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={emailChangeHandler}
-            required
-          />
-        </label>
-        <label>
-          <p>
-            Nr telefonu <span className={styles.asterisk}>*</span>
-          </p>
-          <input
-            type="tel"
-            id="phoneNumber"
-            value={phoneNumber}
-            pattern="[0-9]{3} [0-9]{3} [0-9]{3}|[0-9]{3}[0-9]{3}[0-9]{3}|[0-9]{3}-[0-9]{3}-[0-9]{3}"
-            onChange={phoneChangeHandler}
-            required
-          />
-        </label>
-        <label className={styles.message}>
-          <p>
-            Wiadomość <span className={styles.asterisk}>*</span>
-          </p>
-          <textarea
-            id="message"
-            minLength="3"
-            onChange={messageChangeHandler}
-            value={message}
-          ></textarea>
-        </label>
-        <input type="date" aria-hidden={true} hidden={true} />
-        <Button type="submit">Wyślij</Button>
-      </form>
-    </section>
+    <React.Fragment>
+      <section className={styles.services}>
+        <h1>Umów się na wizytę</h1>
+        <form onSubmit={submitHandler}>
+          <label className={styles.name}>
+            <p>
+              Imię i nazwisko <span className={styles.asterisk}>*</span>
+            </p>
+            <input
+              type="text"
+              id="name"
+              placeholder="np. Adam Kowalski"
+              value={name}
+              minLength="3"
+              onChange={nameChangeHandler}
+              required
+            />
+          </label>
+          <label>
+            <p>
+              E-mail <span className={styles.asterisk}>*</span>
+            </p>
+            <input
+              type="email"
+              id="email"
+              placeholder="np. email@gmail.com"
+              value={email}
+              onChange={emailChangeHandler}
+              required
+            />
+          </label>
+          <label>
+            <p>
+              Nr telefonu <span className={styles.asterisk}>*</span>
+            </p>
+            <input
+              type="tel"
+              id="phoneNumber"
+              placeholder="np. 123 456 789"
+              value={phoneNumber}
+              pattern="[0-9]{3} [0-9]{3} [0-9]{3}|[0-9]{3}[0-9]{3}[0-9]{3}|[0-9]{3}-[0-9]{3}-[0-9]{3}"
+              onChange={phoneChangeHandler}
+              required
+            />
+          </label>
+          <label className={styles.message}>
+            <p>
+              Wiadomość <span className={styles.asterisk}>*</span>
+            </p>
+            <textarea
+              id="message"
+              minLength="3"
+              value={message}
+              onChange={messageChangeHandler}
+            ></textarea>
+          </label>
+          <Button type="submit">Wyślij</Button>
+        </form>
+      </section>
+      {showLoading && <i className={`fa-solid fa-spinner ${styles.loading}`}></i>}
+      {messageState.show && (
+        <Message error={messageState.error} onClose={messageCloseHandler}>
+          <h1>{messageState.title}</h1>
+          <p>{messageState.message}</p>
+        </Message>
+      )}
+    </React.Fragment>
   );
 };
 
