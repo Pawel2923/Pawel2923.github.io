@@ -3,10 +3,11 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./Home/Home";
 import ProductsCatalog from "./ProductsCatalog/ProductsCatalog";
 import ProductDetail from "./ProductsCatalog/ProductDetails/ProductDetail";
-import styles from "./Main.module.css";
 import ContactPage from "./ContactPage/ContactPage";
 import NotFound from "./NotFound/NotFound";
 import Appointments from "./Appointments/Appointments";
+import Cart from "./Cart/Cart";
+import styles from "./Main.module.css";
 
 const Main = () => {
   return (
@@ -26,6 +27,9 @@ const Main = () => {
         </Route>
         <Route path="/products/:productId">
           <ProductDetail />
+        </Route>
+        <Route path="/cart">
+          <Cart />
         </Route>
         <Route path="/contact">
           <ContactPage />

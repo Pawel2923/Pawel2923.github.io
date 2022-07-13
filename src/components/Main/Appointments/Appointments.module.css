@@ -1,4 +1,5 @@
-.services h1 {
+.services h1,
+.services h3 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }

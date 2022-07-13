@@ -7,6 +7,7 @@ import styles from "./ProductDetail.module.css";
 
 const ProductDetail = () => {
   const params = useParams();
+  // const history = useHistory();
   let isDataFound = false;
   let data = {};
 
@@ -17,6 +18,19 @@ const ProductDetail = () => {
       break;
     }
   }
+
+  const buttonClickHandler = () => {
+    let old = localStorage.getItem("inCart");
+    if (old !== null) {
+      if (!old.includes(params.productId)) {
+        localStorage.setItem("inCart", `${old},${params.productId}`);
+      } else {
+        console.error("Ten produkt został już dodany");
+      }
+    } else {
+      localStorage.setItem("inCart", params.productId);
+    }
+  };
 
   return (
     <section className={styles["products"]}>
@@ -39,13 +53,17 @@ const ProductDetail = () => {
           <React.Fragment>
             <div className={styles.left}>
               <h1>{data.name}</h1>
-              <img src={require(`../img/${data.image}`)} className={styles.image} alt="Zdjęcie produktu" />
+              <img
+                src={require(`../img/${data.image}`)}
+                className={styles.image}
+                alt="Zdjęcie produktu"
+              />
             </div>
             <div className={styles.right}>
               <div>
                 {data.price.toFixed(2).toString().replace(/\./g, ",")} zł
               </div>
-              <Button>Dodaj do koszyka</Button>
+              <Button onClick={buttonClickHandler}>Dodaj do koszyka</Button>
             </div>
           </React.Fragment>
         ) : (

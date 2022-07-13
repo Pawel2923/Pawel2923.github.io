@@ -34,9 +34,9 @@ const Contact = (props) => {
           </a>
         </li>
         <li className={styles["list-item"]}>
-          <a title="Zadzwoń" href="tel:+48 123 456 789">
+          <a title="Zadzwoń" href="tel:+00 123 000 000">
             <i className={`fa-solid fa-phone ${styles.icon}`}></i>
-            <span>+48 123 456 789</span>
+            <span>+00 123 000 000</span>
           </a>
         </li>
         <li className={styles["list-item"]}>

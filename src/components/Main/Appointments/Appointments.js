@@ -168,7 +168,6 @@ const Services = () => {
   const submitHandler = (ev) => {
     ev.preventDefault();
 
-    
     setShowLoading(true);
 
     setTimeout(() => {
@@ -203,8 +202,9 @@ const Services = () => {
               show: true,
               error: true,
               title: `Wystąpił błąd ${error.status}`,
-              message: "Nie udało się wysłać twojej wiadomości. Sprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie później."
-            })
+              message:
+                "Nie udało się wysłać twojej wiadomości. Sprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie później.",
+            });
           }
         );
     } else {
@@ -229,6 +229,12 @@ const Services = () => {
     <React.Fragment>
       <section className={styles.services}>
         <h1>Umów się na wizytę</h1>
+        <h3>
+          Wyślij wiadomość lub zadzwoń na{" "}
+          <a title="Zadzwoń" href="tel:+00 123 000 000">
+            +00 123 000 000
+          </a>
+        </h3>
         <form onSubmit={submitHandler}>
           <label className={styles.name}>
             <p>
@@ -285,7 +291,9 @@ const Services = () => {
           <Button type="submit">Wyślij</Button>
         </form>
       </section>
-      {showLoading && <i className={`fa-solid fa-spinner ${styles.loading}`}></i>}
+      {showLoading && (
+        <i className={`fa-solid fa-spinner ${styles.loading}`}></i>
+      )}
       {messageState.show && (
         <Message error={messageState.error} onClose={messageCloseHandler}>
           <h1>{messageState.title}</h1>
