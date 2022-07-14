@@ -7,6 +7,7 @@ import styles from "./Cart.module.css";
 const Cart = () => {
   const history = useHistory();
   const [inCart, setInCart] = useState([]);
+  const [productsList, setProductsList] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("inCart") !== null) {
@@ -18,37 +19,17 @@ const Cart = () => {
     }
   }, []);
 
-  const mapProducts = (product) => {
-    let id = null;
-
+  useEffect(() => {
     for (let inCartId of inCart) {
-      if (product.id === inCartId) {
-        id = product.id;
+      for (let product of  ProductsData) {
+        if (inCartId === product.id) {
+          setProductsList((prevList) => {
+            return [product, ...prevList];
+          });
+        }
       }
     }
-
-    let returnValue = "";
-
-    if (product.id === id) {
-      returnValue = (
-        <li key={product.id} className={styles.product}>
-          <div className={styles.left}>
-            <img
-              src={require(`components/store/productsImg/${product.image}`)}
-              className={styles.image}
-              alt="Zdjęcie produktu"
-            />
-          </div>
-          <div className={styles.right}>
-            <p>ID: {product.id}</p>
-            <p>Nazwa: {product.name}</p>
-          </div>
-        </li>
-      );
-    }
-
-    return returnValue;
-  };
+  }, [inCart]);
 
   const backClickHandler = () => {
     history.goBack();
@@ -70,7 +51,21 @@ const Cart = () => {
         <h1>Koszyk</h1>
         <ul>
           {inCart.length > 0 ? (
-            ProductsData.map(mapProducts)
+            productsList.map((product) => (
+              <li key={product.id} className={styles.product}>
+                <div className={styles.left}>
+                  <img
+                    src={require(`components/store/productsImg/${product.image}`)}
+                    className={styles.image}
+                    alt="Zdjęcie produktu"
+                  />
+                </div>
+                <div className={styles.right}>
+                  <p>ID: {product.id}</p>
+                  <p>Nazwa: {product.name}</p>
+                </div>
+              </li>
+            ))
           ) : (
             <li>Koszyk jest pusty</li>
           )}

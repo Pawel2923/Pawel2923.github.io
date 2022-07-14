@@ -2,12 +2,10 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "components/UI/Button/Button";
 import ProductsData from "components/store/ProductsData";
-
 import styles from "./ProductDetail.module.css";
 
 const ProductDetail = () => {
   const params = useParams();
-  // const history = useHistory();
   let isDataFound = false;
   let data = {};
 
@@ -22,7 +20,14 @@ const ProductDetail = () => {
   const buttonClickHandler = () => {
     let old = localStorage.getItem("inCart");
     if (old !== null) {
-      if (!old.includes(params.productId)) {
+      old = old.split(",");
+      for (let oldItem of old) {
+        if (oldItem === params.productId) {
+          old = params.productId;
+        }
+      }
+
+      if (old.indexOf(params.productId) === -1) {
         localStorage.setItem("inCart", `${old},${params.productId}`);
       } else {
         console.error("Ten produkt został już dodany");
