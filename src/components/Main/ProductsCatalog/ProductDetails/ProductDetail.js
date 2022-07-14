@@ -54,7 +54,7 @@ const ProductDetail = () => {
             <div className={styles.left}>
               <h1>{data.name}</h1>
               <img
-                src={require(`../img/${data.image}`)}
+                src={require(`components/store/productsImg/${data.image}`)}
                 className={styles.image}
                 alt="Zdjęcie produktu"
               />

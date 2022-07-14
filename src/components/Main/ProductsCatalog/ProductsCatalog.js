@@ -92,7 +92,7 @@ const ProductsCatalog = () => {
             <div className={styles.card}>
               <div className={styles["image-wrapper"]}>
                 <img
-                  src={require(`./img/${product.image}`)}
+                  src={require(`components/store/productsImg/${product.image}`)}
                   alt="Zdjęcie produktu"
                   className={styles.image}
                 />

@@ -11,7 +11,7 @@ const Cart = () => {
   useEffect(() => {
     if (localStorage.getItem("inCart") !== null) {
       let idList = localStorage.getItem("inCart").split(",");
-      
+
       setInCart((prevCart) => {
         return [...idList, ...prevCart];
       });
@@ -31,10 +31,19 @@ const Cart = () => {
 
     if (product.id === id) {
       returnValue = (
-        <div key={product.id}>
-          <p>ID: {product.id}</p>
-          <p>Nazwa: {product.name}</p>
-        </div>
+        <li key={product.id} className={styles.product}>
+          <div className={styles.left}>
+            <img
+              src={require(`components/store/productsImg/${product.image}`)}
+              className={styles.image}
+              alt="Zdjęcie produktu"
+            />
+          </div>
+          <div className={styles.right}>
+            <p>ID: {product.id}</p>
+            <p>Nazwa: {product.name}</p>
+          </div>
+        </li>
       );
     }
 
@@ -59,8 +68,16 @@ const Cart = () => {
       </nav>
       <div>
         <h1>Koszyk</h1>
-        <div>{ProductsData.map(mapProducts)}</div>
-        <Button onClick={resetClickHandler}>Wyczyść koszyk</Button>
+        <ul>
+          {inCart.length > 0 ? (
+            ProductsData.map(mapProducts)
+          ) : (
+            <li>Koszyk jest pusty</li>
+          )}
+        </ul>
+        {inCart.length > 0 && (
+          <Button onClick={resetClickHandler}>Wyczyść koszyk</Button>
+        )}
       </div>
     </section>
   );

@@ -16,5 +16,42 @@
 .cart > div {
     margin: 1rem 0;
     display: grid;
-    gap: 1rem;
+    gap: 2rem;
+}
+
+.cart ul {
+  list-style: none;
+  display: grid;
+  row-gap: 2rem;
+}
+
+.product {
+  width: 100%;
+  background: #d3d3d3;
+  display: flex;
+}
+
+.product:nth-child(2n) {
+  background: #bddde7;
+}
+
+.left {
+  aspect-ratio: 1 / 1;
+  max-height: 10rem;
+  overflow: hidden;
+}
+
+.left > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.right {
+  padding: 1rem;
 }
