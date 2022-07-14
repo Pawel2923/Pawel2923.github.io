@@ -63,6 +63,12 @@
   padding: 1rem;
 }
 
+.sort {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .sort button[type="submit"] {
   display: block;
   margin-top: 1rem;

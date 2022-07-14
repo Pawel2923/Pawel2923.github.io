@@ -86,6 +86,11 @@ const ProductsCatalog = () => {
             </select>
             <Button type="submit">Sortuj</Button>
           </form>
+          <div className={styles["cart-wrapper"]}>
+            <Link to="/cart">
+              <i className="fa-solid fa-cart-shopping"></i> Koszyk
+            </Link>
+          </div>
         </div>
         {productsList.map((product) => (
           <Link to={`products/${product.id}`} key={product.id}>
