@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import ProductsData from "components/store/ProductsData";
 import Button from "components/UI/Button/Button";
 import styles from "./Cart.module.css";
+import Amount from "components/UI/Amount/Amount";
 
 const Cart = () => {
   const history = useHistory();
@@ -11,7 +12,7 @@ const Cart = () => {
 
   useEffect(() => {
     if (localStorage.getItem("inCart") !== null) {
-      let idList = localStorage.getItem("inCart").split(",");
+      let idList = JSON.parse(localStorage.getItem("inCart"));
 
       setInCart((prevCart) => {
         return [...idList, ...prevCart];
@@ -21,7 +22,7 @@ const Cart = () => {
 
   useEffect(() => {
     for (let inCartId of inCart) {
-      for (let product of  ProductsData) {
+      for (let product of ProductsData) {
         if (inCartId === product.id) {
           setProductsList((prevList) => {
             return [product, ...prevList];
@@ -61,8 +62,9 @@ const Cart = () => {
                   />
                 </div>
                 <div className={styles.right}>
-                  <p>ID: {product.id}</p>
-                  <p>Nazwa: {product.name}</p>
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <Amount />
                 </div>
               </li>
             ))

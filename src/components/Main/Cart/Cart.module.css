@@ -27,12 +27,8 @@
 
 .product {
   width: 100%;
-  background: #d3d3d3;
+  background: #ffffff;
   display: flex;
-}
-
-.product:nth-child(2n) {
-  background: #bddde7;
 }
 
 .left {

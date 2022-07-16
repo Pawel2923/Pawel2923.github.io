@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Aside from "./Aside/Aside";
 import Button from "components/UI/Button/Button";
 import SortFunctions from "./SortFunctions";
+import ProductsData from "components/store/ProductsData.json";
 import styles from "./ProductsCatalog.module.css";
-import ProductsData from "components/store/ProductsData";
 
 const ProductsCatalog = () => {
   const [productsList, setProductsList] = useState([...ProductsData]);

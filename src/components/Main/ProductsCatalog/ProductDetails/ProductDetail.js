@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "components/UI/Button/Button";
-import ProductsData from "components/store/ProductsData";
+import ProductsData from "components/store/ProductsData.json";
 import styles from "./ProductDetail.module.css";
+import Amount from "components/UI/Amount/Amount";
 
 const ProductDetail = () => {
   const params = useParams();
+  const [amount, setAmount] = useState(1);
   let isDataFound = false;
   let data = {};
 
@@ -17,23 +19,61 @@ const ProductDetail = () => {
     }
   }
 
+  const amountChangeHandler = (number) => {
+    setAmount(number);
+  };
+
   const buttonClickHandler = () => {
-    let old = localStorage.getItem("inCart");
+    let old = JSON.parse(localStorage.getItem("inCart"));
+
     if (old !== null) {
-      old = old.split(",");
-      for (let oldItem of old) {
-        if (oldItem === params.productId) {
-          old = params.productId;
+      let repeatedItem = {
+        isRepeated: false,
+        id: -1,
+        item: {},
+      };
+
+      for (let i = 0; i < old.length; i++) {
+        if (old[i].id === data.id) {
+          repeatedItem = {
+            isRepeated: true,
+            id: i,
+            item: { ...old[i] },
+          };
         }
       }
 
-      if (old.indexOf(params.productId) === -1) {
-        localStorage.setItem("inCart", `${old},${params.productId}`);
+      if (repeatedItem.isRepeated) {
+        old[repeatedItem.id].amount = repeatedItem.item.amount + amount;
+        localStorage.setItem("inCart", JSON.stringify([...old]));
       } else {
-        console.error("Ten produkt został już dodany");
+        localStorage.setItem(
+          "inCart",
+          JSON.stringify([
+            ...old,
+            {
+              id: data.id,
+              name: data.name,
+              description: data.description,
+              amount: amount,
+              price: data.price,
+            },
+          ])
+        );
       }
     } else {
-      localStorage.setItem("inCart", params.productId);
+      localStorage.setItem(
+        "inCart",
+        JSON.stringify([
+          {
+            id: data.id,
+            name: data.name,
+            description: data.description,
+            amount: amount,
+            price: data.price,
+          },
+        ])
+      );
     }
   };
 
@@ -68,6 +108,7 @@ const ProductDetail = () => {
               <div>
                 {data.price.toFixed(2).toString().replace(/\./g, ",")} zł
               </div>
+              <Amount onAmountChange={amountChangeHandler} />
               <Button onClick={buttonClickHandler}>Dodaj do koszyka</Button>
             </div>
           </React.Fragment>
