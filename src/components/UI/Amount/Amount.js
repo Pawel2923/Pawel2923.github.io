@@ -5,8 +5,16 @@ const Amount = (props) => {
   const [amount, setAmount] = useState(1);
 
   useEffect(() => {
-    props.onAmountChange(amount);
+    if (props.onAmountChange !== undefined) {
+      props.onAmountChange(amount);
+    }
   }, [amount, props]);
+
+  useEffect(() => {
+    if (props.value !== undefined) {
+      setAmount(props.value);
+    }
+  }, [props]);
 
   const amountClickHandler = (ev) => {
     if (amount > 1 && ev.target.id === "sub-amount") {

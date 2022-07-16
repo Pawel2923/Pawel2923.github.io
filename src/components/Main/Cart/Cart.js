@@ -1,70 +1,65 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import ProductsData from "components/store/ProductsData";
 import Button from "components/UI/Button/Button";
-import styles from "./Cart.module.css";
 import Amount from "components/UI/Amount/Amount";
+import ProductsData from "components/store/ProductsData.json";
+import styles from "./Cart.module.css";
 
 const Cart = () => {
   const history = useHistory();
-  const [inCart, setInCart] = useState([]);
-  const [productsList, setProductsList] = useState([]);
+  const [inCart, setInCart] = useState(localStorage.getItem("inCart"));
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    if (localStorage.getItem("inCart") !== null) {
-      let idList = JSON.parse(localStorage.getItem("inCart"));
+    if (inCart !== null && inCart.length > 0) {
+      let parsedInCart = JSON.parse(inCart);
 
-      setInCart((prevCart) => {
-        return [...idList, ...prevCart];
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    for (let inCartId of inCart) {
       for (let product of ProductsData) {
-        if (inCartId === product.id) {
-          setProductsList((prevList) => {
-            return [product, ...prevList];
-          });
+        for (let item of parsedInCart) {
+          if (product.id === item.id) {
+            setItems((prevItems) => {
+              return [{ ...product, amount: item.amount }, ...prevItems];
+            });
+          }
         }
       }
     }
   }, [inCart]);
 
   const backClickHandler = () => {
-    history.goBack();
+    history.push("/products");
   };
 
   const resetClickHandler = () => {
     localStorage.removeItem("inCart");
     setInCart([]);
+    setItems([]);
   };
 
   return (
     <section className={styles.cart}>
       <nav>
         <button onClick={backClickHandler}>
-          <i className="fa-solid fa-circle-arrow-left"></i> Wróć
+          <i className="fa-solid fa-circle-arrow-left"></i> Przeglądaj dalej
         </button>
       </nav>
       <div>
         <h1>Koszyk</h1>
         <ul>
-          {inCart.length > 0 ? (
-            productsList.map((product) => (
-              <li key={product.id} className={styles.product}>
+          {items.length > 0 ? (
+            items.map((item) => (
+              <li key={item.id} className={styles.item}>
                 <div className={styles.left}>
                   <img
-                    src={require(`components/store/productsImg/${product.image}`)}
+                    src={require(`components/store/productsImg/${item.image}`)}
                     className={styles.image}
                     alt="Zdjęcie produktu"
                   />
                 </div>
                 <div className={styles.right}>
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <Amount />
+                  <h3>{item.name}</h3>
+                  <p>{item.description}</p>
+                  <Amount value={item.amount} />
                 </div>
               </li>
             ))
@@ -72,7 +67,7 @@ const Cart = () => {
             <li>Koszyk jest pusty</li>
           )}
         </ul>
-        {inCart.length > 0 && (
+        {items.length > 0 && (
           <Button onClick={resetClickHandler}>Wyczyść koszyk</Button>
         )}
       </div>

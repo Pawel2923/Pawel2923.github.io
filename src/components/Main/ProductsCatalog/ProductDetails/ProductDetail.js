@@ -8,13 +8,13 @@ import Amount from "components/UI/Amount/Amount";
 const ProductDetail = () => {
   const params = useParams();
   const [amount, setAmount] = useState(1);
-  let isDataFound = false;
-  let data = {};
+  let isItemFound = false;
+  let item = {};
 
-  for (const item of ProductsData) {
-    if (item.id === params.productId) {
-      data = { ...item };
-      isDataFound = true;
+  for (const product of ProductsData) {
+    if (product.id === params.productId) {
+      item = { ...product };
+      isItemFound = true;
       break;
     }
   }
@@ -34,10 +34,11 @@ const ProductDetail = () => {
       };
 
       for (let i = 0; i < old.length; i++) {
-        if (old[i].id === data.id) {
+        if (old[i].id === item.id) {
           repeatedItem = {
             isRepeated: true,
             id: i,
+            productId: old[i].id,
             item: { ...old[i] },
           };
         }
@@ -52,11 +53,9 @@ const ProductDetail = () => {
           JSON.stringify([
             ...old,
             {
-              id: data.id,
-              name: data.name,
-              description: data.description,
+              id: item.id,
+              productId: item.productId,
               amount: amount,
-              price: data.price,
             },
           ])
         );
@@ -66,11 +65,9 @@ const ProductDetail = () => {
         "inCart",
         JSON.stringify([
           {
-            id: data.id,
-            name: data.name,
-            description: data.description,
+            id: item.id,
+            productId: item.productId,
             amount: amount,
-            price: data.price,
           },
         ])
       );
@@ -94,19 +91,19 @@ const ProductDetail = () => {
         </ul>
       </nav>
       <div className={styles.description}>
-        {isDataFound ? (
+        {isItemFound ? (
           <React.Fragment>
             <div className={styles.left}>
-              <h1>{data.name}</h1>
+              <h1>{item.name}</h1>
               <img
-                src={require(`components/store/productsImg/${data.image}`)}
+                src={require(`components/store/productsImg/${item.image}`)}
                 className={styles.image}
                 alt="Zdjęcie produktu"
               />
             </div>
             <div className={styles.right}>
               <div>
-                {data.price.toFixed(2).toString().replace(/\./g, ",")} zł
+                {item.price.toFixed(2).toString().replace(/\./g, ",")} zł
               </div>
               <Amount onAmountChange={amountChangeHandler} />
               <Button onClick={buttonClickHandler}>Dodaj do koszyka</Button>

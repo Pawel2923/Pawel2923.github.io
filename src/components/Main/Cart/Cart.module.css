@@ -25,7 +25,7 @@
   row-gap: 2rem;
 }
 
-.product {
+.cart ul li {
   width: 100%;
   background: #ffffff;
   display: flex;
