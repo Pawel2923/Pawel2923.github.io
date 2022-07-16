@@ -1,33 +1,33 @@
-import PageInfoCtx from "components/store/page-size";
-import React, { useEffect, useContext } from "react";
+import React, { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./BackToTop.module.css";
 
 const BackToTop = () => {
-  const pageInfo = useContext(PageInfoCtx);
+  const [isShown, setIsShown] = useState(false);
 
-  useEffect(() => {
-    if (pageInfo.screenWidth > 700) {
-      if (pageInfo.scrollFromTop > 400) {
-        document.getElementsByClassName(styles.back)[0].style.display = "flex";
-      } else {
-        document.getElementsByClassName(styles.back)[0].style.display = "none";
-      }
+  const toggleShow = () => {
+    const scrollPos = window.scrollY;
+
+    if (scrollPos > 400) {
+      setIsShown(true);
+    } else {
+      setIsShown(false);
     }
-  }, [pageInfo.screenWidth, pageInfo.scrollFromTop]);
+  };
 
   const btnClickHandler = () => {
     window.scroll({
       top: 0,
-      left: 0,
       behavior: "smooth",
     });
   };
 
+  window.addEventListener('scroll', toggleShow);
+
   return (
     <React.Fragment>
-      {pageInfo.screenWidth > 700 && (
-        <Button className={styles.back} onClick={btnClickHandler}>
+      {window.innerWidth > 700 && (
+        <Button className={`${styles.back} ${isShown ? styles.show : ""}`} onClick={btnClickHandler}>
           <i className="fa-solid fa-arrow-up"></i>
         </Button>
       )}

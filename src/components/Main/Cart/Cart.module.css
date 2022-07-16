@@ -21,14 +21,17 @@
 
 .cart ul {
   list-style: none;
-  display: grid;
-  row-gap: 2rem;
 }
 
 .cart ul li {
   width: 100%;
   background: #ffffff;
   display: flex;
+  margin-bottom: 2rem;
+}
+
+.cart ul li:last-child {
+  margin-bottom: 0;
 }
 
 .left {
