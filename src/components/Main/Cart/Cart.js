@@ -9,6 +9,7 @@ const Cart = () => {
   const history = useHistory();
   const [cart, setCart] = useState([]);
 
+  // Wczytanie produktów z pamięci do stanu cart
   useEffect(() => {
     const cartLocal = localStorage.getItem("cart");
     const parsedCart = JSON.parse(cartLocal);
@@ -35,6 +36,7 @@ const Cart = () => {
     setCart([]);
   };
 
+  // Uaktualnienie ilości produktu
   const amountClickHandler = (number, id) => {
     setCart((prevCart) => {
       for (let item of prevCart) {
@@ -61,6 +63,7 @@ const Cart = () => {
     }
   };
 
+  // Usuwanie pojedyńczych produktów
   const removeClickHandler = (id) => {
     if (cart.length > 0) {
       setCart((prevCart) => {
@@ -102,9 +105,9 @@ const Cart = () => {
       </nav>
       <div>
         <h1>Koszyk</h1>
-        <ul>
-          {cart.length > 0 ? (
-            cart.map((item) => (
+        {cart.length > 0 ? (
+          <ul>
+            {cart.map((item) => (
               <li key={item.id} className={styles.item}>
                 <div className={styles.left}>
                   <img
@@ -128,11 +131,11 @@ const Cart = () => {
                   ></i>
                 </div>
               </li>
-            ))
-          ) : (
-            <li>Koszyk jest pusty</li>
-          )}
-        </ul>
+            ))}
+          </ul>
+        ) : (
+          <p>Koszyk jest pusty</p>
+        )}
         {cart.length > 0 && (
           <Button onClick={resetClickHandler}>Wyczyść koszyk</Button>
         )}

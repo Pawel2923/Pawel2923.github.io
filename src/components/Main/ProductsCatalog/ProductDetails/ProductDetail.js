@@ -8,6 +8,8 @@ import Amount from "components/UI/Amount/Amount";
 const ProductDetail = () => {
   const params = useParams();
   const [amount, setAmount] = useState(1);
+
+  // Wyszukanie produktu z listy wszystkich produków
   let isItemFound = false;
   let item = {};
 
@@ -19,44 +21,48 @@ const ProductDetail = () => {
     }
   }
 
+  // Zmiana Ilości 
   const amountChangeHandler = (number) => {
     setAmount(number);
   };
 
   const buttonClickHandler = () => {
-    let old = JSON.parse(localStorage.getItem("cart"));
+    let cartUpdated = JSON.parse(localStorage.getItem("cart"));
 
-    if (old !== null) {
+    // Sprawdzenie czy koszyk jest pusty
+    if (cartUpdated !== null) { 
       let repeatedItem = {
         isRepeated: false,
         id: -1,
         item: {},
       };
 
-      for (let i = 0; i < old.length; i++) {
-        if (old[i].id === item.id) {
+      // Pętla przeszukuje listę produktów z koszyka, Jeśli znajdzie to samo id zmienia obiekt repeatedItem
+      for (let i = 0; i < cartUpdated.length; i++) { 
+        if (cartUpdated[i].id === item.id) {
           repeatedItem = {
             isRepeated: true,
             id: i,
-            productId: old[i].id,
-            item: { ...old[i] },
+            productId: cartUpdated[i].id,
+            item: { ...cartUpdated[i] },
           };
         }
       }
 
-      if (repeatedItem.isRepeated) {
-        old[repeatedItem.id].amount = repeatedItem.item.amount + amount;
-        localStorage.setItem("cart", JSON.stringify([...old]));
-      } else {
+      // Jeśli produkt się powtórzył to dodana jest ilość produktów
+      if (repeatedItem.isRepeated) {  
+        cartUpdated[repeatedItem.id].amount = repeatedItem.item.amount + amount;
+        localStorage.setItem("cart", JSON.stringify([...cartUpdated]));
+      } else { // Jeśli nie to dodawany jest nowy produkt do listy produktów
         localStorage.setItem(
           "cart",
           JSON.stringify([
-            ...old,
             {
               id: item.id,
               productId: item.productId,
               amount: amount,
             },
+            ...cartUpdated,
           ])
         );
       }
