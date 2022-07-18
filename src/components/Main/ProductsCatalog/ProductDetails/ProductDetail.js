@@ -24,7 +24,7 @@ const ProductDetail = () => {
   };
 
   const buttonClickHandler = () => {
-    let old = JSON.parse(localStorage.getItem("inCart"));
+    let old = JSON.parse(localStorage.getItem("cart"));
 
     if (old !== null) {
       let repeatedItem = {
@@ -46,10 +46,10 @@ const ProductDetail = () => {
 
       if (repeatedItem.isRepeated) {
         old[repeatedItem.id].amount = repeatedItem.item.amount + amount;
-        localStorage.setItem("inCart", JSON.stringify([...old]));
+        localStorage.setItem("cart", JSON.stringify([...old]));
       } else {
         localStorage.setItem(
-          "inCart",
+          "cart",
           JSON.stringify([
             ...old,
             {
@@ -62,7 +62,7 @@ const ProductDetail = () => {
       }
     } else {
       localStorage.setItem(
-        "inCart",
+        "cart",
         JSON.stringify([
           {
             id: item.id,

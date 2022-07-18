@@ -32,7 +32,7 @@ const App = () => {
       }}
     >
       <Header />
-      <BackToTop /> 
+      <BackToTop />
       <Main />
       <Footer />
       <Cookies />

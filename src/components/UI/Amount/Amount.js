@@ -12,16 +12,22 @@ const Amount = (props) => {
 
   useEffect(() => {
     if (props.value !== undefined) {
-      setAmount(props.value);
+      setAmount(props.value.amount);
     }
   }, [props]);
 
   const amountClickHandler = (ev) => {
     if (amount > 1 && ev.target.id === "sub-amount") {
       setAmount(amount - 1);
+      if (props.onAmountClick !== undefined && props.value !== undefined) {
+        props.onAmountClick(amount - 1, props.value.key);
+      }
     }
     if (ev.target.id === "add-amount") {
       setAmount(amount + 1);
+      if (props.onAmountClick !== undefined && props.value !== undefined) {
+        props.onAmountClick(amount + 1, props.value.key);
+      }
     }
   };
 

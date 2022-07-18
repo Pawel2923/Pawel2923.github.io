@@ -53,4 +53,22 @@
 
 .right {
   padding: 1rem;
+  width: 100%;
+  position: relative;
+}
+
+.trash-can {
+  cursor: pointer;
+  font-size: 1.5em;
+  color: #594e4c;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: color 200ms ease;
+}
+
+.trash-can:hover,
+.trash-can:active {
+  color: black;
 }
