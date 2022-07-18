@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../img/logo.svg";
+
 import styles from "./MobileNav.module.css";
 import optionStyles from "./Option.module.css";
+import { ReactComponent as Logo } from "../img/logo.svg";
 
 export const NavOverlay = (props) => {
   const closeHandler = () => {

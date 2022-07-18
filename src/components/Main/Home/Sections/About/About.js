@@ -1,7 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import styles from "./About.module.css";
+
 import Button from "components/UI/Button/Button";
+
+import styles from "./About.module.css";
 
 const About = (props) => {
   const history = useHistory();

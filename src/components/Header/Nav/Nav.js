@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../img/logo.svg";
+
 import styles from "../Header.module.css";
 import optionStyles from "./Option.module.css";
+import { ReactComponent as Logo } from "../img/logo.svg";
 
 const Nav = () => {
   return (

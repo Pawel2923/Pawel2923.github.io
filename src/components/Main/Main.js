@@ -1,12 +1,14 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+
 import Home from "./Home/Home";
+import Appointments from "./Appointments/Appointments";
 import ProductsCatalog from "./ProductsCatalog/ProductsCatalog";
-import ProductDetail from "./ProductsCatalog/ProductDetails/ProductDetail";
+import ProductDetail from "./ProductDetails/ProductDetail";
+import Cart from "./Cart/Cart";
 import ContactPage from "./ContactPage/ContactPage";
 import NotFound from "./NotFound/NotFound";
-import Appointments from "./Appointments/Appointments";
-import Cart from "./Cart/Cart";
+
 import styles from "./Main.module.css";
 
 const Main = () => {

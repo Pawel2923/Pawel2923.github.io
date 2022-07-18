@@ -1,4 +1,5 @@
 import React from "react";
+
 import styles from "./Services.module.css";
 import trim from "./img/trim.jpg";
 import haircut from "./img/haircut.jpg";

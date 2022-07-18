@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Button from "components/UI/Button/Button";
+
 import ProductsData from "components/store/ProductsData.json";
-import styles from "./ProductDetail.module.css";
 import Amount from "components/UI/Amount/Amount";
+import Button from "components/UI/Button/Button";
+
+import styles from "./ProductDetail.module.css";
 
 const ProductDetail = () => {
   const params = useParams();

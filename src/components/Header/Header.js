@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+
 import Nav from "./Nav/Nav";
 import MobileNav from "./Nav/MobileNav";
-import { ReactComponent as Logo } from "./img/logo.svg";
-import styles from "./Header.module.css";
 import PageInfoCtx from "components/store/page-size";
+
+import styles from "./Header.module.css";
+import { ReactComponent as Logo } from "./img/logo.svg";
 
 const Header = () => {
   const pageInfo = useContext(PageInfoCtx)

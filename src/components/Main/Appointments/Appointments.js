@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
+
 import Button from "components/UI/Button/Button";
 import Message from "components/UI/Message/Message";
+
 import styles from "./Appointments.module.css";
 
 const checkValidity = (type, value) => {

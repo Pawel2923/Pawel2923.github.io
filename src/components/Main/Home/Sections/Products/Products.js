@@ -1,6 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+
 import Button from "components/UI/Button/Button";
+
 import styles from "./Products.module.css";
 
 const Products = (props) => {

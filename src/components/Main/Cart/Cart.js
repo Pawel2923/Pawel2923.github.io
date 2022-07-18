@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+
 import Button from "components/UI/Button/Button";
 import Amount from "components/UI/Amount/Amount";
 import ProductsData from "components/store/ProductsData.json";
+
 import styles from "./Cart.module.css";
 
 const Cart = () => {
