@@ -12,19 +12,11 @@ const App = () => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   useEffect(() => {
-    let resizing = false;
-
     window.addEventListener("resize", () => {
-      resizing = true;
-    });
-
-    setInterval(() => {
-      if (resizing) {
-        resizing = false;
-
+      setTimeout(() => {
         setScreenSize(window.innerWidth);
-      }
-    }, 100);
+      }, 1000);
+    });
   }, []);
 
   return (
