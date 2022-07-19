@@ -14,11 +14,26 @@ const ProductsCatalog = () => {
 
   const filterItems = (type, minValue, maxValue) => {
     if (type === "price") {
-      setItems([
-        ...ProductsData.filter(
-          (value) => value.price >= minValue && value.price <= maxValue
-        ),
-      ]);
+      if (minValue === 0 || minValue === "0") {
+        setItems([
+          ...ProductsData.filter(
+            (value) => value.price <= maxValue
+          ),
+        ]);
+      } else if (maxValue === 0 || maxValue === "0") {
+        console.log("ok");
+        setItems([
+          ...ProductsData.filter(
+            (value) => value.price >= minValue
+          ),
+        ]);
+      } else {
+        setItems([
+          ...ProductsData.filter(
+            (value) => value.price >= minValue && value.price <= maxValue
+          ),
+        ]);
+      }
     }
   };
 
