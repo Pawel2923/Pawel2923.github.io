@@ -52,8 +52,8 @@ const AddProducts = () => {
         name: name,
         description: desc,
         image: image,
-        price: price,
-        score: score,
+        price: parseFloat(price),
+        score: parseInt(score),
       },
     ];
 

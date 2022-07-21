@@ -84,23 +84,23 @@
     "name": "Balsam do brody",
     "description": "Balsam do brody",
     "image": "product2.jpg",
-    "price": "20.00",
-    "score": "64"
+    "price": 20.00,
+    "score": 64
   },
   {
     "id": "odywka-do-brody",
     "name": "Odżywka do brody",
     "description": "Odżwyka do brody.",
     "image": "product2.jpg",
-    "price": "37.65",
-    "score": "34"
+    "price": 37.65,
+    "score": 34
   },
   {
     "id": "olejki",
     "name": "Olejki do brody",
     "description": "Zestaw olejków do brody",
     "image": "product2.jpg",
-    "price": "65.00",
-    "score": "83"
+    "price": 65.00,
+    "score": 83
   }
 ]
