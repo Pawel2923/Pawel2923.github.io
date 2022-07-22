@@ -205,7 +205,7 @@ const Services = () => {
               error: true,
               title: `Wystąpił błąd ${error.status}`,
               message:
-                "Nie udało się wysłać twojej wiadomości. Sprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie później.",
+                "Nie udało się wysłać twojej wiadomości./nSprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie później.",
             });
           }
         );
@@ -220,11 +220,16 @@ const Services = () => {
   };
 
   const messageCloseHandler = () => {
-    setMessageState((prevState) => {
-      let newState = { ...prevState };
-      newState.show = false;
-      return newState;
-    });
+    document.getElementById("overlay").style.animationName = styles["fadeOut"];
+    document.getElementById("card").style.animationName = styles["hide"];
+
+    setTimeout(() => {
+      setMessageState((prevState) => {
+        let newState = { ...prevState };
+        newState.show = false;
+        return newState;
+      });
+    }, 200);
   };
 
   return (
@@ -299,7 +304,9 @@ const Services = () => {
       {messageState.show && (
         <Message error={messageState.error} onClose={messageCloseHandler}>
           <h1>{messageState.title}</h1>
-          <p>{messageState.message}</p>
+          {messageState.message.split("/n").map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
         </Message>
       )}
     </React.Fragment>

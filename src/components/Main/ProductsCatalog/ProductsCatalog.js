@@ -9,7 +9,7 @@ import ProductsData from "components/store/ProductsData.json";
 import styles from "./ProductsCatalog.module.css";
 
 const ProductsCatalog = () => {
-  const [items, setItems] = useState([...ProductsData]);
+  const [items, setItems] = useState(ProductsData);
   const [sortBy, setSortBy] = useState("none");
 
   const sortItems = () => {
@@ -48,30 +48,52 @@ const ProductsCatalog = () => {
     }
   };
 
-  const filterItems = (type, filter) => {
-    if (type === "price") {
-      if (filter.isDisabled === undefined) {
-        if (filter.minValue === 0) {
-          setItems([
-            ...ProductsData.filter((value) => value.price <= filter.maxValue),
-          ]);
-        } else if (filter.maxValue === 0) {
-          setItems([
-            ...ProductsData.filter((value) => value.price >= filter.minValue),
-          ]);
-        } else {
-          setItems([
-            ...ProductsData.filter(
-              (value) =>
-                value.price >= filter.minValue && value.price <= filter.maxValue
-            ),
-          ]);
-        }
-      }
+  const filterPrice = (data, filter) => {
+    if (filter.minValue === 0) {
+      setItems([...data.filter((value) => value.price <= filter.maxValue)]);
+    } else if (filter.maxValue === 0) {
+      setItems([...data.filter((value) => value.price >= filter.minValue)]);
+    } else {
+      setItems([
+        ...data.filter(
+          (value) =>
+            value.price >= filter.minValue && value.price <= filter.maxValue
+        ),
+      ]);
     }
+  };
 
-    if (sortBy !== "none") {
-      sortItems();
+  const filterItems = (type, filter) => {
+    if (type !== "none") {
+      if (type === "price") {
+        filterPrice(ProductsData, filter);
+      }
+
+      let newList = [];
+
+      if (type === "categories") {
+        for (let checkbox of filter) {
+          newList.push(
+            ...ProductsData.filter((value) => value.category === checkbox.value)
+          );
+        }
+
+        setItems(newList);
+      }
+
+      if (type === "combined") {
+        for (let checkbox of filter.checkboxes) {
+          newList.push(
+            ...ProductsData.filter((value) => value.category === checkbox.value)
+          );
+        }
+
+        filterPrice(newList, filter);
+      }
+
+      if (sortBy !== "none") {
+        sortItems();
+      }
     }
   };
 
@@ -85,9 +107,17 @@ const ProductsCatalog = () => {
     sortItems();
   };
 
+  const resetItems = () => {
+    setItems(ProductsData);
+
+    if (sortBy !== "none") {
+      sortItems();
+    }
+  };
+
   return (
     <div className={styles["products-container"]}>
-      <Aside onFilter={filterItems} />
+      <Aside onFilter={filterItems} onReset={resetItems} />
       <section className={styles["products-catalog"]}>
         <div className={styles.sort}>
           <form onSubmit={sortSubmitHandler}>
@@ -111,57 +141,61 @@ const ProductsCatalog = () => {
             </Link>
           </div>
         </div>
-        {items.map((item) => (
-          <Link to={`products/${item.id}`} key={item.id}>
-            <div className={styles.card}>
-              <div className={styles["image-wrapper"]}>
-                <img
-                  src={require(`components/store/productsImg/${item.image}`)}
-                  alt="Zdjęcie produktu"
-                  className={styles.image}
-                />
-              </div>
-              <div className={styles["desc-wrapper"]}>
-                <h3>{item.name}</h3>
-                <div>{item.description}</div>
-                <div>
-                  Cena: {item.price.toFixed(2).toString().replace(/\./g, ",")}{" "}
-                  zł
+        {items.length > 0 ? (
+          items.map((item) => (
+            <Link to={`products/${item.id}`} key={item.id}>
+              <div className={styles.card}>
+                <div className={styles["image-wrapper"]}>
+                  <img
+                    src={require(`components/store/productsImg/${item.image}`)}
+                    alt="Zdjęcie produktu"
+                    className={styles.image}
+                  />
                 </div>
-                <div>
-                  Opinie:
-                  <div className={styles.rating}>
-                    <i
-                      className={`fa-solid fa-star ${styles.star} ${
-                        item.score >= 20 && styles.checked
-                      }`}
-                    ></i>
-                    <i
-                      className={`fa-solid fa-star ${styles.star} ${
-                        item.score >= 40 && styles.checked
-                      }`}
-                    ></i>
-                    <i
-                      className={`fa-solid fa-star ${styles.star} ${
-                        item.score >= 60 && styles.checked
-                      }`}
-                    ></i>
-                    <i
-                      className={`fa-solid fa-star ${styles.star} ${
-                        item.score >= 80 && styles.checked
-                      }`}
-                    ></i>
-                    <i
-                      className={`fa-solid fa-star ${styles.star} ${
-                        item.score >= 95 && styles.checked
-                      }`}
-                    ></i>
+                <div className={styles["desc-wrapper"]}>
+                  <h3>{item.name}</h3>
+                  <div>{item.description}</div>
+                  <div>
+                    Cena: {item.price.toFixed(2).toString().replace(/\./g, ",")}{" "}
+                    zł
+                  </div>
+                  <div>
+                    Opinie:
+                    <div className={styles.rating}>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          item.score >= 20 && styles.checked
+                        }`}
+                      ></i>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          item.score >= 40 && styles.checked
+                        }`}
+                      ></i>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          item.score >= 60 && styles.checked
+                        }`}
+                      ></i>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          item.score >= 80 && styles.checked
+                        }`}
+                      ></i>
+                      <i
+                        className={`fa-solid fa-star ${styles.star} ${
+                          item.score >= 95 && styles.checked
+                        }`}
+                      ></i>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))
+        ) : (
+          <h1>Nie znaleziono wyników</h1>
+        )}
       </section>
     </div>
   );

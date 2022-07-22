@@ -32,6 +32,14 @@
   color: #fff;
 }
 
+.reset-btn {
+  margin-top: 1rem;
+  background: #fff;
+  border: 1px solid #000;
+  font-size: 0.9em;
+  display: block;
+}
+
 @media screen and (min-width: 700px) {
   .aside {
     background: #fff;

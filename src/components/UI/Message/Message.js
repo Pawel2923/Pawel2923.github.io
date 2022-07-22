@@ -10,8 +10,8 @@ const Message = (props) => {
 
   return ReactDOM.createPortal(
     <React.Fragment>
-      <div className={styles.overlay} onClick={closeHandler}></div>
-      <div className={`${styles.card} ${props.error ? styles.error : ""}`}>
+      <div className={styles.overlay} id="overlay" onClick={closeHandler}></div>
+      <div className={`${styles.card} ${props.error ? styles.error : ""}`} id="card">
         {props.children}
         <div className={styles.close}>
           <i className="fa-solid fa-xmark" onClick={closeHandler}></i>

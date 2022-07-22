@@ -3,6 +3,7 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 5;
+    animation: fadeIn ease 200ms both;
 }
 
 .card {
@@ -22,7 +23,9 @@
     transform: translate(-50%, -50%);
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
     z-index: 6;
+    animation: show ease 200ms both;
 }
 
 .card h1 {
@@ -40,4 +43,22 @@
     cursor: pointer;
     top: 2rem;
     right: 2rem;
+}
+
+@keyframes show {
+  from {
+    transform: translate(-50%, -50%) scaleY(0);
+  }
+  to {
+    transform: translate(-50%, -50%) scaleY(1);
+  }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
