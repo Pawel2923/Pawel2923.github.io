@@ -204,8 +204,14 @@ const Services = () => {
               show: true,
               error: true,
               title: `Wystąpił błąd ${error.status}`,
-              message:
-                "Nie udało się wysłać twojej wiadomości./nSprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie później.",
+              message: (
+                <span>
+                  Nie udało się wysłać twojej wiadomości.
+                  <br />
+                  Sprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie
+                  później.
+                </span>
+              ),
             });
           }
         );
@@ -220,8 +226,8 @@ const Services = () => {
   };
 
   const messageCloseHandler = () => {
-    document.getElementById("overlay").style.animationName = styles["fadeOut"];
-    document.getElementById("card").style.animationName = styles["hide"];
+    document.getElementById("overlay").style.animationName = "fadeOut";
+    document.getElementById("card").style.animationName = "hide";
 
     setTimeout(() => {
       setMessageState((prevState) => {
@@ -302,12 +308,7 @@ const Services = () => {
         <i className={`fa-solid fa-spinner ${styles.loading}`}></i>
       )}
       {messageState.show && (
-        <Message error={messageState.error} onClose={messageCloseHandler}>
-          <h1>{messageState.title}</h1>
-          {messageState.message.split("/n").map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </Message>
+        <Message onClose={messageCloseHandler} messageInfo={messageState} />
       )}
     </React.Fragment>
   );

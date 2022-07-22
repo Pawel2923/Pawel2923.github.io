@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 import ProductsData from "components/store/ProductsData.json";
 import Amount from "components/UI/Amount/Amount";
 import Button from "components/UI/Button/Button";
+import Message from "components/UI/Message/Message";
 
 import styles from "./ProductDetail.module.css";
 
 const ProductDetail = () => {
   const params = useParams();
+  const history = useHistory();
   const [amount, setAmount] = useState(1);
+  const [messageState, setMessageState] = useState({
+    show: false,
+    error: false,
+    title: "",
+    message: "",
+  });
 
   // Wyszukanie produktu z listy wszystkich produków
   let isItemFound = false;
@@ -26,6 +34,23 @@ const ProductDetail = () => {
   // Zmiana Ilości
   const amountChangeHandler = (number) => {
     setAmount(number);
+  };
+
+  const messageCloseHandler = () => {
+    document.getElementById("overlay").style.animationName = "fadeOut";
+    document.getElementById("card").style.animationName = "hide";
+
+    setTimeout(() => {
+      setMessageState((prevState) => {
+        let newState = { ...prevState };
+        newState.show = false;
+        return newState;
+      });
+    }, 200);
+  };
+
+  const messageBtnClickHandler = () => {
+    history.push("/cart");
   };
 
   const buttonClickHandler = () => {
@@ -81,6 +106,16 @@ const ProductDetail = () => {
         ])
       );
     }
+
+    setMessageState({
+      show: true,
+      error: false,
+      title: "Dodano do koszyka",
+      message: <React.Fragment>
+        Produkt został dodany do koszyka. 
+        <Button onClick={messageBtnClickHandler} className={styles["message-button"]}>Przejdź do koszyka</Button>
+      </React.Fragment>,
+    });
   };
 
   return (
@@ -151,6 +186,12 @@ const ProductDetail = () => {
               <h1>Opis produktu</h1>
               {item.description}
             </div>
+            {messageState.show && (
+              <Message
+                onClose={messageCloseHandler}
+                messageInfo={messageState}
+              />
+            )}
           </React.Fragment>
         ) : (
           <h1>Taki produkt nie istnieje</h1>

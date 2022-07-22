@@ -69,6 +69,10 @@
   margin-bottom: 0.5rem;
 }
 
+.message-button {
+  margin-top: 0.5rem;
+}
+
 @media screen and (min-width: 700px) {
   .description {
     grid-template-columns: 2fr 1fr;
@@ -76,5 +80,9 @@
 
   .rating {
     font-size: 1em;
+  }
+
+  .message-button {
+    margin-top: 1rem;
   }
 }

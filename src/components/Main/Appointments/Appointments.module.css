@@ -57,21 +57,3 @@
     transform: rotateZ(360deg);
   }
 }
-
-@keyframes hide {
-  from {
-    transform: translate(-50%, -50%) scaleY(1);
-  }
-  to {
-    transform: translate(-50%, -50%) scaleY(0);
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
