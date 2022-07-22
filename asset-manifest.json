@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.4f28b02f.css",
-    "main.js": "/static/js/main.e35e91bd.js",
+    "main.css": "/static/css/main.7f4090f6.css",
+    "main.js": "/static/js/main.e32bdbef.js",
     "static/media/products.jpg": "/static/media/products.4cfa8ebd41d2a7ec459c.jpg",
     "static/media/barber.jpg": "/static/media/barber.e8b55bec66b11a874c2b.jpg",
     "static/media/procedure.jpg": "/static/media/procedure.08b92a526c5ee558908f.jpg",
@@ -12,11 +12,11 @@
     "static/media/logo.svg": "/static/media/logo.e41054a6a8f10e8b82afe6792f80650e.svg",
     "static/media/product1.jpg": "/static/media/product1.b4b1cc9fe57d23142a93.jpg",
     "index.html": "/index.html",
-    "main.4f28b02f.css.map": "/static/css/main.4f28b02f.css.map",
-    "main.e35e91bd.js.map": "/static/js/main.e35e91bd.js.map"
+    "main.7f4090f6.css.map": "/static/css/main.7f4090f6.css.map",
+    "main.e32bdbef.js.map": "/static/js/main.e32bdbef.js.map"
   },
   "entrypoints": [
-    "static/css/main.4f28b02f.css",
-    "static/js/main.e35e91bd.js"
+    "static/css/main.7f4090f6.css",
+    "static/js/main.e32bdbef.js"
   ]
 }
