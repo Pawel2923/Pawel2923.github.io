@@ -174,7 +174,7 @@ const Services = () => {
 
     setTimeout(() => {
       setShowLoading(false);
-    }, 6000);
+    }, 7000);
 
     if (validateForm()) {
       emailjs

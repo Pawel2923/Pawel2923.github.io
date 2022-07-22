@@ -23,7 +23,7 @@ const ProductDetail = () => {
     }
   }
 
-  // Zmiana Ilości 
+  // Zmiana Ilości
   const amountChangeHandler = (number) => {
     setAmount(number);
   };
@@ -32,7 +32,7 @@ const ProductDetail = () => {
     let cartUpdated = JSON.parse(localStorage.getItem("cart"));
 
     // Sprawdzenie czy koszyk jest pusty
-    if (cartUpdated !== null) { 
+    if (cartUpdated !== null) {
       let repeatedItem = {
         isRepeated: false,
         id: -1,
@@ -40,7 +40,7 @@ const ProductDetail = () => {
       };
 
       // Pętla przeszukuje listę produktów z koszyka, Jeśli znajdzie to samo id zmienia obiekt repeatedItem
-      for (let i = 0; i < cartUpdated.length; i++) { 
+      for (let i = 0; i < cartUpdated.length; i++) {
         if (cartUpdated[i].id === item.id) {
           repeatedItem = {
             isRepeated: true,
@@ -52,10 +52,11 @@ const ProductDetail = () => {
       }
 
       // Jeśli produkt się powtórzył to dodana jest ilość produktów
-      if (repeatedItem.isRepeated) {  
+      if (repeatedItem.isRepeated) {
         cartUpdated[repeatedItem.id].amount = repeatedItem.item.amount + amount;
         localStorage.setItem("cart", JSON.stringify([...cartUpdated]));
-      } else { // Jeśli nie to dodawany jest nowy produkt do listy produktów
+      } else {
+        // Jeśli nie to dodawany jest nowy produkt do listy produktów
         localStorage.setItem(
           "cart",
           JSON.stringify([
@@ -101,7 +102,7 @@ const ProductDetail = () => {
       <div className={styles.description}>
         {isItemFound ? (
           <React.Fragment>
-            <div className={styles.left}>
+            <div className={styles["image-wrapper"]}>
               <h1>{item.name}</h1>
               <img
                 src={require(`components/store/productsImg/${item.image}`)}
@@ -113,14 +114,49 @@ const ProductDetail = () => {
               <div>
                 {item.price.toFixed(2).toString().replace(/\./g, ",")} zł
               </div>
+              <div>
+                Oceny tego produktu:
+                <div className={styles.rating}>
+                  <i
+                    className={`fa-solid fa-star ${styles.star} ${
+                      item.score >= 20 && styles.checked
+                    }`}
+                  ></i>
+                  <i
+                    className={`fa-solid fa-star ${styles.star} ${
+                      item.score >= 40 && styles.checked
+                    }`}
+                  ></i>
+                  <i
+                    className={`fa-solid fa-star ${styles.star} ${
+                      item.score >= 60 && styles.checked
+                    }`}
+                  ></i>
+                  <i
+                    className={`fa-solid fa-star ${styles.star} ${
+                      item.score >= 80 && styles.checked
+                    }`}
+                  ></i>
+                  <i
+                    className={`fa-solid fa-star ${styles.star} ${
+                      item.score >= 95 && styles.checked
+                    }`}
+                  ></i>
+                </div>
+              </div>
               <Amount onAmountChange={amountChangeHandler} />
               <Button onClick={buttonClickHandler}>Dodaj do koszyka</Button>
+            </div>
+            <div className={styles.bottom}>
+              <h1>Opis produktu</h1>
+              {item.description}
             </div>
           </React.Fragment>
         ) : (
           <h1>Taki produkt nie istnieje</h1>
         )}
       </div>
+      <br />
     </section>
   );
 };
