@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Button from "components/UI/Button/Button";
 import Amount from "components/UI/Amount/Amount";
@@ -119,8 +119,9 @@ const Cart = () => {
                   />
                 </div>
                 <div className={styles.right}>
-                  <h3>{item.name}</h3>
-                  <p>{item.description}</p>
+                  <Link to={`/products/${item.id}`}>
+                    <h3>{item.name}</h3>
+                  </Link>
                   <Amount
                     onAmountClick={amountClickHandler}
                     value={{ amount: item.amount, key: item.id }}

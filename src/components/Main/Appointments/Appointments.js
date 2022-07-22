@@ -174,7 +174,7 @@ const Services = () => {
 
     setTimeout(() => {
       setShowLoading(false);
-    }, 6000);
+    }, 7000);
 
     if (validateForm()) {
       emailjs
@@ -204,8 +204,14 @@ const Services = () => {
               show: true,
               error: true,
               title: `Wystąpił błąd ${error.status}`,
-              message:
-                "Nie udało się wysłać twojej wiadomości. Sprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie później.",
+              message: (
+                <span>
+                  Nie udało się wysłać twojej wiadomości.
+                  <br />
+                  Sprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie
+                  później.
+                </span>
+              ),
             });
           }
         );
@@ -220,11 +226,16 @@ const Services = () => {
   };
 
   const messageCloseHandler = () => {
-    setMessageState((prevState) => {
-      let newState = { ...prevState };
-      newState.show = false;
-      return newState;
-    });
+    document.getElementById("overlay").style.animationName = "fadeOut";
+    document.getElementById("card").style.animationName = "hide";
+
+    setTimeout(() => {
+      setMessageState((prevState) => {
+        let newState = { ...prevState };
+        newState.show = false;
+        return newState;
+      });
+    }, 200);
   };
 
   return (
@@ -297,10 +308,7 @@ const Services = () => {
         <i className={`fa-solid fa-spinner ${styles.loading}`}></i>
       )}
       {messageState.show && (
-        <Message error={messageState.error} onClose={messageCloseHandler}>
-          <h1>{messageState.title}</h1>
-          <p>{messageState.message}</p>
-        </Message>
+        <Message onClose={messageCloseHandler} messageInfo={messageState} />
       )}
     </React.Fragment>
   );

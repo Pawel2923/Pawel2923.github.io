@@ -2,13 +2,16 @@ import React, { useContext, useState } from "react";
 
 import Button from "components/UI/Button/Button";
 import PageInfoCtx from "components/store/page-size";
+import { categories } from "./utils/categories";
 
 import styles from "./Aside.module.css";
 
 const Aside = (props) => {
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(0);
-  const [categories, setCategories] = useState([]);
+  const [isChecked, setIsChecked] = useState(
+    new Array(categories.length).fill(false)
+  );
 
   const pageInfo = useContext(PageInfoCtx);
 
@@ -16,6 +19,8 @@ const Aside = (props) => {
     const value = parseFloat(ev.target.value.trim());
     if (!isNaN(value)) {
       setPriceMin(value);
+    } else {
+      setPriceMin(0);
     }
   };
 
@@ -23,13 +28,17 @@ const Aside = (props) => {
     const value = parseFloat(ev.target.value.trim());
     if (!isNaN(value)) {
       setPriceMax(value);
+    } else {
+      setPriceMax(0);
     }
   };
 
-  const checkboxChangeHandler = (ev) => {
-    setCategories((prevState) => [...prevState, ev.target.value]);
+  const checkboxChangeHandler = (pos) => {
+    const updatedIsChecked = isChecked.map((item, index) =>
+      index === pos ? !item : item
+    );
 
-    console.log(categories);
+    setIsChecked(updatedIsChecked);
   };
 
   const formBtnClickHandler = () => {
@@ -51,121 +60,57 @@ const Aside = (props) => {
   const filterSubmitHandler = (ev) => {
     ev.preventDefault();
 
-    props.onFilter("price", priceMin, priceMax);
+    let checkboxes = document.querySelectorAll("input[type='checkbox']");
+    let checked = [];
+
+    for (let checkbox of checkboxes) {
+      if (checkbox.checked) {
+        checked.push(checkbox);
+      }
+    }
+
+    if (checked.length > 0 && (priceMin > 0 || priceMax > 0)) {
+      props.onFilter("combined", {
+        minValue: priceMin,
+        maxValue: priceMax,
+        checkboxes: checked,
+      });
+    } else if (checked.length > 0 && priceMin === 0 && priceMax === 0) {
+      props.onFilter("categories", checked);
+    } else if (priceMin > 0 || priceMax > 0) {
+      props.onFilter("price", { minValue: priceMin, maxValue: priceMax });
+    } else {
+      props.onFilter("none");
+    }
+  };
+
+  const filterResetHandler = () => {
+    setPriceMin(0);
+    setPriceMax(0);
+    setIsChecked(new Array(categories.length).fill(false));
+    props.onReset();
   };
 
   let formContent = (
     <React.Fragment>
       <div className={styles.categories}>
         <h3>Kategoria</h3>
-        <label>
-          <input
-            type="checkbox"
-            value="maszynki"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Maszynki i trymery</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="grzebienie"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Grzebienie i szczotki</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="nozyczki"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Nożyczki</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="nasadki"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Nasadki do maszynek</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="kremy"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Kremy i mydła do golenia</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="olejki-golenie"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Olejki i żele do golenia</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="olejki-broda"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Olejki do brody</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="balsamy"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Balsamy i woski do brody</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="szampony-broda"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Mydła i szampony do brody</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="zestawy-wlosy"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Zestawy do włosów</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="szampony-wlosy"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Szampony i odżywki do włosów</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="akcesoria"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Pozostałe akcesoria</span>
-          <span className="checkmark"></span>
-        </label>
+        {categories.map((category, index) => (
+          <label key={`category-${index}`}>
+            <input
+              type="checkbox"
+              id={`category-${index}`}
+              name={category.name}
+              value={category.value}
+              checked={isChecked[index]}
+              onChange={() => {
+                checkboxChangeHandler(index);
+              }}
+            />
+            <span className="text">{category.name}</span>
+            <span className="checkmark"></span>
+          </label>
+        ))}
       </div>
       <div className={styles.price}>
         <h3>Cena</h3>
@@ -178,6 +123,10 @@ const Aside = (props) => {
           <input type="number" id="priceMax" onChange={maxPriceChangeHandler} />
         </label>
       </div>
+
+      <Button type="reset" className={styles["reset-btn"]}>
+        Resetuj filtry
+      </Button>
     </React.Fragment>
   );
 
@@ -200,7 +149,7 @@ const Aside = (props) => {
   return (
     <aside className={styles.aside}>
       <div className="filter">
-        <form onSubmit={filterSubmitHandler}>
+        <form onSubmit={filterSubmitHandler} onReset={filterResetHandler}>
           {formContent}
           <Button type="submit" className={styles["submit-btn"]}>
             Filtruj
