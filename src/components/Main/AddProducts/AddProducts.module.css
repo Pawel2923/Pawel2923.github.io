@@ -1,8 +1,0 @@
-.add form > * {
-    display: block;
-    margin-bottom: 1rem;
-}
-
-.add form > *:last-child {
-    margin-bottom: 0;
-}

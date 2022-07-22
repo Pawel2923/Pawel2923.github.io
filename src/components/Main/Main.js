@@ -8,7 +8,6 @@ import ProductDetail from "./ProductDetails/ProductDetail";
 import Cart from "./Cart/Cart";
 import ContactPage from "./ContactPage/ContactPage";
 import NotFound from "./NotFound/NotFound";
-import AddProducts from "./AddProducts/AddProducts";
 
 import styles from "./Main.module.css";
 
@@ -36,9 +35,6 @@ const Main = () => {
         </Route>
         <Route path="/contact">
           <ContactPage />
-        </Route>
-        <Route path="/add-products">
-          <AddProducts />
         </Route>
         <Route path="*">
           <NotFound />
