@@ -12,38 +12,7 @@ const ProductsCatalog = () => {
   const [items, setItems] = useState([...ProductsData]);
   const [sortBy, setSortBy] = useState("none");
 
-  const filterItems = (type, minValue, maxValue) => {
-    if (type === "price") {
-      if (minValue === 0 || minValue === "0") {
-        setItems([
-          ...ProductsData.filter(
-            (value) => value.price <= maxValue
-          ),
-        ]);
-      } else if (maxValue === 0 || maxValue === "0") {
-        console.log("ok");
-        setItems([
-          ...ProductsData.filter(
-            (value) => value.price >= minValue
-          ),
-        ]);
-      } else {
-        setItems([
-          ...ProductsData.filter(
-            (value) => value.price >= minValue && value.price <= maxValue
-          ),
-        ]);
-      }
-    }
-  };
-
-  const sortSelectChangeHandler = (ev) => {
-    setSortBy(ev.target.value);
-  };
-
-  const sortSubmitHandler = (ev) => {
-    ev.preventDefault();
-
+  const sortItems = () => {
     if (sortBy === "nameA") {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.nameA)];
@@ -77,6 +46,43 @@ const ProductsCatalog = () => {
     if (sortBy === "none") {
       setItems([...ProductsData]);
     }
+  };
+
+  const filterItems = (type, filter) => {
+    if (type === "price") {
+      if (filter.isDisabled === undefined) {
+        if (filter.minValue === 0) {
+          setItems([
+            ...ProductsData.filter((value) => value.price <= filter.maxValue),
+          ]);
+        } else if (filter.maxValue === 0) {
+          setItems([
+            ...ProductsData.filter((value) => value.price >= filter.minValue),
+          ]);
+        } else {
+          setItems([
+            ...ProductsData.filter(
+              (value) =>
+                value.price >= filter.minValue && value.price <= filter.maxValue
+            ),
+          ]);
+        }
+      }
+    }
+
+    if (sortBy !== "none") {
+      sortItems();
+    }
+  };
+
+  const sortSelectChangeHandler = (ev) => {
+    setSortBy(ev.target.value);
+  };
+
+  const sortSubmitHandler = (ev) => {
+    ev.preventDefault();
+
+    sortItems();
   };
 
   return (

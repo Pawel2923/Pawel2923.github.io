@@ -13,6 +13,7 @@ const AddProducts = () => {
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState(0);
   const [score, setScore] = useState(50);
+  const [category, setCategory] = useState("");
   const [result, setResult] = useState("");
 
   const idChangeHandler = (ev) => {
@@ -33,6 +34,10 @@ const AddProducts = () => {
 
   const scoreChangeHandler = (ev) => {
     setScore(ev.target.value);
+  };
+
+  const categoryChangeHandler = (ev) => {
+    setCategory(ev.target.value);
   };
 
   const copyToClipboard = () => {
@@ -148,6 +153,14 @@ const AddProducts = () => {
           min="0"
           max="100"
         />
+        <select defaultValue={category} onChange={categoryChangeHandler} required={true}>
+          <option value="maszynki">maszynki</option>
+          <option value="grzebienie">grzebienie</option>
+          <option value="nozyczki">nozyczki</option>
+          <option value="srodki-brody">srodki-brody</option>
+          <option value="srodki-wlosy">srodki-wlosy</option>
+          <option value="akcesoria">akcesoria</option>
+        </select>
         <Button type="submit">Dodaj</Button>
       </form>
       <textarea

@@ -28,8 +28,6 @@ const Aside = (props) => {
 
   const checkboxChangeHandler = (ev) => {
     setCategories((prevState) => [...prevState, ev.target.value]);
-
-    console.log(categories);
   };
 
   const formBtnClickHandler = () => {
@@ -51,7 +49,15 @@ const Aside = (props) => {
   const filterSubmitHandler = (ev) => {
     ev.preventDefault();
 
-    props.onFilter("price", priceMin, priceMax);
+    if (priceMin > 0 || priceMax > 0) {
+      props.onFilter("price", { minValue: priceMin, maxValue: priceMax });
+    } else {
+      props.onFilter("price", { isDisabled: true });
+    }
+
+    if (categories.length > 0) {
+      props.onFilter("categories", categories);
+    }
   };
 
   let formContent = (
@@ -88,73 +94,28 @@ const Aside = (props) => {
         <label>
           <input
             type="checkbox"
-            value="nasadki"
+            value="srodki-brody"
             onChange={checkboxChangeHandler}
           />
-          <span className="text">Nasadki do maszynek</span>
+          <span className="text">Środki do brody</span>
           <span className="checkmark"></span>
         </label>
         <label>
           <input
             type="checkbox"
-            value="kremy"
+            value="srodki-wlosy"
             onChange={checkboxChangeHandler}
           />
-          <span className="text">Kremy i mydła do golenia</span>
+          <span className="text">Środki do włosów</span>
           <span className="checkmark"></span>
         </label>
         <label>
           <input
             type="checkbox"
-            value="olejki-golenie"
+            value="zestawy"
             onChange={checkboxChangeHandler}
           />
-          <span className="text">Olejki i żele do golenia</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="olejki-broda"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Olejki do brody</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="balsamy"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Balsamy i woski do brody</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="szampony-broda"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Mydła i szampony do brody</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="zestawy-wlosy"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Zestawy do włosów</span>
-          <span className="checkmark"></span>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="szampony-wlosy"
-            onChange={checkboxChangeHandler}
-          />
-          <span className="text">Szampony i odżywki do włosów</span>
+          <span className="text">Zestawy</span>
           <span className="checkmark"></span>
         </label>
         <label>
