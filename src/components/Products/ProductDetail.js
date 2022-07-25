@@ -5,7 +5,8 @@ import Amount from 'components/UI/Amount/Amount';
 import Button from 'components/UI/Button/Button';
 import Modal from 'components/UI/Modal/Modal';
 import ProductsData from './ProductsData.json';
-import styles from './ProductDetail.module.css';
+import classes from './ProductDetail.module.css';
+import Ratings from './Ratings';
 
 const ProductDetail = () => {
   const params = useParams();
@@ -107,13 +108,13 @@ const ProductDetail = () => {
       title: 'Dodano do koszyka',
       message: <React.Fragment>
         Produkt został dodany do koszyka. 
-        <Button onClick={messageBtnClickHandler} className={styles['message-button']}>Przejdź do koszyka</Button>
+        <Button onClick={messageBtnClickHandler} className={classes['message-button']}>Przejdź do koszyka</Button>
       </React.Fragment>,
     });
   };
 
   return (
-    <section className={styles['products']}>
+    <section className={classes['products']}>
       <nav>
         <ul>
           <li>
@@ -128,55 +129,26 @@ const ProductDetail = () => {
           </li>
         </ul>
       </nav>
-      <div className={styles.description}>
+      <div className={classes.description}>
         {isItemFound ? (
           <React.Fragment>
-            <div className={styles["image-wrapper"]}>
+            <div className={classes["image-wrapper"]}>
               <h1>{item.name}</h1>
               <img
                 src={require(`assets/product-img/${item.image}`)}
-                className={styles.image}
+                className={classes.image}
                 alt="Zdjęcie produktu"
               />
             </div>
-            <div className={styles.right}>
+            <div className={classes.right}>
               <div>
                 {item.price.toFixed(2).toString().replace(/\./g, ",")} zł
               </div>
-              <div>
-                Oceny tego produktu:
-                <div className={styles.rating}>
-                  <i
-                    className={`fa-solid fa-star ${styles.star} ${
-                      item.score >= 20 && styles.checked
-                    }`}
-                  ></i>
-                  <i
-                    className={`fa-solid fa-star ${styles.star} ${
-                      item.score >= 40 && styles.checked
-                    }`}
-                  ></i>
-                  <i
-                    className={`fa-solid fa-star ${styles.star} ${
-                      item.score >= 60 && styles.checked
-                    }`}
-                  ></i>
-                  <i
-                    className={`fa-solid fa-star ${styles.star} ${
-                      item.score >= 80 && styles.checked
-                    }`}
-                  ></i>
-                  <i
-                    className={`fa-solid fa-star ${styles.star} ${
-                      item.score >= 95 && styles.checked
-                    }`}
-                  ></i>
-                </div>
-              </div>
+              <Ratings score={item.score} />
               <Amount onAmountChange={amountChangeHandler} />
               <Button onClick={buttonClickHandler}>Dodaj do koszyka</Button>
             </div>
-            <div className={styles.bottom}>
+            <div className={classes.bottom}>
               <h1>Opis produktu</h1>
               {item.description}
             </div>

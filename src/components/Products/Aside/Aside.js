@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Button from "components/UI/Button/Button";
-import { categories } from "./categories";
-import styles from "./Aside.module.css";
+import Button from 'components/UI/Button/Button';
+import { categories } from './categories';
+import styles from './Aside.module.css';
 
 const Aside = (props) => {
   const [priceMin, setPriceMin] = useState(0);
@@ -39,24 +39,24 @@ const Aside = (props) => {
 
   const formBtnClickHandler = () => {
     const contentBtn = document.getElementsByClassName(
-      styles["form-content-btn"]
+      styles['form-content-btn']
     )[0];
-    const asideForm = document.getElementById("asideFormContent");
+    const asideForm = document.getElementById('asideFormContent');
 
-    asideForm.classList.toggle("hideElement");
-    if (asideForm.classList.contains("hideElement")) {
-      contentBtn.innerHTML = "Pokaż filtry";
-      contentBtn.style.marginTop = "0";
+    asideForm.classList.toggle('hideElement');
+    if (asideForm.classList.contains('hideElement')) {
+      contentBtn.innerHTML = 'Pokaż filtry';
+      contentBtn.style.marginTop = '0';
     } else {
-      contentBtn.innerHTML = "Schowaj filtry";
-      contentBtn.style.marginTop = "1rem";
+      contentBtn.innerHTML = 'Schowaj filtry';
+      contentBtn.style.marginTop = '1rem';
     }
   };
 
   const filterSubmitHandler = (ev) => {
     ev.preventDefault();
 
-    let checkboxes = document.querySelectorAll("input[type='checkbox']");
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
     let checked = [];
 
     for (let checkbox of checkboxes) {
@@ -66,17 +66,17 @@ const Aside = (props) => {
     }
 
     if (checked.length > 0 && (priceMin > 0 || priceMax > 0)) {
-      props.onFilter("combined", {
+      props.onFilter('combined', {
         minValue: priceMin,
         maxValue: priceMax,
         checkboxes: checked,
       });
     } else if (checked.length > 0 && priceMin === 0 && priceMax === 0) {
-      props.onFilter("categories", checked);
+      props.onFilter('categories', checked);
     } else if (priceMin > 0 || priceMax > 0) {
-      props.onFilter("price", { minValue: priceMin, maxValue: priceMax });
+      props.onFilter('price', { minValue: priceMin, maxValue: priceMax });
     } else {
-      props.onFilter("none");
+      props.onFilter('none');
     }
   };
 
@@ -120,7 +120,7 @@ const Aside = (props) => {
         </label>
       </div>
 
-      <Button type="reset" className={styles["reset-btn"]}>
+      <Button type="reset" className={styles['reset-btn']}>
         Resetuj filtry
       </Button>
     </React.Fragment>
@@ -134,7 +134,7 @@ const Aside = (props) => {
         </div>
         <Button
           onClick={formBtnClickHandler}
-          className={styles["form-content-btn"]}
+          className={styles['form-content-btn']}
         >
           Pokaż filtry
         </Button>

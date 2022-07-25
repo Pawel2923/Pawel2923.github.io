@@ -1,5 +1,9 @@
 .aside {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   background: transparent;
   margin: 0 10% 2rem 10%;

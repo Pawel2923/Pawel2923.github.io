@@ -1,48 +1,49 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import Aside from "./Aside/Aside";
-import SortFunctions from "./SortFunctions";
-import Button from "components/UI/Button/Button";
-import ProductsData from "./ProductsData.json";
-import styles from "./Products.module.css";
+import Aside from './Aside/Aside';
+import SortFunctions from './SortFunctions';
+import Button from 'components/UI/Button/Button';
+import ProductsData from './ProductsData.json';
+import Ratings from './Ratings';
+import classes from './Products.module.css';
 
 const Products = () => {
   const [items, setItems] = useState(ProductsData);
-  const [sortBy, setSortBy] = useState("none");
+  const [sortBy, setSortBy] = useState('none');
 
   const sortItems = () => {
-    if (sortBy === "nameA") {
+    if (sortBy === 'nameA') {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.nameA)];
       });
     }
 
-    if (sortBy === "nameZ") {
+    if (sortBy === 'nameZ') {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.nameZ)];
       });
     }
 
-    if (sortBy === "priceMax") {
+    if (sortBy === 'priceMax') {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.priceMax)];
       });
     }
 
-    if (sortBy === "priceMin") {
+    if (sortBy === 'priceMin') {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.priceMin)];
       });
     }
 
-    if (sortBy === "reviews") {
+    if (sortBy === 'reviews') {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.reviews)];
       });
     }
 
-    if (sortBy === "none") {
+    if (sortBy === 'none') {
       setItems([...ProductsData]);
     }
   };
@@ -63,14 +64,14 @@ const Products = () => {
   };
 
   const filterItems = (type, filter) => {
-    if (type !== "none") {
-      if (type === "price") {
+    if (type !== 'none') {
+      if (type === 'price') {
         filterPrice(ProductsData, filter);
       }
 
       let newList = [];
 
-      if (type === "categories") {
+      if (type === 'categories') {
         for (let checkbox of filter) {
           newList.push(
             ...ProductsData.filter((value) => value.category === checkbox.value)
@@ -80,7 +81,7 @@ const Products = () => {
         setItems(newList);
       }
 
-      if (type === "combined") {
+      if (type === 'combined') {
         for (let checkbox of filter.checkboxes) {
           newList.push(
             ...ProductsData.filter((value) => value.category === checkbox.value)
@@ -90,7 +91,7 @@ const Products = () => {
         filterPrice(newList, filter);
       }
 
-      if (sortBy !== "none") {
+      if (sortBy !== 'none') {
         sortItems();
       }
     }
@@ -109,16 +110,16 @@ const Products = () => {
   const resetItems = () => {
     setItems(ProductsData);
 
-    if (sortBy !== "none") {
+    if (sortBy !== 'none') {
       sortItems();
     }
   };
 
   return (
-    <div className={styles["products-container"]}>
+    <div className={classes["products-container"]}>
       <Aside onFilter={filterItems} onReset={resetItems} />
-      <section className={styles["products-catalog"]}>
-        <div className={styles.sort}>
+      <section className={classes["products-catalog"]}>
+        <div className={classes.sort}>
           <form onSubmit={sortSubmitHandler}>
             <select
               id="sortBy"
@@ -134,7 +135,7 @@ const Products = () => {
             </select>
             <Button type="submit">Sortuj</Button>
           </form>
-          <div className={styles["cart-wrapper"]}>
+          <div className={classes["cart-wrapper"]}>
             <Link to="/cart">
               <i className="fa-solid fa-cart-shopping"></i> Koszyk
             </Link>
@@ -143,51 +144,22 @@ const Products = () => {
         {items.length > 0 ? (
           items.map((item) => (
             <Link to={`products/${item.id}`} key={item.id}>
-              <div className={styles.card}>
-                <div className={styles["image-wrapper"]}>
+              <div className={classes.card}>
+                <div className={classes["image-wrapper"]}>
                   <img
                     src={require(`assets/product-img/${item.image}`)}
                     alt="Zdjęcie produktu"
-                    className={styles.image}
+                    className={classes.image}
                   />
                 </div>
-                <div className={styles["desc-wrapper"]}>
+                <div className={classes["desc-wrapper"]}>
                   <h3>{item.name}</h3>
                   <div>{item.description}</div>
                   <div>
                     Cena: {item.price.toFixed(2).toString().replace(/\./g, ",")}{" "}
                     zł
                   </div>
-                  <div>
-                    Opinie:
-                    <div className={styles.rating}>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          item.score >= 20 && styles.checked
-                        }`}
-                      ></i>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          item.score >= 40 && styles.checked
-                        }`}
-                      ></i>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          item.score >= 60 && styles.checked
-                        }`}
-                      ></i>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          item.score >= 80 && styles.checked
-                        }`}
-                      ></i>
-                      <i
-                        className={`fa-solid fa-star ${styles.star} ${
-                          item.score >= 95 && styles.checked
-                        }`}
-                      ></i>
-                    </div>
-                  </div>
+                  <Ratings score={item.score} />
                 </div>
               </div>
             </Link>
