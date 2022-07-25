@@ -3,7 +3,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 
 import Amount from 'components/UI/Amount/Amount';
 import Button from 'components/UI/Button/Button';
-import Message from 'components/UI/Message/Message';
+import Modal from 'components/UI/Modal/Modal';
 import ProductsData from './ProductsData.json';
 import styles from './ProductDetail.module.css';
 
@@ -11,7 +11,7 @@ const ProductDetail = () => {
   const params = useParams();
   const history = useHistory();
   const [amount, setAmount] = useState(1);
-  const [messageState, setMessageState] = useState({
+  const [modalState, setModalState] = useState({
     show: false,
     error: false,
     title: '',
@@ -36,7 +36,7 @@ const ProductDetail = () => {
   };
 
   const messageCloseHandler = () => {
-    setMessageState((prevState) => {
+    setModalState((prevState) => {
       let newState = { ...prevState };
       newState.show = false;
       return newState;
@@ -101,7 +101,7 @@ const ProductDetail = () => {
       );
     }
 
-    setMessageState({
+    setModalState({
       show: true,
       error: false,
       title: 'Dodano do koszyka',
@@ -180,10 +180,10 @@ const ProductDetail = () => {
               <h1>Opis produktu</h1>
               {item.description}
             </div>
-            {messageState.show && (
-              <Message
+            {modalState.show && (
+              <Modal
                 onClose={messageCloseHandler}
-                messageInfo={messageState}
+                modalInfo={modalState}
               />
             )}
           </React.Fragment>

@@ -1,23 +1,22 @@
-import React, { useState } from "react";
-import emailjs from "@emailjs/browser";
+import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
-import Button from "components/UI/Button/Button";
-import Message from "components/UI/Message/Message";
-
-import styles from "./Appointments.module.css";
+import Button from 'components/UI/Button/Button';
+import Modal from 'components/UI/Modal/Modal';
+import classes from './Appointments.module.css';
 
 const checkValidity = (type, value) => {
-  if (type === "text") {
-    if (value.trim() !== "" && value.trim().length >= 3) {
+  if (type === 'TEXT') {
+    if (value.trim() !== '' && value.trim().length >= 3) {
       return true;
     } else {
       return false;
     }
   }
 
-  if (type === "email") {
-    if (value.trim() !== "") {
-      if (value.includes("@")) {
+  if (type === 'EMAIL') {
+    if (value.trim() !== '') {
+      if (value.includes('@')) {
         return true;
       } else {
         return false;
@@ -27,8 +26,8 @@ const checkValidity = (type, value) => {
     }
   }
 
-  if (type === "phoneNumber") {
-    if (value.trim() !== "") {
+  if (type === 'PHONE_NUMBER') {
+    if (value.trim() !== '') {
       const re1 = /[0-9]{3} [0-9]{3} [0-9]{3}/g;
       const re2 = /[0-9]{3}[0-9]{3}[0-9]{3}/g;
       const re3 = /[0-9]{3}-[0-9]{3}-[0-9]{3}/g;
@@ -43,24 +42,21 @@ const checkValidity = (type, value) => {
     }
   }
 
-  if (type !== "text" && type !== "email" && type !== "phoneNumber") {
-    console.error(
-      "Funkcja checkValidity potrzebuje prawidłowego paremetru type do poprawnego działania."
-    );
-  }
+  console.error('Funkcja checkValidity potrzebuje prawidłowego paremetru type do poprawnego działania.');
+  return false;
 };
 
 const Appointments = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [message, setMessage] = useState('');
 
-  const [messageState, setMessageState] = useState({
+  const [modalState, setModalState] = useState({
     show: false,
     error: false,
-    title: "",
-    message: "",
+    title: '',
+    message: '',
   });
   const [showLoading, setShowLoading] = useState(false);
 
@@ -68,9 +64,9 @@ const Appointments = () => {
     setName(ev.target.value);
 
     if (!ev.target.validity.valid) {
-      ev.target.classList.add("invalid");
+      ev.target.classList.add('invalid');
     } else {
-      ev.target.classList.remove("invalid");
+      ev.target.classList.remove('invalid');
     }
   };
 
@@ -78,9 +74,9 @@ const Appointments = () => {
     setEmail(ev.target.value);
 
     if (!ev.target.validity.valid) {
-      ev.target.classList.add("invalid");
+      ev.target.classList.add('invalid');
     } else {
-      ev.target.classList.remove("invalid");
+      ev.target.classList.remove('invalid');
     }
   };
 
@@ -88,9 +84,9 @@ const Appointments = () => {
     setPhoneNumber(ev.target.value);
 
     if (!ev.target.validity.valid) {
-      ev.target.classList.add("invalid");
+      ev.target.classList.add('invalid');
     } else {
-      ev.target.classList.remove("invalid");
+      ev.target.classList.remove('invalid');
     }
   };
 
@@ -98,69 +94,25 @@ const Appointments = () => {
     setMessage(ev.target.value);
 
     if (!ev.target.validity.valid) {
-      ev.target.classList.add("invalid");
+      ev.target.classList.add('invalid');
     } else {
-      ev.target.classList.remove("invalid");
+      ev.target.classList.remove('invalid');
     }
   };
 
   const validateForm = () => {
-    let isValid = false;
+    let isValid = true;
 
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const phoneInput = document.getElementById("phoneNumber");
-    const messageInput = document.getElementById("message");
-
-    if (checkValidity("text", message)) {
-      if (messageInput.classList.contains("invalid")) {
-        messageInput.classList.remove("invalid");
-      }
-      isValid = true;
-    } else {
-      if (!messageInput.classList.contains("invalid")) {
-        messageInput.classList.add("invalid");
-        messageInput.focus();
-      }
+    if (!checkValidity('TEXT', name)) {
       isValid = false;
     }
-
-    if (checkValidity("phoneNumber", phoneNumber)) {
-      if (phoneInput.classList.contains("invalid")) {
-        phoneInput.classList.remove("invalid");
-      }
-      isValid = true;
-    } else {
-      if (!phoneInput.classList.contains("invalid")) {
-        phoneInput.classList.add("invalid");
-        phoneInput.focus();
-      }
+    if (!checkValidity('EMAIL', email)) {
       isValid = false;
     }
-
-    if (checkValidity("email", email)) {
-      if (emailInput.classList.contains("invalid")) {
-        emailInput.classList.remove("invalid");
-      }
-      isValid = true;
-    } else {
-      if (!emailInput.classList.contains("invalid")) {
-        emailInput.classList.add("invalid");
-        emailInput.focus();
-      }
+    if (!checkValidity('PHONE_NUMBER', phoneNumber)) {
       isValid = false;
     }
-
-    if (checkValidity("text", name)) {
-      if (nameInput.classList.contains("invalid")) {
-        nameInput.classList.remove("invalid");
-      }
-      isValid = true;
-    } else {
-      if (!nameInput.classList.contains("invalid")) {
-        nameInput.classList.add("invalid");
-        nameInput.focus();
-      }
+    if (!checkValidity('TEXT', message)) {
       isValid = false;
     }
 
@@ -170,17 +122,17 @@ const Appointments = () => {
   const submitHandler = (ev) => {
     ev.preventDefault();
 
-    setShowLoading(true);
-
-    setTimeout(() => {
-      setShowLoading(false);
-    }, 7000);
-
     if (validateForm()) {
+      setShowLoading(true);
+
+      setTimeout(() => {
+        setShowLoading(false);
+      }, 7000);
+
       emailjs
         .send(
-          "service_mt81aag",
-          "template_j69osgm",
+          'service_mt81aag',
+          'template_j69osgm',
           {
             from_name: name,
             from_email: email,
@@ -188,15 +140,15 @@ const Appointments = () => {
             message: message,
             phone_number: phoneNumber,
           },
-          "vSOVWrVLzBl721pXk"
+          'vSOVWrVLzBl721pXk'
         )
         .then(
           () => {
-            setMessageState({
+            setModalState({
               show: true,
               error: false,
-              title: "Wysłano wiadomość",
-              message: "Twoja wiadomość została pomyślnie przesłana.",
+              title: 'Wysłano wiadomość',
+              message: 'Twoja wiadomość została pomyślnie przesłana.',
             });
           },
           (error) => {
@@ -216,21 +168,21 @@ const Appointments = () => {
           }
         );
     } else {
-      console.warn("Błąd walidacji maila");
+      console.warn('Błąd walidacji maila');
     }
 
-    setName("");
-    setEmail("");
-    setPhoneNumber("");
-    setMessage("");
+    setName('');
+    setEmail('');
+    setPhoneNumber('');
+    setMessage('');
   };
 
   const messageCloseHandler = () => {
-    document.getElementById("overlay").style.animationName = "fadeOut";
-    document.getElementById("card").style.animationName = "hide";
+    document.getElementById('overlay').style.animationName = 'fadeOut';
+    document.getElementById('card').style.animationName = 'hide';
 
     setTimeout(() => {
-      setMessageState((prevState) => {
+      setModalState((prevState) => {
         let newState = { ...prevState };
         newState.show = false;
         return newState;
@@ -240,18 +192,18 @@ const Appointments = () => {
 
   return (
     <React.Fragment>
-      <section className={styles.appointments}>
+      <section className={classes.appointments}>
         <h1>Umów się na wizytę</h1>
         <h3>
-          Wyślij wiadomość lub zadzwoń na{" "}
+          Wyślij wiadomość lub zadzwoń na
           <a title="Zadzwoń" href="tel:+00 123 000 000">
             +00 123 000 000
           </a>
         </h3>
         <form onSubmit={submitHandler}>
-          <label className={styles.name}>
+          <label className={classes.name}>
             <p>
-              Imię i nazwisko <span className={styles.asterisk}>*</span>
+              Imię i nazwisko <span className={classes.asterisk}>*</span>
             </p>
             <input
               type="text"
@@ -265,7 +217,7 @@ const Appointments = () => {
           </label>
           <label>
             <p>
-              E-mail <span className={styles.asterisk}>*</span>
+              E-mail <span className={classes.asterisk}>*</span>
             </p>
             <input
               type="email"
@@ -278,7 +230,7 @@ const Appointments = () => {
           </label>
           <label>
             <p>
-              Nr telefonu <span className={styles.asterisk}>*</span>
+              Nr telefonu <span className={classes.asterisk}>*</span>
             </p>
             <input
               type="tel"
@@ -290,25 +242,26 @@ const Appointments = () => {
               required
             />
           </label>
-          <label className={styles.message}>
+          <label className={classes.message}>
             <p>
-              Wiadomość <span className={styles.asterisk}>*</span>
+              Wiadomość <span className={classes.asterisk}>*</span>
             </p>
             <textarea
               id="message"
               minLength="3"
               value={message}
               onChange={messageChangeHandler}
-            ></textarea>
+              required
+            />
           </label>
           <Button type="submit">Wyślij</Button>
         </form>
       </section>
       {showLoading && (
-        <i className={`fa-solid fa-spinner ${styles.loading}`}></i>
+        <i className={`fa-solid fa-spinner ${classes.loading}`}></i>
       )}
-      {messageState.show && (
-        <Message onClose={messageCloseHandler} messageInfo={messageState} />
+      {modalState.show && (
+        <Modal onClose={messageCloseHandler} modalInfo={modalState} />
       )}
     </React.Fragment>
   );
