@@ -1,5 +1,6 @@
 .services ul {
   list-style-type: none;
+  display: -ms-grid;
   display: grid;
   margin-top: 1rem;
   row-gap: 3rem;
@@ -8,9 +9,13 @@
 .services ul li {
   width: 100%;
   position: relative;
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 1rem 1fr;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   overflow: hidden;
   text-align: center;
   gap: 1rem;
