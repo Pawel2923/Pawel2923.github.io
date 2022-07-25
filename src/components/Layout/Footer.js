@@ -1,18 +1,18 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import styles from "./Footer.module.css";
+import classes from './Footer.module.css';
 
 const Footer = () => {
   useEffect(() => {
     const changeFooterPosition = (bodyHeight) => {
       if (!(window.innerHeight <= bodyHeight)) {
         document
-          .getElementsByClassName(styles.footer)[0]
-          .classList.add(styles.absolute);
+          .getElementsByClassName(classes.footer)[0]
+          .classList.add(classes.absolute);
       } else {
         document
-          .getElementsByClassName(styles.footer)[0]
-          .classList.remove(styles.absolute);
+          .getElementsByClassName(classes.footer)[0]
+          .classList.remove(classes.absolute);
       }
     };
 
@@ -24,7 +24,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className={styles.footer}>
+    <footer className={classes.footer}>
       <p>Wszelkie prawa zastrzeżone &copy; 2022</p>
     </footer>
   );

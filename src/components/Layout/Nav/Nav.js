@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from '../Header.module.css';
-import optionStyles from './Option.module.css';
+import Option from './Option';
+import classes from '../Header.module.css';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 
 const Nav = () => {
@@ -11,24 +11,24 @@ const Nav = () => {
       <li>
         <Link
           to="/home"
-          className={styles["image-wrapper"]}
+          className={classes["image-wrapper"]}
           title="Przejdź na stronę główną"
         >
           <Logo />
         </Link>
       </li>
-      <li className={optionStyles.option}>
-        <Link to="/home">Strona główna</Link>
-      </li>
-      <li className={optionStyles.option}>
-        <Link to="/appointments">Wizyty</Link>
-      </li>
-      <li className={optionStyles.option}>
-        <Link to="/products">Produkty</Link>
-      </li>
-      <li className={optionStyles.option}>
-        <Link to="/contact">Kontakt</Link>
-      </li>
+      <Option link={{ to: "/home" }}>
+        Strona główna
+      </Option>
+      <Option link={{ to: "/appointments" }}>
+        Wizyty
+      </Option>
+      <Option link={{ to: "/products" }}>
+        Produkty
+      </Option>
+      <Option link={{ to: "/contact" }}>
+        Kontakt
+      </Option>
     </Fragment>
   );
 };
