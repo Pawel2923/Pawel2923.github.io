@@ -50,7 +50,7 @@ const checkValidity = (type, value) => {
   }
 };
 
-const Services = () => {
+const Appointments = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -240,7 +240,7 @@ const Services = () => {
 
   return (
     <React.Fragment>
-      <section className={styles.services}>
+      <section className={styles.appointments}>
         <h1>Umów się na wizytę</h1>
         <h3>
           Wyślij wiadomość lub zadzwoń na{" "}
@@ -314,4 +314,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Appointments;

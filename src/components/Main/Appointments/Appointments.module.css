@@ -1,21 +1,21 @@
-.services h1,
-.services h3 {
+.appointments h1,
+.appointments h3 {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.services form {
+.appointments form {
   width: fit-content;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
-.services form label {
+.appointments form label {
   margin: 0;
 }
 
-.services form input {
+.appointments form input {
   width: 100%;
 }
 

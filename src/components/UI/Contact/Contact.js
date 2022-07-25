@@ -50,7 +50,7 @@ const Contact = (props) => {
         </li>
       </ul>
       {(showMap || (props.showMap !== undefined && props.showMap)) && (
-        <div className="map">
+        <div className={styles.map}>
           <iframe
             title="Mapa"
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d646.2445579016344!2d20.6995441687172!3d49.61701505081073!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473de537b62d3f4d%3A0x754e7e58dcfda174!2sJana%20D%C5%82ugosza%2040%2C%2033-300%20Nowy%20S%C4%85cz!5e0!3m2!1spl!2spl!4v1656065124860!5m2!1spl!2spl"

@@ -30,6 +30,10 @@
   margin-bottom: 0.5rem;
 }
 
+.map {
+  margin-top: 2rem;
+}
+
 @media screen and (max-width: 709px) {
   .list {
     grid-template-columns: 1fr;

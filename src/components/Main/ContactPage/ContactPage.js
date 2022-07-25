@@ -1,12 +1,12 @@
 import Contact from "components/UI/Contact/Contact";
-import "./ContactPage.css";
+import React from "react";
 
 const ContactPage = () => {
-    return (
-        <div className="contact-page">
-            <Contact showMap={true} />
-        </div>
-    );
+  return (
+    <React.Fragment>
+      <Contact showMap={true} />
+    </React.Fragment>
+  );
 };
 
 export default ContactPage;
