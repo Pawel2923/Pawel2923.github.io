@@ -10,6 +10,7 @@ import styles from "./Cart.module.css";
 const Cart = () => {
   const history = useHistory();
   const [cart, setCart] = useState([]);
+  const [showPayment, setShowPayment] = useState(false);
 
   // Wczytanie produktów z pamięci do stanu cart
   useEffect(() => {
@@ -36,6 +37,7 @@ const Cart = () => {
   const resetClickHandler = () => {
     localStorage.removeItem("cart");
     setCart([]);
+    setShowPayment(false);
   };
 
   // Uaktualnienie ilości produktu
@@ -98,6 +100,16 @@ const Cart = () => {
     }
   };
 
+  const payClickHandler = () => {
+    setShowPayment(true);
+  };
+
+  const paySubmitHandler = (ev) => {
+    ev.preventDefault();
+
+    setShowPayment(false);
+  };
+
   return (
     <section className={styles.cart}>
       <nav>
@@ -140,7 +152,21 @@ const Cart = () => {
           <p>Koszyk jest pusty</p>
         )}
         {cart.length > 0 && (
-          <Button onClick={resetClickHandler}>Wyczyść koszyk</Button>
+          <div>
+            <Button onClick={resetClickHandler} className={styles["reset-btn"]}>Wyczyść koszyk</Button>
+            <Button onClick={payClickHandler}>Zapłać</Button>
+          </div>
+        )}
+        {showPayment && (
+          <div className={styles.payment}>
+            <form onSubmit={paySubmitHandler}>
+              <input type="number" placeholder="Numer karty" />
+              <input type="text" placeholder="Imię i nazwisko na karcie" />
+              <input type="number" placeholder="CVV" />
+              <input type="date" placeholder="Data ważności" />
+              <Button type="submit">Potwierdź</Button>
+            </form>
+          </div>
         )}
       </div>
     </section>
