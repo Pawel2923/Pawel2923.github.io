@@ -1,0 +1,30 @@
+.main {
+  width: 100%;
+  margin-bottom: 50px;
+  background-color: #f6f6f6;
+  font-size: 0.9em;
+}
+
+.main section {
+  padding: 1rem 10%;
+}
+
+.main h3 {
+  font-size: 1.1em;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+}
+
+.main h1,
+.main h2 {
+  font-family: 'Merriweather', serif;
+  font-weight: 600;
+  font-size: 1.3em;
+  letter-spacing: 1px;
+}
+
+@media screen and (min-width: 700px) {
+  .main {
+    font-size: 1em;
+  }
+}

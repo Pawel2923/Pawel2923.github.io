@@ -1,0 +1,137 @@
+[
+  {
+    "id": "maszynka-do-przycinania",
+    "name": "Maszynka do przycinania brody",
+    "description": "Maszynka do brody. Opakowanie zawiera kabel zasilający oraz zestaw nasadek.",
+    "image": "product1.jpg",
+    "price": 199.99,
+    "score": 89,
+    "category": "maszynki"
+  },
+  {
+    "id": "grzebien1",
+    "name": "Grzebień do brody",
+    "description": "Grzebień do brody cedrowy Pan Drwal.",
+    "image": "product2.jpg",
+    "price": 80,
+    "score": 95,
+    "category": "grzebienie"
+  },
+  {
+    "id": "nozyczki-do-brody-i-wasow",
+    "name": "Nożyczki do brody i wąsów",
+    "description": "Idealne nożyczki do przycinania brody i wąsów.",
+    "image": "product2.jpg",
+    "price": 354.3,
+    "score": 45,
+    "category": "nozyczki"
+  },
+  {
+    "id": "maszynka-do-przycinania4",
+    "name": "Maszynka do przycinania włosów",
+    "description": "Maszynka do przycinania włosów.",
+    "image": "product2.jpg",
+    "price": 354,
+    "score": 54,
+    "category": "maszynki"
+  },
+  {
+    "id": "pomada",
+    "name": "Pomada do brody",
+    "description": "Idealna pomada do brody.",
+    "image": "product2.jpg",
+    "price": 345,
+    "score": 25,
+    "category": "srodki-brody"
+  },
+  {
+    "id": "zestaw-nasadek",
+    "name": "Zestaw nasadek do maszynki",
+    "description": "Pełen zestaw nasadek do maszynek do przycinania.",
+    "image": "product2.jpg",
+    "price": 345.02,
+    "score": 87,
+    "category": "zestawy"
+  },
+  {
+    "id": "brzytwa",
+    "name": "Brzytwa do ścinania zarostu",
+    "description": "Produkt potrzebny dla każdego barbera.",
+    "image": "product2.jpg",
+    "price": 345,
+    "score": 0,
+    "category": "brzytwy"
+  },
+  {
+    "id": "lakier-do-wlosow",
+    "name": "Lakier do włosów",
+    "description": "Prosty lakier do włosów.",
+    "image": "product2.jpg",
+    "price": 345,
+    "score": 0,
+    "category": "srodki-wlosy"
+  },
+  {
+    "id": "grzebien2",
+    "name": "Szczotka do włosów",
+    "description": "Wysokiej jakości szczotka do włosów.",
+    "image": "product2.jpg",
+    "price": 25,
+    "score": 0,
+    "category": "grzebienie"
+  },
+  {
+    "id": "krem-do-golenia",
+    "name": "Krem do golenia",
+    "description": "Krem do golenia.",
+    "image": "product1.jpg",
+    "price": 25,
+    "score": 0,
+    "category": "srodki-brody"
+  },
+  {
+    "id": "balsam-do-brody",
+    "name": "Balsam do brody",
+    "description": "Balsam do brody",
+    "image": "product2.jpg",
+    "price": 20,
+    "score": 64,
+    "category": "srodki-brody"
+  },
+  {
+    "id": "odywka-do-brody",
+    "name": "Odżywka do brody",
+    "description": "Odżwyka do brody.",
+    "image": "product2.jpg",
+    "price": 37.65,
+    "score": 34,
+    "category": "srodki-brody"
+  },
+  {
+    "id": "olejki",
+    "name": "Olejki do brody",
+    "description": "Zestaw olejków do brody",
+    "image": "product2.jpg",
+    "price": 65,
+    "score": 83,
+    "category": "srodki-brody"
+  },
+  {
+    "id": "ladowarka",
+    "name": "Ładowarka do maszynki",
+    "description": "Ładowarka do maszynki do przycinania z wyjściem 15V.",
+    "image": "product2.jpg",
+    "price": 20.99,
+    "score": 64,
+    "category": "akcesoria"
+  },
+  {
+    "id": "ladowarka2",
+    "name": "Ładowarka do maszynki",
+    "description": "Ładowarka do maszynki z wyjściem 20V.",
+    "image": "product2.jpg",
+    "price": 39.99,
+    "score": 83,
+    "category": "akcesoria"
+  }
+]

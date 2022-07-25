@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import Button from "components/UI/Button/Button";
-
-import styles from "./Contact.module.css";
+import classes from "./Contact.module.css";
 
 const Contact = (props) => {
   const [showMap, setShowMap] = useState(false);
@@ -22,35 +21,35 @@ const Contact = (props) => {
   return (
     <section className={props.className}>
       <h1>Skontaktuj się z nami</h1>
-      <ul className={styles.list}>
-        <li className={styles["list-item"]}>
-          <Button onClick={showMapClickHandler} title="Pokaż na mapie">
-            <i className={`fa-solid fa-location-dot ${styles.icon}`}></i>
+      <ul className={classes.list}>
+        <li className={classes["list-item"]}>
+          <button onClick={showMapClickHandler} title="Pokaż na mapie">
+            <i className={`fa-solid fa-location-dot ${classes.icon}`}></i>
             <span>Jana Długosza 40, 33-300 Nowy Sącz</span>
-          </Button>
+          </button>
         </li>
-        <li className={styles["list-item"]}>
+        <li className={classes["list-item"]}>
           <a title="Wyślij email" href="mailto:barber-shop-react@outlook.com">
-            <i className={`fa-solid fa-envelope ${styles.icon}`}></i>
+            <i className={`fa-solid fa-envelope ${classes.icon}`}></i>
             <span>barber-shop-react@outlook.com</span>
           </a>
         </li>
-        <li className={styles["list-item"]}>
+        <li className={classes["list-item"]}>
           <a title="Zadzwoń" href="tel:+00 123 000 000">
-            <i className={`fa-solid fa-phone ${styles.icon}`}></i>
+            <i className={`fa-solid fa-phone ${classes.icon}`}></i>
             <span>+00 123 000 000</span>
           </a>
         </li>
-        <li className={styles["list-item"]}>
+        <li className={classes["list-item"]}>
           <div>
-            <i className={`fa-solid fa-clock ${styles.icon}`}></i>
+            <i className={`fa-solid fa-clock ${classes.icon}`}></i>
             <p>Pon-Pią 9:00 - 19:00</p>
             <p>Sob-Niedz: 10:00 - 20:00</p>
           </div>
         </li>
       </ul>
       {(showMap || (props.showMap !== undefined && props.showMap)) && (
-        <div className={styles.map}>
+        <div className={classes.map}>
           <iframe
             title="Mapa"
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d646.2445579016344!2d20.6995441687172!3d49.61701505081073!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473de537b62d3f4d%3A0x754e7e58dcfda174!2sJana%20D%C5%82ugosza%2040%2C%2033-300%20Nowy%20S%C4%85cz!5e0!3m2!1spl!2spl!4v1656065124860!5m2!1spl!2spl"

@@ -1,36 +1,19 @@
-import React, { useState, useEffect } from "react";
-
-import Header from "./components/Header/Header";
-import BackToTop from "./components/UI/BackToTop/BackToTop";
-import Main from "./components/Main/Main";
-import Footer from "./components/Footer/Footer";
-import Cookies from "./components/UI/Cookies/Cookies";
-
-import PageInfoCtx from "./components/store/page-size";
+import WindowSizeProvider from 'store/WindowSizeProvider';
+import BackToTop from 'components/UI/BackToTop/BackToTop';
+import Cookies from './components/UI/Cookies/Cookies';
+import Header from 'components/Layout/Header';
+import Main from 'components/Layout/Main';
+import Footer from 'components/Layout/Footer';
 
 const App = () => {
-  const [screenSize, setScreenSize] = useState(window.innerWidth);
-
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setTimeout(() => {
-        setScreenSize(window.innerWidth);
-      }, 1000);
-    });
-  }, []);
-
-  return (
-    <PageInfoCtx.Provider
-      value={{
-        screenWidth: screenSize,
-      }}
-    >
-      <Header />
+   return (
+    <WindowSizeProvider>
       <BackToTop />
+      <Cookies />
+      <Header />
       <Main />
       <Footer />
-      <Cookies />
-    </PageInfoCtx.Provider>
+    </WindowSizeProvider>
   );
 };
 

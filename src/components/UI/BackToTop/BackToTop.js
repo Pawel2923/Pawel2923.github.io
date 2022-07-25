@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import { Fragment, useState, useContext } from 'react';
 
-import Button from "../Button/Button";
-
-import styles from "./BackToTop.module.css";
+import classes from './BackToTop.module.css';
+import WindowSizeContext from 'store/window-size';
 
 const BackToTop = () => {
+  const windowSizeCtx = useContext(WindowSizeContext);
   const [isShown, setIsShown] = useState(false);
 
   const toggleShow = () => {
+    if (windowSizeCtx.width <= 700) {
+      return;
+    }
+
     const scrollPos = window.scrollY;
 
     if (scrollPos > 400) {
@@ -20,20 +24,20 @@ const BackToTop = () => {
   const btnClickHandler = () => {
     window.scroll({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
   window.addEventListener('scroll', toggleShow);
 
   return (
-    <React.Fragment>
-      {window.innerWidth > 700 && (
-        <Button className={`${styles.back} ${isShown ? styles.show : ""}`} onClick={btnClickHandler}>
+    <Fragment>
+      {isShown && (
+        <button className={classes.back} onClick={btnClickHandler}>
           <i className="fa-solid fa-arrow-up"></i>
-        </Button>
+        </button>
       )}
-    </React.Fragment>
+    </Fragment>
   );
 };
 

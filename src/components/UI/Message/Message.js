@@ -22,7 +22,7 @@ const Message = (props) => {
         </div>
       </div>
     </React.Fragment>,
-    document.getElementById("overlay-root")
+    document.getElementById("overlays")
   );
 };
 

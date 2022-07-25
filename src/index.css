@@ -1,7 +1,15 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body {
@@ -15,6 +23,8 @@ body {
 a {
   color: #594e4c;
   text-decoration: none;
+  -webkit-transition: color 200ms ease;
+  -o-transition: color 200ms ease;
   transition: color 200ms ease;
 }
 
@@ -22,6 +32,15 @@ a:hover,
 a:active {
   color: black;
 }
+
+button {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+
 
 .hideElement {
   display: none;
@@ -105,22 +124,4 @@ form label span.checkmark::after {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-}
-
-@keyframes hide {
-  from {
-    transform: translate(-50%, -50%) scaleY(1);
-  }
-  to {
-    transform: translate(-50%, -50%) scaleY(0);
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
 }

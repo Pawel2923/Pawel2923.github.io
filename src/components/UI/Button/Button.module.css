@@ -1,24 +1,18 @@
 .button {
-  border-radius: 20px;
-  background: #fdb06f;
-  color: #000;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
+  position: relative;
   width: fit-content;
   padding: 0.6em 1em;
-  position: relative;
-  -webkit-transition: 200ms ease;
-  -o-transition: 200ms ease;
-  transition: 200ms ease;
-  border: none;
-  font-size: 1em;
-}
-
-.button:active {
-  -webkit-transform: scale3d(1.1, 1.1, 1.1);
-  transform: scale3d(1.1, 1.1, 1.1);
-}
-
-.button:hover {
+  border-radius: 20px;
+  border: 1px solid #fdb06f;
+  background-color: #fdb06f;
+  color: black;
   cursor: pointer;
+  font-size: 1em;
+  transition: 200ms ease;
+}
+
+.button:hover,
+.button:active {
+   background-color: #BF8454;
+   border-color: #BF8454;
 }
