@@ -1,103 +1,51 @@
-import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
-import Button from "components/UI/Button/Button";
-import Amount from "components/UI/Amount/Amount";
+import Button from 'components/UI/Button/Button';
+import Amount from 'components/UI/Amount/Amount';
 import ProductsData from '../Products/ProductsData.json';
+import CartContext from 'store/cart-context';
 
-import styles from "./Cart.module.css";
+import classes from './Cart.module.css';
 
 const Cart = () => {
   const history = useHistory();
-  const [cart, setCart] = useState([]);
+  const cartCtx = useContext(CartContext);
   const [showPayment, setShowPayment] = useState(false);
 
-  // Wczytanie produktów z pamięci do stanu cart
-  useEffect(() => {
-    const cartLocal = localStorage.getItem("cart");
-    const parsedCart = JSON.parse(cartLocal);
+  const getProducts = () => {
+    let cartItems = [];
 
-    if (cartLocal !== null && parsedCart.length > 0) {
-      for (let product of ProductsData) {
-        for (let item of parsedCart) {
+    if (cartCtx.items.length > 0) {
+      for (const product of ProductsData) {
+        for (const item of cartCtx.items) {
           if (item.id === product.id) {
-            setCart((prevCart) => {
-              return [{ ...product, amount: item.amount }, ...prevCart];
-            });
+            cartItems.push({ ...product, amount: item.amount });
           }
         }
       }
     }
-  }, []);
+
+    return cartItems;
+  };
+
+  const cart = getProducts();
 
   const backClickHandler = () => {
-    history.push("/products");
+    history.push('/products');
   };
 
   const resetClickHandler = () => {
-    localStorage.removeItem("cart");
-    setCart([]);
+    cartCtx.resetItems();
     setShowPayment(false);
   };
 
-  // Uaktualnienie ilości produktu
-  const amountClickHandler = (number, id) => {
-    setCart((prevCart) => {
-      for (let item of prevCart) {
-        if (item.id === id) {
-          item.amount = number;
-        }
-      }
-      return [...prevCart];
-    });
-
-    const cartLocal = localStorage.getItem("cart");
-    const parsedCart = JSON.parse(cartLocal);
-
-    if (cartLocal !== null) {
-      let cartUpdated = parsedCart;
-
-      for (let item of cartUpdated) {
-        if (item.id === id) {
-          item.amount = number;
-        }
-      }
-
-      localStorage.setItem("cart", JSON.stringify(cartUpdated));
-    }
+  const amountClickHandler = (id, number) => {
+    cartCtx.changeAmount(id, number);
   };
 
-  // Usuwanie pojedyńczych produktów
   const removeClickHandler = (id) => {
-    if (cart.length > 0) {
-      setCart((prevCart) => {
-        for (let item of prevCart) {
-          if (item.id === id) {
-            let index = prevCart.indexOf(item);
-
-            prevCart.splice(index, 1);
-          }
-        }
-        return [...prevCart];
-      });
-    }
-
-    const cartLocal = localStorage.getItem("cart");
-    const parsedCart = JSON.parse(cartLocal);
-
-    if (cartLocal !== null) {
-      let cartUpdated = parsedCart;
-
-      for (let item of cartUpdated) {
-        if (item.id === id) {
-          let index = cartUpdated.indexOf(item);
-
-          cartUpdated.splice(index, 1);
-        }
-      }
-
-      localStorage.setItem("cart", JSON.stringify(cartUpdated));
-    }
+    cartCtx.removeItem(id);
   };
 
   const payClickHandler = () => {
@@ -111,7 +59,7 @@ const Cart = () => {
   };
 
   return (
-    <section className={styles.cart}>
+    <section className={classes.cart}>
       <nav>
         <button onClick={backClickHandler}>
           <i className="fa-solid fa-circle-arrow-left"></i> Przeglądaj dalej
@@ -122,15 +70,15 @@ const Cart = () => {
         {cart.length > 0 ? (
           <ul>
             {cart.map((item) => (
-              <li key={item.id} className={styles.item}>
-                <div className={styles.left}>
+              <li key={item.id} className={classes.item}>
+                <div className={classes.left}>
                   <img
                     src={require(`assets/product-img/${item.image}`)}
-                    className={styles.image}
+                    className={classes.image}
                     alt="Zdjęcie produktu"
                   />
                 </div>
-                <div className={styles.right}>
+                <div className={classes.right}>
                   <Link to={`/products/${item.id}`}>
                     <h3>{item.name}</h3>
                   </Link>
@@ -139,7 +87,7 @@ const Cart = () => {
                     value={{ amount: item.amount, key: item.id }}
                   />
                   <i
-                    className={`fa-solid fa-trash-can ${styles["trash-can"]}`}
+                    className={`fa-solid fa-trash-can ${classes["trash-can"]}`}
                     onClick={() => {
                       removeClickHandler(item.id);
                     }}
@@ -153,12 +101,14 @@ const Cart = () => {
         )}
         {cart.length > 0 && (
           <div>
-            <Button onClick={resetClickHandler} className={styles["reset-btn"]}>Wyczyść koszyk</Button>
+            <Button 
+              onClick={resetClickHandler}
+            className={classes["reset-btn"]}>Wyczyść koszyk</Button>
             <Button onClick={payClickHandler}>Zapłać</Button>
           </div>
         )}
         {showPayment && (
-          <div className={styles.payment}>
+          <div className={classes.payment}>
             <form onSubmit={paySubmitHandler}>
               <input type="number" placeholder="Numer karty" />
               <input type="text" placeholder="Imię i nazwisko na karcie" />

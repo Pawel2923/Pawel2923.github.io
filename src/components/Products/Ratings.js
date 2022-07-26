@@ -2,7 +2,7 @@ import classes from './Ratings.module.css';
 
 const Ratings = (props) => {
    return (
-      <section>
+      <div>
          Opinie:
          <div className={classes.rating}>
             <i
@@ -31,7 +31,7 @@ const Ratings = (props) => {
             }`}
             ></i>
          </div>
-      </section>
+      </div>
    );
 };
 

@@ -5,6 +5,8 @@
   background-color: none;
   color: #594e4c;
   text-decoration: none;
+  -webkit-transition: color 200ms ease;
+  -o-transition: color 200ms ease;
   transition: color 200ms ease;
 }
 
@@ -15,6 +17,7 @@
 
 .cart > div {
     margin: 1rem 0;
+    display: -ms-grid;
     display: grid;
     gap: 2rem;
 }
@@ -26,6 +29,8 @@
 .cart ul li {
   width: 100%;
   background: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-bottom: 2rem;
 }
@@ -59,6 +64,8 @@
 
 .right a {
   display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 
@@ -69,7 +76,11 @@
   position: absolute;
   right: 1rem;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: color 200ms ease;
+  -o-transition: color 200ms ease;
   transition: color 200ms ease;
 }
 
@@ -81,7 +92,6 @@
 .reset-btn {
   background: #fff;
   border: 1px solid #000;
-  font-size: 0.9em;
   margin-right: 1rem;
 }
 

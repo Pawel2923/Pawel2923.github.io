@@ -21,13 +21,13 @@ const Amount = (props) => {
     if (amount > 1 && ev.target.id === "sub-amount") {
       setAmount(amount - 1);
       if (props.onAmountClick !== undefined && props.value !== undefined) {
-        props.onAmountClick(amount - 1, props.value.key);
+        props.onAmountClick(props.value.key, amount - 1);
       }
     }
     if (ev.target.id === "add-amount") {
       setAmount(amount + 1);
       if (props.onAmountClick !== undefined && props.value !== undefined) {
-        props.onAmountClick(amount + 1, props.value.key);
+        props.onAmountClick(props.value.key, amount + 1);
       }
     }
   };

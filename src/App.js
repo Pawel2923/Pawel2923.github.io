@@ -1,4 +1,5 @@
 import WindowSizeProvider from 'store/WindowSizeProvider';
+import CartProvider from 'store/CartProvider';
 import BackToTop from 'components/UI/BackToTop/BackToTop';
 import Cookies from './components/UI/Cookies/Cookies';
 import Header from 'components/Layout/Header';
@@ -8,11 +9,13 @@ import Footer from 'components/Layout/Footer';
 const App = () => {
    return (
     <WindowSizeProvider>
-      <BackToTop />
-      <Cookies />
-      <Header />
-      <Main />
-      <Footer />
+      <CartProvider>
+        <BackToTop />
+        <Cookies />
+        <Header />
+        <Main />
+        <Footer />
+      </CartProvider>
     </WindowSizeProvider>
   );
 };

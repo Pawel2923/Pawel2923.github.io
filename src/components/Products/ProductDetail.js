@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import { Fragment, useState, useContext } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 import Amount from 'components/UI/Amount/Amount';
 import Button from 'components/UI/Button/Button';
 import Modal from 'components/UI/Modal/Modal';
 import ProductsData from './ProductsData.json';
-import classes from './ProductDetail.module.css';
 import Ratings from './Ratings';
+import classes from './ProductDetail.module.css';
+import CartContext from 'store/cart-context';
+
+const findProduct = (productId) => {
+  for (const product of ProductsData) {
+    if (product.id === productId) {
+      return { ...product, isFound: true };
+    }
+  }
+  return { isFound: false };
+};
 
 const ProductDetail = () => {
   const params = useParams();
   const history = useHistory();
+  const cartCtx = useContext(CartContext);
+
   const [amount, setAmount] = useState(1);
   const [modalState, setModalState] = useState({
     show: false,
@@ -19,19 +31,8 @@ const ProductDetail = () => {
     message: '',
   });
 
-  // Wyszukanie produktu z listy wszystkich produków
-  let isItemFound = false;
-  let item = {};
+  const item = findProduct(params.productId);
 
-  for (const product of ProductsData) {
-    if (product.id === params.productId) {
-      item = { ...product };
-      isItemFound = true;
-      break;
-    }
-  }
-
-  // Zmiana Ilości
   const amountChangeHandler = (number) => {
     setAmount(number);
   };
@@ -49,67 +50,18 @@ const ProductDetail = () => {
   };
 
   const buttonClickHandler = () => {
-    let cartUpdated = JSON.parse(localStorage.getItem('cart'));
-
-    // Sprawdzenie czy koszyk jest pusty
-    if (cartUpdated !== null) {
-      let repeatedItem = {
-        isRepeated: false,
-        id: -1,
-        item: {},
-      };
-
-      // Pętla przeszukuje listę produktów z koszyka, Jeśli znajdzie to samo id zmienia obiekt repeatedItem
-      for (let i = 0; i < cartUpdated.length; i++) {
-        if (cartUpdated[i].id === item.id) {
-          repeatedItem = {
-            isRepeated: true,
-            id: i,
-            productId: cartUpdated[i].id,
-            item: { ...cartUpdated[i] },
-          };
-        }
-      }
-
-      // Jeśli produkt się powtórzył to dodana jest ilość produktów
-      if (repeatedItem.isRepeated) {
-        cartUpdated[repeatedItem.id].amount = repeatedItem.item.amount + amount;
-        localStorage.setItem('cart', JSON.stringify([...cartUpdated]));
-      } else {
-        // Jeśli nie to dodawany jest nowy produkt do listy produktów
-        localStorage.setItem(
-          'cart',
-          JSON.stringify([
-            {
-              id: item.id,
-              productId: item.productId,
-              amount: amount,
-            },
-            ...cartUpdated,
-          ])
-        );
-      }
-    } else {
-      localStorage.setItem(
-        'cart',
-        JSON.stringify([
-          {
-            id: item.id,
-            productId: item.productId,
-            amount: amount,
-          },
-        ])
-      );
-    }
+    cartCtx.addItem(params.productId, amount);
 
     setModalState({
       show: true,
       error: false,
       title: 'Dodano do koszyka',
-      message: <React.Fragment>
-        Produkt został dodany do koszyka. 
-        <Button onClick={messageBtnClickHandler} className={classes['message-button']}>Przejdź do koszyka</Button>
-      </React.Fragment>,
+      message: (
+        <Fragment>
+          Produkt został dodany do koszyka. 
+          <Button onClick={messageBtnClickHandler} className={classes['message-button']}>Przejdź do koszyka</Button>
+        </Fragment>
+      ),
     });
   };
 
@@ -130,8 +82,8 @@ const ProductDetail = () => {
         </ul>
       </nav>
       <div className={classes.description}>
-        {isItemFound ? (
-          <React.Fragment>
+        {item.isFound ? (
+          <Fragment>
             <div className={classes["image-wrapper"]}>
               <h1>{item.name}</h1>
               <img
@@ -158,7 +110,7 @@ const ProductDetail = () => {
                 modalInfo={modalState}
               />
             )}
-          </React.Fragment>
+          </Fragment>
         ) : (
           <h1>Taki produkt nie istnieje</h1>
         )}
