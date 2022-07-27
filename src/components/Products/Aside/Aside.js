@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import { Fragment, useState, useContext } from 'react';
 
 import Button from 'components/UI/Button/Button';
 import { categories } from './categories';
-import styles from './Aside.module.css';
+import classes from './Aside.module.css';
+import WindowSizeContext from 'store/window-size';
 
 const Aside = (props) => {
+  const windowSizeCtx = useContext(WindowSizeContext);
+
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(0);
   const [isChecked, setIsChecked] = useState(
@@ -39,7 +42,7 @@ const Aside = (props) => {
 
   const formBtnClickHandler = () => {
     const contentBtn = document.getElementsByClassName(
-      styles['form-content-btn']
+      classes['form-content-btn']
     )[0];
     const asideForm = document.getElementById('asideFormContent');
 
@@ -88,8 +91,8 @@ const Aside = (props) => {
   };
 
   let formContent = (
-    <React.Fragment>
-      <div className={styles.categories}>
+    <Fragment>
+      <div className={classes.categories}>
         <h3>Kategoria</h3>
         {categories.map((category, index) => (
           <label key={`category-${index}`}>
@@ -108,7 +111,7 @@ const Aside = (props) => {
           </label>
         ))}
       </div>
-      <div className={styles.price}>
+      <div className={classes.price}>
         <h3>Cena</h3>
         <label>
           <span>Od</span>
@@ -120,34 +123,34 @@ const Aside = (props) => {
         </label>
       </div>
 
-      <Button type="reset" className={styles['reset-btn']}>
+      <Button type="reset" className={classes['reset-btn']}>
         Resetuj filtry
       </Button>
-    </React.Fragment>
+    </Fragment>
   );
 
-  if (window.innerWidth < 700) {
+  if (windowSizeCtx.width < 700) {
     formContent = (
-      <React.Fragment>
+      <Fragment>
         <div id="asideFormContent" className="hideElement">
           {formContent}
         </div>
         <Button
           onClick={formBtnClickHandler}
-          className={styles['form-content-btn']}
+          className={classes['form-content-btn']}
         >
           Pokaż filtry
         </Button>
-      </React.Fragment>
+      </Fragment>
     );
   }
 
   return (
-    <aside className={styles.aside}>
+    <aside className={classes.aside}>
       <div className="filter">
         <form onSubmit={filterSubmitHandler} onReset={filterResetHandler}>
           {formContent}
-          <Button type="submit" className={styles["submit-btn"]}>
+          <Button type="submit" className={classes["submit-btn"]}>
             Filtruj
           </Button>
         </form>

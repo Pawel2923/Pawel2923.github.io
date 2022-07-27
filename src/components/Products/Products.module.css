@@ -61,6 +61,10 @@
   padding: 1rem;
 }
 
+.desc-wrapper > div:first-of-type {
+  display: none;
+}
+
 .sort {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -94,6 +98,10 @@
     display: initial;
     margin-top: 0;
     margin-left: 1rem;
+  }
+
+  .desc-wrapper > div:first-of-type {
+    display: block;
   }
 
   .rating {
