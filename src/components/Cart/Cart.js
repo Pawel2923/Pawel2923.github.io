@@ -1,35 +1,55 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useReducer, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import Button from 'components/UI/Button/Button';
 import Amount from 'components/UI/Amount/Amount';
 import ProductsData from '../Products/ProductsData.json';
 import CartContext from 'store/cart-context';
-
 import classes from './Cart.module.css';
 
-const Cart = () => {
-  const history = useHistory();
-  const cartCtx = useContext(CartContext);
-  const [showPayment, setShowPayment] = useState(false);
+const defaultCart = [];
 
-  const getProducts = () => {
+const cartReducer = (state, action) => {
+  if (action.type === 'FIND_ITEMS') {
     let cartItems = [];
 
-    if (cartCtx.items.length > 0) {
+    if (action.items.length > 0) {
       for (const product of ProductsData) {
-        for (const item of cartCtx.items) {
+        for (const item of action.items) {
           if (item.id === product.id) {
             cartItems.push({ ...product, amount: item.amount });
+          }
+        }
+      }
+    } else {
+      if (localStorage.getItem('cart') !== null) {
+        const cartLocal = JSON.parse(localStorage.getItem('cart'));
+
+        for (const product of ProductsData) {
+          for (const item of cartLocal) {
+            if (item.id === product.id) {
+              cartItems.push({ ...product, amount: item.amount });
+            }
           }
         }
       }
     }
 
     return cartItems;
-  };
+  }
 
-  const cart = getProducts();
+  return defaultCart;
+};
+
+const Cart = () => {
+  const history = useHistory();
+  const cartCtx = useContext(CartContext);
+  const [showPayment, setShowPayment] = useState(false);
+  const [cart, dispatchCart] = useReducer(cartReducer, defaultCart);
+
+  useEffect(() => {
+    dispatchCart({ type: 'FIND_ITEMS', items: cartCtx.items });
+  }, [cartCtx.items]);
 
   const backClickHandler = () => {
     history.push('/products');
@@ -37,6 +57,7 @@ const Cart = () => {
 
   const resetClickHandler = () => {
     cartCtx.resetItems();
+    dispatchCart({ type: 'RESET' });
     setShowPayment(false);
   };
 

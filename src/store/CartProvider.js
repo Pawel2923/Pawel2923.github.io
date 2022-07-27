@@ -8,23 +8,31 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
    if (action.type === 'ADD') {
-      const existingIndex = state.items.findIndex(item => item.id === action.item.id)
+      let oldItems = state.items;
+      if (!(oldItems.length > 0) && localStorage.getItem('cart') !== null) {
+         const cartLocal = JSON.parse(localStorage.getItem('cart'));
+
+         oldItems = cartLocal;
+      }
+
+      const existingIndex = oldItems.findIndex(item => item.id === action.item.id)
       let updatedItems;
 
       if (existingIndex !== -1) {
-         const existingItem = state.items[existingIndex];
+         const existingItem = oldItems[existingIndex];
 
          const updatedItem = {
             ...existingItem,
             amount: existingItem.amount + action.item.amount
          };
 
-         updatedItems = [...state.items];
+         updatedItems = [...oldItems];
          updatedItems[existingIndex] = updatedItem;
       } else {
-         updatedItems = state.items.concat({ ...action.item });
+         updatedItems = oldItems.concat({ ...action.item });
       }
 
+      localStorage.setItem('cart', JSON.stringify(updatedItems));
       return {
          items: updatedItems
       };
@@ -33,33 +41,51 @@ const cartReducer = (state, action) => {
    if (action.type === 'REMOVE') {
       let updatedItems = state.items.filter(item => item.id !== action.item.id);
 
+      if (!(state.items > 0) && localStorage.getItem('cart') !== null) {
+         const cartLocal = JSON.parse(localStorage.getItem('cart'));
+
+         updatedItems = cartLocal.filter(item => item.id !== action.item.id);
+      }
+
+      localStorage.setItem('cart', JSON.stringify(updatedItems));
       return {
          items: updatedItems
       }
    }
 
    if (action.type === 'CHANGE_AMOUNT') {
-      const targetId = state.items.findIndex(item => item.id === action.item.id);
+      let oldItems = state.items;
+      if (!(oldItems.length > 0) && localStorage.getItem('cart') !== null) {
+         const cartLocal = JSON.parse(localStorage.getItem('cart'));
+
+         oldItems = cartLocal;
+      }
+      
+      const targetId = oldItems.findIndex(item => item.id === action.item.id);
 
       if (targetId !== -1) {
-         const target = state.items[targetId];
+         const target = oldItems[targetId];
 
          const updatedItem = {
             ...target,
             amount: action.item.amount
          };
 
-         let updatedItems = [...state.items];
+         let updatedItems = [...oldItems];
          updatedItems[targetId] = updatedItem;
 
+         localStorage.setItem('cart', JSON.stringify(updatedItems));
          return {
             items: updatedItems
          };
       }
-
+      
       return state;
    }
 
+   if (localStorage.getItem('cart') !== null) {
+      localStorage.removeItem('cart');
+   }
    return defaultCartState;
 };
 
