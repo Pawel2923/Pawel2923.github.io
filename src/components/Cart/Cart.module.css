@@ -95,6 +95,16 @@
   margin-right: 1rem;
 }
 
+.payment > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment label {
+  text-align: left;
+}
+
 .payment input {
-  margin-bottom: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
 }

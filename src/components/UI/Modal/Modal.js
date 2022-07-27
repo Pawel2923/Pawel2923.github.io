@@ -25,7 +25,7 @@ const ModalOverlay = (props) => {
 const Modal = (props) => {
 
   const closeHandler = () => {
-    props.onClose();
+    props.modalInfo.onClose();
   };
 
   return createPortal(

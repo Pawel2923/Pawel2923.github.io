@@ -5,6 +5,7 @@ import Button from 'components/UI/Button/Button';
 import Amount from 'components/UI/Amount/Amount';
 import ProductsData from '../Products/ProductsData.json';
 import CartContext from 'store/cart-context';
+import Modal from 'components/UI/Modal/Modal';
 import classes from './Cart.module.css';
 
 const defaultCart = [];
@@ -79,6 +80,43 @@ const Cart = () => {
     setShowPayment(false);
   };
 
+  const payCloseHandler = () => {
+    setShowPayment(false);
+  };
+
+  const today = new Date();
+  const year = today.getFullYear();
+  let month = today.getMonth();
+  month = +month + 1;
+
+  if (month < 10) {
+    month = ('0' + month);
+  }
+
+  const paymentElement = (
+    <div className={classes.payment}>
+      <form onSubmit={paySubmitHandler}>
+        <label>
+          <p>Imię i nazwisko na karcie</p>
+          <input type="text" minLength={3} required />
+        </label>
+        <label>
+          <p>Numer karty</p>
+          <input type="text" minLength={16} maxLength={16} required />
+        </label>
+        <label>
+          <p>Numer CVV</p>
+          <input type="text" minLength={3} maxLength={3} required />
+        </label>
+        <label>
+          <p>Data ważności karty</p>
+          <input type="month" min={`${year}-${month}`} required />
+        </label>
+        <Button type="submit">Potwierdź</Button>
+      </form>
+    </div>
+  );
+
   return (
     <section className={classes.cart}>
       <nav>
@@ -129,15 +167,12 @@ const Cart = () => {
           </div>
         )}
         {showPayment && (
-          <div className={classes.payment}>
-            <form onSubmit={paySubmitHandler}>
-              <input type="number" placeholder="Numer karty" />
-              <input type="text" placeholder="Imię i nazwisko na karcie" />
-              <input type="number" placeholder="CVV" />
-              <input type="date" placeholder="Data ważności" />
-              <Button type="submit">Potwierdź</Button>
-            </form>
-          </div>
+          <Modal modalInfo={{
+            title: 'Dokonaj płatność',
+            message: paymentElement,
+            error: false,
+            onClose: payCloseHandler
+          }} />
         )}
       </div>
     </section>

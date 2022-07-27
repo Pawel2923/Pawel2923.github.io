@@ -106,8 +106,7 @@ const ProductDetail = () => {
             </div>
             {modalState.show && (
               <Modal
-                onClose={messageCloseHandler}
-                modalInfo={modalState}
+                modalInfo={{ ...modalState, onClose: messageCloseHandler }}
               />
             )}
           </Fragment>
