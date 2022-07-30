@@ -1,8 +1,8 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 const WindowSizeContext = createContext({
-   width: 0,
-   height: 0
+  width: 0,
+  height: 0,
 });
 
 export default WindowSizeContext;

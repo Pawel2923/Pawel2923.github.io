@@ -1,12 +1,12 @@
-import React, { Fragment, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState } from "react";
+import { createPortal } from "react-dom";
+import { Link } from "react-router-dom";
 
-import Option from './Option';
-import classes from './MobileNav.module.css';
-import { ReactComponent as Logo } from 'assets/logo.svg';
+import Option from "./Option";
+import classes from "./MobileNav.module.css";
+import { ReactComponent as Logo } from "assets/logo.svg";
 
-const portalContainer = document.getElementById('overlays');
+const portalContainer = document.getElementById("overlays");
 
 export const NavOverlay = (props) => {
   const closeHandler = () => {
@@ -16,9 +16,9 @@ export const NavOverlay = (props) => {
   return (
     <div className={classes.overlay}>
       <nav>
-        <div className={classes['close-wrapper']}>
+        <div className={classes["close-wrapper"]}>
           <i className="fa-solid fa-xmark" onClick={closeHandler}></i>
-          <Link to="/home" className={classes['image-wrapper']}>
+          <Link to="/home" className={classes["image-wrapper"]}>
             <Logo />
           </Link>
         </div>
@@ -48,13 +48,13 @@ const MobileNav = () => {
   const [isOverlayClosed, setIsOverlayClosed] = useState(true);
 
   const openHandler = () => {
-    document.body.style.overflow = 'hidden';
-    
+    document.body.style.overflow = "hidden";
+
     setIsOverlayClosed(false);
   };
 
   const closeHandler = () => {
-    document.body.style.overflow = 'initial';
+    document.body.style.overflow = "initial";
 
     setIsOverlayClosed(true);
   };
@@ -65,13 +65,15 @@ const MobileNav = () => {
         <i className="fa-solid fa-bars" onClick={openHandler}></i>
       </li>
       <li>
-        <Link to="/home" className={classes['image-wrapper']}>
+        <Link to="/home" className={classes["image-wrapper"]}>
           <Logo />
         </Link>
       </li>
-      {!isOverlayClosed && 
-        createPortal(<NavOverlay closeHandler={closeHandler} />, portalContainer)
-      }
+      {!isOverlayClosed &&
+        createPortal(
+          <NavOverlay closeHandler={closeHandler} />,
+          portalContainer
+        )}
     </Fragment>
   );
 };

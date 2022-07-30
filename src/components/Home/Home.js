@@ -1,10 +1,10 @@
-import { Fragment } from 'react';
+import { Fragment } from "react";
 
-import About from './HomeAbout';
-import Products from './HomeProducts';
-import Services from './HomeServices';
-import Contact from 'components/UI/Contact/Contact';
-import classes from './Home.module.css';
+import About from "./HomeAbout";
+import Products from "./HomeProducts";
+import Services from "./HomeServices";
+import Contact from "components/UI/Contact/Contact";
+import classes from "./Home.module.css";
 
 const Home = () => {
   return (

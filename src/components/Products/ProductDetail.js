@@ -1,13 +1,13 @@
-import { Fragment, useState, useContext } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Fragment, useState, useContext } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
 
-import Amount from 'components/UI/Amount/Amount';
-import Button from 'components/UI/Button/Button';
-import Modal from 'components/UI/Modal/Modal';
-import ProductsData from './ProductsData.json';
-import Ratings from './Ratings';
-import classes from './ProductDetail.module.css';
-import CartContext from 'store/cart-context';
+import Amount from "components/UI/Amount/Amount";
+import Button from "components/UI/Button/Button";
+import Modal from "components/UI/Modal/Modal";
+import ProductsData from "./ProductsData.json";
+import Ratings from "./Ratings";
+import classes from "./ProductDetail.module.css";
+import CartContext from "store/cart-context";
 
 const findProduct = (productId) => {
   for (const product of ProductsData) {
@@ -27,8 +27,8 @@ const ProductDetail = () => {
   const [modalState, setModalState] = useState({
     show: false,
     error: false,
-    title: '',
-    message: '',
+    title: "",
+    message: "",
   });
 
   const item = findProduct(params.productId);
@@ -46,7 +46,7 @@ const ProductDetail = () => {
   };
 
   const messageBtnClickHandler = () => {
-    history.push('/cart');
+    history.push("/cart");
   };
 
   const buttonClickHandler = () => {
@@ -55,18 +55,23 @@ const ProductDetail = () => {
     setModalState({
       show: true,
       error: false,
-      title: 'Dodano do koszyka',
+      title: "Dodano do koszyka",
       message: (
         <Fragment>
-          Produkt został dodany do koszyka. 
-          <Button onClick={messageBtnClickHandler} className={classes['message-button']}>Przejdź do koszyka</Button>
+          Produkt został dodany do koszyka.
+          <Button
+            onClick={messageBtnClickHandler}
+            className={classes["message-button"]}
+          >
+            Przejdź do koszyka
+          </Button>
         </Fragment>
       ),
     });
   };
 
   return (
-    <section className={classes['products']}>
+    <section className={classes["products"]}>
       <nav>
         <ul>
           <li>
@@ -106,7 +111,10 @@ const ProductDetail = () => {
             </div>
             {modalState.show && (
               <Modal
-                modalInfo={{ ...modalState, onClose: messageCloseHandler }}
+                modalInfo={{
+                  ...modalState,
+                  onClose: messageCloseHandler,
+                }}
               />
             )}
           </Fragment>

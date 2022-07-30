@@ -1,49 +1,49 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import Aside from './Aside/Aside';
-import SortFunctions from './SortFunctions';
-import Button from 'components/UI/Button/Button';
-import ProductsData from './ProductsData.json';
-import Ratings from './Ratings';
-import classes from './Products.module.css';
+import Aside from "./Aside/Aside";
+import SortFunctions from "./SortFunctions";
+import Button from "components/UI/Button/Button";
+import ProductsData from "./ProductsData.json";
+import Ratings from "./Ratings";
+import classes from "./Products.module.css";
 
 const Products = () => {
   const [items, setItems] = useState(ProductsData);
-  const [sortBy, setSortBy] = useState('none');
+  const [sortBy, setSortBy] = useState("none");
 
   const sortItems = () => {
-    if (sortBy === 'nameA') {
+    if (sortBy === "nameA") {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.nameA)];
       });
     }
 
-    if (sortBy === 'nameZ') {
+    if (sortBy === "nameZ") {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.nameZ)];
       });
     }
 
-    if (sortBy === 'priceMax') {
+    if (sortBy === "priceMax") {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.priceMax)];
       });
     }
 
-    if (sortBy === 'priceMin') {
+    if (sortBy === "priceMin") {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.priceMin)];
       });
     }
 
-    if (sortBy === 'reviews') {
+    if (sortBy === "reviews") {
       setItems((prevItems) => {
         return [...prevItems.sort(SortFunctions.reviews)];
       });
     }
 
-    if (sortBy === 'none') {
+    if (sortBy === "none") {
       setItems([...ProductsData]);
     }
   };
@@ -64,14 +64,14 @@ const Products = () => {
   };
 
   const filterItems = (type, filter) => {
-    if (type !== 'none') {
-      if (type === 'price') {
+    if (type !== "none") {
+      if (type === "price") {
         filterPrice(ProductsData, filter);
       }
 
       let newList = [];
 
-      if (type === 'categories') {
+      if (type === "categories") {
         for (let checkbox of filter) {
           newList.push(
             ...ProductsData.filter((value) => value.category === checkbox.value)
@@ -81,7 +81,7 @@ const Products = () => {
         setItems(newList);
       }
 
-      if (type === 'combined') {
+      if (type === "combined") {
         for (let checkbox of filter.checkboxes) {
           newList.push(
             ...ProductsData.filter((value) => value.category === checkbox.value)
@@ -91,7 +91,7 @@ const Products = () => {
         filterPrice(newList, filter);
       }
 
-      if (sortBy !== 'none') {
+      if (sortBy !== "none") {
         sortItems();
       }
     }
@@ -110,7 +110,7 @@ const Products = () => {
   const resetItems = () => {
     setItems(ProductsData);
 
-    if (sortBy !== 'none') {
+    if (sortBy !== "none") {
       sortItems();
     }
   };

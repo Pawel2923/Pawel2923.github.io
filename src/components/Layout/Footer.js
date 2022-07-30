@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import classes from './Footer.module.css';
+import classes from "./Footer.module.css";
 
 const Footer = () => {
   useEffect(() => {

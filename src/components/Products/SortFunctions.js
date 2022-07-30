@@ -19,19 +19,19 @@ const SortFunctions = {
   },
   priceMax: (a, b) => {
     if (a.price > b.price) {
-        return -1;
+      return -1;
     }
     if (a.price < b.price) {
-        return 1;
+      return 1;
     }
     return 0;
   },
   priceMin: (a, b) => {
     if (b.price > a.price) {
-        return -1;
+      return -1;
     }
     if (b.price < a.price) {
-        return 1;
+      return 1;
     }
     return 0;
   },

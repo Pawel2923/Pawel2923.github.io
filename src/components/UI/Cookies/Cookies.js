@@ -1,6 +1,6 @@
-import CookieConsent from 'react-cookie-consent';
+import CookieConsent from "react-cookie-consent";
 
-import classes from '../Button/Button.module.css';
+import classes from "../Button/Button.module.css";
 
 const Cookies = () => {
   return (
@@ -9,7 +9,7 @@ const Cookies = () => {
       buttonText="Akceptuj"
       disableButtonStyles={true}
       buttonClasses={classes.button}
-      buttonStyle={{ margin: '15px' }}
+      buttonStyle={{ margin: "15px" }}
     >
       Ta strona wymaga plików cookies do prawidłowego działania.
     </CookieConsent>

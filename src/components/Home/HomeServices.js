@@ -1,9 +1,9 @@
-import trim from 'assets/home-img/trim.jpg';
-import haircut from 'assets/home-img/haircut.jpg';
-import procedure from 'assets/home-img/procedure.jpg';
-import barber from 'assets/home-img/barber.jpg';
-import products from 'assets/home-img/products.jpg';
-import styles from './HomeServices.module.css';
+import trim from "assets/home-img/trim.jpg";
+import haircut from "assets/home-img/haircut.jpg";
+import procedure from "assets/home-img/procedure.jpg";
+import barber from "assets/home-img/barber.jpg";
+import products from "assets/home-img/products.jpg";
+import styles from "./HomeServices.module.css";
 
 const HomeServices = (props) => {
   return (
@@ -11,7 +11,13 @@ const HomeServices = (props) => {
       <h1>Nasze usługi</h1>
       <ul>
         <li>
-          <img src={trim} alt="Zarost zdjęcie" className={styles.image} width="100%" height="auto" />
+          <img
+            src={trim}
+            alt="Zarost zdjęcie"
+            className={styles.image}
+            width="100%"
+            height="auto"
+          />
           <div className={styles["service-description"]}>
             <h3>Strzyżenie i modelowanie brody</h3>
             <br />
@@ -31,10 +37,22 @@ const HomeServices = (props) => {
               trendów.
             </p>
           </div>
-          <img src={haircut} alt="Fryzura zdjęcie" className={styles.image} width="100%" height="auto" />
+          <img
+            src={haircut}
+            alt="Fryzura zdjęcie"
+            className={styles.image}
+            width="100%"
+            height="auto"
+          />
         </li>
         <li>
-          <img src={procedure} alt="Zabiegi zdjęcie" className={styles.image} width="100%" height="auto" />
+          <img
+            src={procedure}
+            alt="Zabiegi zdjęcie"
+            className={styles.image}
+            width="100%"
+            height="auto"
+          />
           <div className={styles["service-description"]}>
             <h3>Zabiegi pielęgnacyjne</h3>
             <br />
@@ -52,16 +70,26 @@ const HomeServices = (props) => {
               Masz kilka pytań? Nasi pracownicy pełni wiedzy odpowiedzą na nie.
             </p>
           </div>
-          <img src={barber} alt="Doradztwo zdjęcie" className={styles.image} width="100%" height="auto" />
+          <img
+            src={barber}
+            alt="Doradztwo zdjęcie"
+            className={styles.image}
+            width="100%"
+            height="auto"
+          />
         </li>
         <li>
-          <img src={products} alt="Produkty zdjęcie" className={styles.image} width="100%" height="auto" />
+          <img
+            src={products}
+            alt="Produkty zdjęcie"
+            className={styles.image}
+            width="100%"
+            height="auto"
+          />
           <div className={styles["service-description"]}>
             <h3>Produkty pielęgnacyjne</h3>
             <br />
-            <p>
-              Zakup potrzebne produkty do pielęgnacji twojej brody w domu.
-            </p>
+            <p>Zakup potrzebne produkty do pielęgnacji twojej brody w domu.</p>
           </div>
         </li>
       </ul>

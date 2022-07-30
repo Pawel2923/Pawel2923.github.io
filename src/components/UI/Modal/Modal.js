@@ -1,16 +1,20 @@
-import { Fragment } from 'react';
-import { createPortal } from 'react-dom';
+import { Fragment } from "react";
+import { createPortal } from "react-dom";
 
-import classes from './Modal.module.css';
+import classes from "./Modal.module.css";
 
-const portalContainer = document.getElementById('overlays');
+const portalContainer = document.getElementById("overlays");
 
 const ModalOverlay = (props) => {
-  const cardClasses = `${classes.card} ${props.error ? classes.error : ''}`;
+  const cardClasses = `${classes.card} ${props.error ? classes.error : ""}`;
 
   return (
     <Fragment>
-      <div className={classes.overlay} id="overlay" onClick={props.onClose}></div>
+      <div
+        className={classes.overlay}
+        id="overlay"
+        onClick={props.onClose}
+      ></div>
       <div id="card" className={cardClasses}>
         <h1>{props.modalInfo.title}</h1>
         {props.modalInfo.message}
@@ -23,17 +27,18 @@ const ModalOverlay = (props) => {
 };
 
 const Modal = (props) => {
-
   const closeHandler = () => {
     props.modalInfo.onClose();
   };
 
   return createPortal(
-    <ModalOverlay 
-      modalInfo={props.modalInfo} 
+    <ModalOverlay
+      modalInfo={props.modalInfo}
       error={props.modalInfo.error ? true : false}
       onClose={closeHandler}
-    />, portalContainer);
+    />,
+    portalContainer
+  );
 };
 
 export default Modal;

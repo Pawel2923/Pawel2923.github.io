@@ -1,17 +1,17 @@
-import { useState, useContext, useReducer, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useState, useContext, useReducer, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 
-import Button from 'components/UI/Button/Button';
-import Amount from 'components/UI/Amount/Amount';
-import ProductsData from '../Products/ProductsData.json';
-import CartContext from 'store/cart-context';
-import Modal from 'components/UI/Modal/Modal';
-import classes from './Cart.module.css';
+import Button from "components/UI/Button/Button";
+import Amount from "components/UI/Amount/Amount";
+import ProductsData from "../Products/ProductsData.json";
+import CartContext from "store/cart-context";
+import Modal from "components/UI/Modal/Modal";
+import classes from "./Cart.module.css";
 
 const defaultCart = [];
 
 const cartReducer = (state, action) => {
-  if (action.type === 'FIND_ITEMS') {
+  if (action.type === "FIND_ITEMS") {
     let cartItems = [];
 
     if (action.items.length > 0) {
@@ -23,8 +23,8 @@ const cartReducer = (state, action) => {
         }
       }
     } else {
-      if (localStorage.getItem('cart') !== null) {
-        const cartLocal = JSON.parse(localStorage.getItem('cart'));
+      if (localStorage.getItem("cart") !== null) {
+        const cartLocal = JSON.parse(localStorage.getItem("cart"));
 
         for (const product of ProductsData) {
           for (const item of cartLocal) {
@@ -49,16 +49,16 @@ const Cart = () => {
   const [cart, dispatchCart] = useReducer(cartReducer, defaultCart);
 
   useEffect(() => {
-    dispatchCart({ type: 'FIND_ITEMS', items: cartCtx.items });
+    dispatchCart({ type: "FIND_ITEMS", items: cartCtx.items });
   }, [cartCtx.items]);
 
   const backClickHandler = () => {
-    history.push('/products');
+    history.push("/products");
   };
 
   const resetClickHandler = () => {
     cartCtx.resetItems();
-    dispatchCart({ type: 'RESET' });
+    dispatchCart({ type: "RESET" });
     setShowPayment(false);
   };
 
@@ -90,7 +90,7 @@ const Cart = () => {
   month = +month + 1;
 
   if (month < 10) {
-    month = ('0' + month);
+    month = "0" + month;
   }
 
   const paymentElement = (
@@ -143,7 +143,10 @@ const Cart = () => {
                   </Link>
                   <Amount
                     onAmountClick={amountClickHandler}
-                    value={{ amount: item.amount, key: item.id }}
+                    value={{
+                      amount: item.amount,
+                      key: item.id,
+                    }}
                   />
                   <i
                     className={`fa-solid fa-trash-can ${classes["trash-can"]}`}
@@ -160,19 +163,24 @@ const Cart = () => {
         )}
         {cart.length > 0 && (
           <div>
-            <Button 
+            <Button
               onClick={resetClickHandler}
-            className={classes["reset-btn"]}>Wyczyść koszyk</Button>
+              className={classes["reset-btn"]}
+            >
+              Wyczyść koszyk
+            </Button>
             <Button onClick={payClickHandler}>Zapłać</Button>
           </div>
         )}
         {showPayment && (
-          <Modal modalInfo={{
-            title: 'Dokonaj płatność',
-            message: paymentElement,
-            error: false,
-            onClose: payCloseHandler
-          }} />
+          <Modal
+            modalInfo={{
+              title: "Dokonaj płatność",
+              message: paymentElement,
+              error: false,
+              onClose: payCloseHandler,
+            }}
+          />
         )}
       </div>
     </section>

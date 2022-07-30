@@ -1,13 +1,13 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from "react-router-dom";
 
-import Home from 'components/Home/Home';
-import Appointments from 'components/Appointments/Appointments';
-import Products from 'components/Products/Products';
-import ProductDetail from 'components/Products/ProductDetail';
-import Cart from 'components/Cart/Cart';
-import ContactPage from 'components/ContactPage/ContactPage';
+import Home from "components/Home/Home";
+import Appointments from "components/Appointments/Appointments";
+import Products from "components/Products/Products";
+import ProductDetail from "components/Products/ProductDetail";
+import Cart from "components/Cart/Cart";
+import ContactPage from "components/ContactPage/ContactPage";
 
-import classes from './Main.module.css';
+import classes from "./Main.module.css";
 
 const Main = () => {
   return (

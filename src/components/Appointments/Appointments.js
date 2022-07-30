@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
-import Button from 'components/UI/Button/Button';
-import Modal from 'components/UI/Modal/Modal';
-import classes from './Appointments.module.css';
+import Button from "components/UI/Button/Button";
+import Modal from "components/UI/Modal/Modal";
+import classes from "./Appointments.module.css";
 
 const checkValidity = (type, value) => {
-  if (type === 'TEXT') {
-    if (value.trim() !== '' && value.trim().length >= 3) {
+  if (type === "TEXT") {
+    if (value.trim() !== "" && value.trim().length >= 3) {
       return true;
     } else {
       return false;
     }
   }
 
-  if (type === 'EMAIL') {
-    if (value.trim() !== '') {
-      if (value.includes('@')) {
+  if (type === "EMAIL") {
+    if (value.trim() !== "") {
+      if (value.includes("@")) {
         return true;
       } else {
         return false;
@@ -26,8 +26,8 @@ const checkValidity = (type, value) => {
     }
   }
 
-  if (type === 'PHONE_NUMBER') {
-    if (value.trim() !== '') {
+  if (type === "PHONE_NUMBER") {
+    if (value.trim() !== "") {
       const re1 = /[0-9]{3} [0-9]{3} [0-9]{3}/g;
       const re2 = /[0-9]{3}[0-9]{3}[0-9]{3}/g;
       const re3 = /[0-9]{3}-[0-9]{3}-[0-9]{3}/g;
@@ -42,21 +42,23 @@ const checkValidity = (type, value) => {
     }
   }
 
-  console.error('Funkcja checkValidity potrzebuje prawidłowego paremetru type do poprawnego działania.');
+  console.error(
+    "Funkcja checkValidity potrzebuje prawidłowego paremetru type do poprawnego działania."
+  );
   return false;
 };
 
 const Appointments = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [message, setMessage] = useState("");
 
   const [modalState, setModalState] = useState({
     show: false,
     error: false,
-    title: '',
-    message: '',
+    title: "",
+    message: "",
   });
   const [showLoading, setShowLoading] = useState(false);
 
@@ -64,9 +66,9 @@ const Appointments = () => {
     setName(ev.target.value);
 
     if (!ev.target.validity.valid) {
-      ev.target.classList.add('invalid');
+      ev.target.classList.add("invalid");
     } else {
-      ev.target.classList.remove('invalid');
+      ev.target.classList.remove("invalid");
     }
   };
 
@@ -74,9 +76,9 @@ const Appointments = () => {
     setEmail(ev.target.value);
 
     if (!ev.target.validity.valid) {
-      ev.target.classList.add('invalid');
+      ev.target.classList.add("invalid");
     } else {
-      ev.target.classList.remove('invalid');
+      ev.target.classList.remove("invalid");
     }
   };
 
@@ -84,9 +86,9 @@ const Appointments = () => {
     setPhoneNumber(ev.target.value);
 
     if (!ev.target.validity.valid) {
-      ev.target.classList.add('invalid');
+      ev.target.classList.add("invalid");
     } else {
-      ev.target.classList.remove('invalid');
+      ev.target.classList.remove("invalid");
     }
   };
 
@@ -94,25 +96,25 @@ const Appointments = () => {
     setMessage(ev.target.value);
 
     if (!ev.target.validity.valid) {
-      ev.target.classList.add('invalid');
+      ev.target.classList.add("invalid");
     } else {
-      ev.target.classList.remove('invalid');
+      ev.target.classList.remove("invalid");
     }
   };
 
   const validateForm = () => {
     let isValid = true;
 
-    if (!checkValidity('TEXT', name)) {
+    if (!checkValidity("TEXT", name)) {
       isValid = false;
     }
-    if (!checkValidity('EMAIL', email)) {
+    if (!checkValidity("EMAIL", email)) {
       isValid = false;
     }
-    if (!checkValidity('PHONE_NUMBER', phoneNumber)) {
+    if (!checkValidity("PHONE_NUMBER", phoneNumber)) {
       isValid = false;
     }
-    if (!checkValidity('TEXT', message)) {
+    if (!checkValidity("TEXT", message)) {
       isValid = false;
     }
 
@@ -131,8 +133,8 @@ const Appointments = () => {
 
       emailjs
         .send(
-          'service_mt81aag',
-          'template_j69osgm',
+          "service_mt81aag",
+          "template_j69osgm",
           {
             from_name: name,
             from_email: email,
@@ -140,15 +142,15 @@ const Appointments = () => {
             message: message,
             phone_number: phoneNumber,
           },
-          'vSOVWrVLzBl721pXk'
+          "vSOVWrVLzBl721pXk"
         )
         .then(
           () => {
             setModalState({
               show: true,
               error: false,
-              title: 'Wysłano wiadomość',
-              message: 'Twoja wiadomość została pomyślnie przesłana.',
+              title: "Wysłano wiadomość",
+              message: "Twoja wiadomość została pomyślnie przesłana.",
             });
           },
           (error) => {
@@ -168,18 +170,18 @@ const Appointments = () => {
           }
         );
     } else {
-      console.warn('Błąd walidacji maila');
+      console.warn("Błąd walidacji maila");
     }
 
-    setName('');
-    setEmail('');
-    setPhoneNumber('');
-    setMessage('');
+    setName("");
+    setEmail("");
+    setPhoneNumber("");
+    setMessage("");
   };
 
   const messageCloseHandler = () => {
-    document.getElementById('overlay').style.animationName = 'fadeOut';
-    document.getElementById('card').style.animationName = 'hide';
+    document.getElementById("overlay").style.animationName = "fadeOut";
+    document.getElementById("card").style.animationName = "hide";
 
     setTimeout(() => {
       setModalState((prevState) => {

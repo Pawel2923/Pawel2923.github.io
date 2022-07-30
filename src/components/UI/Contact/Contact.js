@@ -60,7 +60,9 @@ const Contact = (props) => {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
-          {!(props.showMap !== undefined && props.showMap) && <Button onClick={hideMapClickHandler}>Schowaj mapę</Button>}
+          {!(props.showMap !== undefined && props.showMap) && (
+            <Button onClick={hideMapClickHandler}>Schowaj mapę</Button>
+          )}
         </div>
       )}
     </section>

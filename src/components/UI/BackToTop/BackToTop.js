@@ -1,7 +1,7 @@
-import { Fragment, useState, useContext } from 'react';
+import { Fragment, useState, useContext } from "react";
 
-import classes from './BackToTop.module.css';
-import WindowSizeContext from 'store/window-size';
+import classes from "./BackToTop.module.css";
+import WindowSizeContext from "store/window-size";
 
 const BackToTop = () => {
   const windowSizeCtx = useContext(WindowSizeContext);
@@ -24,11 +24,11 @@ const BackToTop = () => {
   const btnClickHandler = () => {
     window.scroll({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
-  window.addEventListener('scroll', toggleShow);
+  window.addEventListener("scroll", toggleShow);
 
   return (
     <Fragment>
