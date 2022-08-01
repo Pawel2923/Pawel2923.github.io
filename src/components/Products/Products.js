@@ -1,27 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import Product from "./Product";
 import Aside from "./Aside/Aside";
 import SortFunctions from "./SortFunctions";
 import Button from "components/UI/Button/Button";
-import ProductsData from "./ProductsData.json";
-import Ratings from "./Ratings";
 import classes from "./Products.module.css";
+import useHttp from "hooks/use-http";
+
+const requestConfig = {
+  url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json",
+};
+
+const applyData = (data) => {
+  try {
+    let transformedData = [];
+    for (let key in data) {
+      transformedData.push(data[key]);
+    }
+
+    if (!transformedData) {
+      throw new Error("Wystąpił błąd: Nie można znaleźć transformaedData");
+    }
+
+    return transformedData;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 const Products = () => {
-  const [items, setItems] = useState(ProductsData);
+  const { sendRequest, result } = useHttp();
+
+  useEffect(() => {
+    sendRequest(requestConfig, applyData);
+  }, [sendRequest]);
+
+  const [items, setItems] = useState([]);
   const [sortBy, setSortBy] = useState("none");
 
+  useEffect(() => {
+    if (result !== undefined) {
+      setItems(result);
+    }
+  }, [result]);
+
   const sortItems = () => {
-    if (sortBy === "nameA") {
+    if (sortBy === "titleA") {
       setItems((prevItems) => {
-        return [...prevItems.sort(SortFunctions.nameA)];
+        return [...prevItems.sort(SortFunctions.titleA)];
       });
     }
 
-    if (sortBy === "nameZ") {
+    if (sortBy === "titleZ") {
       setItems((prevItems) => {
-        return [...prevItems.sort(SortFunctions.nameZ)];
+        return [...prevItems.sort(SortFunctions.titleZ)];
       });
     }
 
@@ -44,7 +77,7 @@ const Products = () => {
     }
 
     if (sortBy === "none") {
-      setItems([...ProductsData]);
+      setItems([...result]);
     }
   };
 
@@ -66,7 +99,7 @@ const Products = () => {
   const filterItems = (type, filter) => {
     if (type !== "none") {
       if (type === "price") {
-        filterPrice(ProductsData, filter);
+        filterPrice(result, filter);
       }
 
       let newList = [];
@@ -74,7 +107,7 @@ const Products = () => {
       if (type === "categories") {
         for (let checkbox of filter) {
           newList.push(
-            ...ProductsData.filter((value) => value.category === checkbox.value)
+            ...result.filter((value) => value.category === checkbox.value)
           );
         }
 
@@ -84,7 +117,7 @@ const Products = () => {
       if (type === "combined") {
         for (let checkbox of filter.checkboxes) {
           newList.push(
-            ...ProductsData.filter((value) => value.category === checkbox.value)
+            ...result.filter((value) => value.category === checkbox.value)
           );
         }
 
@@ -108,7 +141,7 @@ const Products = () => {
   };
 
   const resetItems = () => {
-    setItems(ProductsData);
+    setItems(result);
 
     if (sortBy !== "none") {
       sortItems();
@@ -127,8 +160,8 @@ const Products = () => {
               defaultValue={sortBy}
             >
               <option value="none">Trafność - największa</option>
-              <option value="nameA">Nazwa (A-Z)</option>
-              <option value="nameZ">Nazwa (Z-A)</option>
+              <option value="titleA">Nazwa (A-Z)</option>
+              <option value="titleZ">Nazwa (Z-A)</option>
               <option value="priceMax">Cena - malejąco</option>
               <option value="priceMin">Cena - rosnąco</option>
               <option value="reviews">Najwyżej oceniane</option>
@@ -141,32 +174,21 @@ const Products = () => {
             </Link>
           </div>
         </div>
-        {items.length > 0 ? (
+        {items.length > 0 &&
           items.map((item) => (
-            <Link to={`products/${item.id}`} key={item.id}>
-              <div className={classes.card}>
-                <div className={classes["image-wrapper"]}>
-                  <img
-                    src={require(`assets/product-img/${item.image}`)}
-                    alt="Zdjęcie produktu"
-                    className={classes.image}
-                  />
-                </div>
-                <div className={classes["desc-wrapper"]}>
-                  <h3>{item.name}</h3>
-                  <div>{item.description}</div>
-                  <div>
-                    Cena: {item.price.toFixed(2).toString().replace(/\./g, ",")}{" "}
-                    zł
-                  </div>
-                  <Ratings score={item.score} />
-                </div>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <h1>Nie znaleziono wyników</h1>
-        )}
+            <Product
+              key={item.id}
+              info={{
+                id: item.id,
+                title: item.title,
+                image: item.imagePath,
+                description: item.description,
+                price: item.price,
+                score: item.score,
+                category: item.category,
+              }}
+            />
+          ))}
       </section>
     </div>
   );

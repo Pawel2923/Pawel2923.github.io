@@ -1,0 +1,45 @@
+.card {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr;
+  grid-template-columns: auto 1fr;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.image-wrapper {
+  aspect-ratio: 1 / 1;
+  max-height: 10rem;
+  overflow: hidden;
+}
+
+.image-wrapper > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.desc-wrapper {
+  padding: 1rem;
+}
+
+.desc-wrapper > div:first-of-type {
+  display: none;
+}
+
+@media screen and (min-width: 700px) {
+  .desc-wrapper > div:first-of-type {
+    display: block;
+  }
+
+  .rating {
+    display: inline-block;
+    font-size: 1em;
+  }
+}

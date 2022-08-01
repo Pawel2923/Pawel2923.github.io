@@ -1,16 +1,30 @@
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState, useContext, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 
 import Amount from "components/UI/Amount/Amount";
 import Button from "components/UI/Button/Button";
 import Modal from "components/UI/Modal/Modal";
-import ProductsData from "./ProductsData.json";
 import Ratings from "./Ratings";
 import classes from "./ProductDetail.module.css";
 import CartContext from "store/cart-context";
 
-const findProduct = (productId) => {
-  for (const product of ProductsData) {
+import useHttp from "hooks/use-http";
+
+const requestConfig = {
+  url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json",
+};
+
+const applyData = (data) => {
+  let transformedData = [];
+  for (let key in data) {
+    transformedData.push(data[key]);
+  }
+
+  return transformedData;
+};
+
+const findProduct = (productId, productsData) => {
+  for (const product of productsData) {
     if (product.id === productId) {
       return { ...product, isFound: true };
     }
@@ -19,9 +33,15 @@ const findProduct = (productId) => {
 };
 
 const ProductDetail = () => {
-  const params = useParams();
+  const { productId } = useParams();
   const history = useHistory();
   const cartCtx = useContext(CartContext);
+  const [item, setItem] = useState([]);
+  const { sendRequest, result } = useHttp();
+
+  useEffect(() => {
+    sendRequest(requestConfig, applyData);
+  }, [sendRequest]);
 
   const [amount, setAmount] = useState(1);
   const [modalState, setModalState] = useState({
@@ -31,7 +51,11 @@ const ProductDetail = () => {
     message: "",
   });
 
-  const item = findProduct(params.productId);
+  useEffect(() => {
+    if (result !== undefined) {
+      setItem(findProduct(productId, result));
+    }
+  }, [result, productId]);
 
   const amountChangeHandler = (number) => {
     setAmount(number);
@@ -50,7 +74,7 @@ const ProductDetail = () => {
   };
 
   const buttonClickHandler = () => {
-    cartCtx.addItem(params.productId, amount);
+    cartCtx.addItem(productId, amount);
 
     setModalState({
       show: true,
@@ -90,18 +114,22 @@ const ProductDetail = () => {
         {item.isFound ? (
           <Fragment>
             <div className={classes["image-wrapper"]}>
-              <h1>{item.name}</h1>
+              <h1>{item.title}</h1>
               <img
-                src={require(`assets/product-img/${item.image}`)}
+                src={require(`assets/product-img/${item.imagePath}`)}
                 className={classes.image}
                 alt="Zdjęcie produktu"
               />
             </div>
             <div className={classes.right}>
               <div>
-                {item.price.toFixed(2).toString().replace(/\./g, ",")} zł
+                {parseFloat(item.price)
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\./g, ",")}{" "}
+                zł
               </div>
-              <Ratings score={item.score} />
+              <Ratings score={parseInt(item.score)} />
               <Amount onAmountChange={amountChangeHandler} />
               <Button onClick={buttonClickHandler}>Dodaj do koszyka</Button>
             </div>

@@ -1,18 +1,18 @@
 const SortFunctions = {
-  nameA: (a, b) => {
-    if (a.name.trim().toLowerCase() < b.name.trim().toLowerCase()) {
+  titleA: (a, b) => {
+    if (a.title.trim().toLowerCase() < b.title.trim().toLowerCase()) {
       return -1;
     }
-    if (a.name.trim().toLowerCase() > b.name.trim().toLowerCase()) {
+    if (a.title.trim().toLowerCase() > b.title.trim().toLowerCase()) {
       return 1;
     }
     return 0;
   },
-  nameZ: (a, b) => {
-    if (b.name.trim().toLowerCase() < a.name.trim().toLowerCase()) {
+  titleZ: (a, b) => {
+    if (b.title.trim().toLowerCase() < a.title.trim().toLowerCase()) {
       return -1;
     }
-    if (b.name.trim().toLowerCase() > a.name.trim().toLowerCase()) {
+    if (b.title.trim().toLowerCase() > a.title.trim().toLowerCase()) {
       return 1;
     }
     return 0;

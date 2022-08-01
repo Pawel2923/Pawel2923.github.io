@@ -3,10 +3,23 @@ import { Link, useHistory } from "react-router-dom";
 
 import Button from "components/UI/Button/Button";
 import Amount from "components/UI/Amount/Amount";
-import ProductsData from "../Products/ProductsData.json";
 import CartContext from "store/cart-context";
 import Modal from "components/UI/Modal/Modal";
 import classes from "./Cart.module.css";
+import useHttp from "hooks/use-http";
+
+const requestConfig = {
+  url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+};
+
+const applyData = (data) => {
+  let transformedData = [];
+  for (let key in data) {
+    transformedData.push(data[key]);
+  }
+
+  return transformedData;
+};
 
 const defaultCart = [];
 
@@ -15,7 +28,7 @@ const cartReducer = (state, action) => {
     let cartItems = [];
 
     if (action.items.length > 0) {
-      for (const product of ProductsData) {
+      for (const product of action.products) {
         for (const item of action.items) {
           if (item.id === product.id) {
             cartItems.push({ ...product, amount: item.amount });
@@ -26,7 +39,7 @@ const cartReducer = (state, action) => {
       if (localStorage.getItem("cart") !== null) {
         const cartLocal = JSON.parse(localStorage.getItem("cart"));
 
-        for (const product of ProductsData) {
+        for (const product of action.products) {
           for (const item of cartLocal) {
             if (item.id === product.id) {
               cartItems.push({ ...product, amount: item.amount });
@@ -47,10 +60,17 @@ const Cart = () => {
   const cartCtx = useContext(CartContext);
   const [showPayment, setShowPayment] = useState(false);
   const [cart, dispatchCart] = useReducer(cartReducer, defaultCart);
+  const { sendRequest, result } = useHttp();
 
   useEffect(() => {
-    dispatchCart({ type: "FIND_ITEMS", items: cartCtx.items });
-  }, [cartCtx.items]);
+    sendRequest(requestConfig, applyData);
+  }, [sendRequest]);
+
+  useEffect(() => {
+    if (result !== undefined) {
+      dispatchCart({ type: "FIND_ITEMS", items: cartCtx.items, products: result });
+    }
+  }, [cartCtx.items, result]);
 
   const backClickHandler = () => {
     history.push("/products");
@@ -132,14 +152,14 @@ const Cart = () => {
               <li key={item.id} className={classes.item}>
                 <div className={classes.left}>
                   <img
-                    src={require(`assets/product-img/${item.image}`)}
+                    src={require(`assets/product-img/${item.imagePath}`)}
                     className={classes.image}
                     alt="Zdjęcie produktu"
                   />
                 </div>
                 <div className={classes.right}>
                   <Link to={`/products/${item.id}`}>
-                    <h3>{item.name}</h3>
+                    <h3>{item.title}</h3>
                   </Link>
                   <Amount
                     onAmountClick={amountClickHandler}

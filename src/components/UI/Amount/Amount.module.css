@@ -17,8 +17,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 40px;
-  height: 30px;
+  padding: 0.2rem 0.5rem;
 }
 
 .amount > *:last-child {
@@ -39,4 +38,10 @@
 .amount i:first-child {
   background: #db2828;
   border: 1px solid darkred;
+}
+
+@media screen and (min-width: 700px) {
+  .amount > * {
+    padding: 0.5rem 1rem;
+  }
 }

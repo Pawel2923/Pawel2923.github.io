@@ -1,0 +1,16 @@
+.card {
+    border-radius: 18px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card label {
+    margin-bottom: 0;
+}
+
+.card input,
+.card textarea {
+    margin-bottom: 1rem;
+}
