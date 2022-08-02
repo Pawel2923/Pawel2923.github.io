@@ -5,8 +5,7 @@ import classes from "./Product.module.css";
 
 const Product = (props) => {
   const productInfo = props.info;
-  productInfo.price = parseFloat(props.info.price).toFixed(2).toString().replace(/\./g, ",");
-  productInfo.score = parseInt(props.info.score);
+  productInfo.price = props.info.price.toFixed(2).toString().replace(/\./g, ",");
 
   return (
     <Link to={`products/${productInfo.id}`}>

@@ -11,8 +11,15 @@
   transition: 200ms ease;
 }
 
-.button:hover,
-.button:active {
-   background-color: #BF8454;
-   border-color: #BF8454;
+.button::after {
+  content: "";
+  transition: background-color 200ms ease;
+  inset: -1px;
+  position: absolute;
+  border-radius: inherit;
+}
+
+.button:hover::after,
+.button:active::after {
+  background-color: rgba(0, 0, 0, 0.1);
 }

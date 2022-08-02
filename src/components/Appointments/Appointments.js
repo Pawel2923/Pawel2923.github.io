@@ -131,7 +131,6 @@ const Appointments = () => {
             <Input
               attributes={{
                 type: "email",
-                type: "text",
                 id: "email",
                 value: email,
                 required: true,
@@ -147,7 +146,6 @@ const Appointments = () => {
             <Input
               attributes={{
                 type: "tel",
-                type: "text",
                 id: "phoneNumber",
                 value: phoneNumber,
                 pattern: phoneNumberPattern,
