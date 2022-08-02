@@ -11,8 +11,8 @@
   background-size: cover;
   background-position: center;
   color: white;
-  padding-top: 10% !important;
-  padding-bottom: calc(10% + 7rem) !important;
+  padding-top: 15% !important;
+  padding-bottom: calc(15% + 7rem) !important;
   position: relative;
 }
 
@@ -118,9 +118,9 @@
   }
 
   .about {
-    padding-top: 20%;
-    padding-bottom: calc(20% + 7rem);
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
+    padding-top: 30% !important;
+    padding-bottom: calc(30% + 7rem) !important;
   }
 }

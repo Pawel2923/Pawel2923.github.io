@@ -11,7 +11,7 @@ const HomeProducts = (props) => {
   };
 
   return (
-    <section className={`${props.className} ${classes.products}`}>
+    <section className={classes.products}>
       <h1>Produkty</h1>
       <p>
         W naszym sklepie oferujemy szeroką gamę produktów do pielęgnacji

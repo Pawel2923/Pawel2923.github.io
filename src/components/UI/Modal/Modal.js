@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 
 import classes from "./Modal.module.css";
@@ -9,7 +9,7 @@ const ModalOverlay = (props) => {
   const cardClasses = `${classes.card} ${props.error ? classes.error : ""}`;
 
   return (
-    <Fragment>
+    <React.Fragment>
       <div
         className={classes.overlay}
         id="overlay"
@@ -22,23 +22,30 @@ const ModalOverlay = (props) => {
           <i className="fa-solid fa-xmark" onClick={props.onClose}></i>
         </div>
       </div>
-    </Fragment>
+    </React.Fragment>
   );
 };
 
 const Modal = (props) => {
+  const [showModal, setShowModal] = useState(true);
+
   const closeHandler = () => {
-    props.modalInfo.onClose();
+    setShowModal(false);
+    if (props.onClose) {
+      props.onClose();
+    }
   };
 
-  return createPortal(
-    <ModalOverlay
-      modalInfo={props.modalInfo}
-      error={props.modalInfo.error ? true : false}
-      onClose={closeHandler}
-    />,
-    portalContainer
-  );
+  if (showModal) {
+    return createPortal(
+      <ModalOverlay
+        modalInfo={props.modalInfo}
+        error={props.modalInfo.error ? true : false}
+        onClose={closeHandler}
+      />,
+      portalContainer
+    );
+  }
 };
 
 export default Modal;

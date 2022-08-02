@@ -70,8 +70,19 @@ form textarea {
   position: relative;
 }
 
-.invalid {
+form textarea {
+  font-family: inherit;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+}
+
+input.invalid,
+textarea.invalid {
   border-color: #e10000;
+}
+
+div.invalid {
+  color: #e10000;
 }
 
 form input:focus,

@@ -9,20 +9,14 @@
 }
 
 .image-wrapper {
-  aspect-ratio: 1 / 1;
   max-height: 10rem;
   overflow: hidden;
 }
 
-.image-wrapper > img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
 .image {
-  width: 100%;
-  height: 100%;
+  display: block;
+  width: 8rem;
+  height: 8rem;
 }
 
 .desc-wrapper {
@@ -34,12 +28,16 @@
 }
 
 @media screen and (min-width: 700px) {
-  .desc-wrapper > div:first-of-type {
-    display: block;
+  .image-wrapper {
+    aspect-ratio: 1 / 1;
   }
 
-  .rating {
-    display: inline-block;
-    font-size: 1em;
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .desc-wrapper > div:first-of-type {
+    display: block;
   }
 }

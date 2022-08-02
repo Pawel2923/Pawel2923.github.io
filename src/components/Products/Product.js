@@ -4,23 +4,27 @@ import Ratings from "./Ratings";
 import classes from "./Product.module.css";
 
 const Product = (props) => {
+  const productInfo = props.info;
+  productInfo.price = parseFloat(props.info.price).toFixed(2).toString().replace(/\./g, ",");
+  productInfo.score = parseInt(props.info.score);
+
   return (
-    <Link to={`products/${props.info.id}`}>
+    <Link to={`products/${productInfo.id}`}>
       <div className={classes.card}>
         <div className={classes["image-wrapper"]}>
           <img
-            src={require(`assets/product-img/${props.info.image}`)}
+            src={require(`assets/product-img/${productInfo.imagePath}`)}
             alt="Zdjęcie produktu"
             className={classes.image}
           />
         </div>
         <div className={classes["desc-wrapper"]}>
-          <h3>{props.info.title}</h3>
-          <div>{props.info.description}</div>
+          <h3>{productInfo.title}</h3>
+          <div>{productInfo.description}</div>
           <div>
-            Cena: {parseFloat(props.info.price).toFixed(2).toString().replace(/\./g, ",")} zł
+            Cena: {productInfo.price} zł
           </div>
-          <Ratings score={parseInt(props.info.score)} />
+          <Ratings score={productInfo.score} />
         </div>
       </div>
     </Link>

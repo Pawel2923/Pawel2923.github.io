@@ -1,12 +1,12 @@
-import { Fragment } from "react";
+import React from "react";
 
 import Contact from "components/UI/Contact/Contact";
 
 const ContactPage = () => {
   return (
-    <Fragment>
+    <React.Fragment>
       <Contact showMap={true} />
-    </Fragment>
+    </React.Fragment>
   );
 };
 

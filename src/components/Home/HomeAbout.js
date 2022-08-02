@@ -11,7 +11,7 @@ const HomeAbout = (props) => {
   };
 
   return (
-    <section className={`${classes.about} ${props.className}`}>
+    <section className={classes.about}>
       <div className={classes.top}>
         <h1>O nas</h1>
         <h3>

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import Option from "./Option";
@@ -7,7 +7,7 @@ import { ReactComponent as Logo } from "assets/logo.svg";
 
 const Nav = () => {
   return (
-    <Fragment>
+    <React.Fragment>
       <li>
         <Link
           to="/home"
@@ -21,7 +21,7 @@ const Nav = () => {
       <Option link={{ to: "/appointments" }}>Wizyty</Option>
       <Option link={{ to: "/products" }}>Produkty</Option>
       <Option link={{ to: "/contact" }}>Kontakt</Option>
-    </Fragment>
+    </React.Fragment>
   );
 };
 

@@ -13,6 +13,7 @@
   -ms-grid-columns: 1fr 1rem 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  width: 100%;
 }
 
 .appointments form label {
@@ -23,11 +24,9 @@
   width: 100%;
 }
 
-.name {
-  -ms-grid-column-span: 2;
-  grid-column: span 2;
-}
-
+.name,
+.email,
+.phone,
 .message {
   -ms-grid-column-span: 2;
   grid-column: span 2;
@@ -43,42 +42,16 @@
   color: #e10000;
 }
 
-.loading {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  font-size: 4rem;
-  -webkit-animation-name: rotating;
-          animation-name: rotating;
-  -webkit-animation-duration: 1.5s;
-          animation-duration: 1.5s;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-}
+@media screen and (min-width: 700px) {
+  .appointments form {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
 
-@-webkit-keyframes rotating {
-  from {
-    -webkit-transform: rotateZ(0deg);
-            transform: rotateZ(0deg);
-  }
-  to {
-    -webkit-transform: rotateZ(360deg);
-            transform: rotateZ(360deg);
-  }
-}
-
-@keyframes rotating {
-  from {
-    -webkit-transform: rotateZ(0deg);
-            transform: rotateZ(0deg);
-  }
-  to {
-    -webkit-transform: rotateZ(360deg);
-            transform: rotateZ(360deg);
+  .email,
+  .phone {
+    -ms-grid-column-span: 1;
+    grid-column: span 1;
   }
 }

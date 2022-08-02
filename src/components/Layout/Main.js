@@ -8,7 +8,7 @@ import Cart from "components/Cart/Cart";
 import ContactPage from "components/ContactPage/ContactPage";
 
 import classes from "./Main.module.css";
-import AddProduct from "components/Products/AddProduct";
+import AddProduct from "components/Products/AddProducts/AddProduct";
 
 const Main = () => {
   return (

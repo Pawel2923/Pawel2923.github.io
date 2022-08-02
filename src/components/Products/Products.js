@@ -1,134 +1,49 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import Product from "./Product";
+// import Product from "./Product";
+import SortProducts from "./SortProducts";
 import Aside from "./Aside/Aside";
-import SortFunctions from "./SortFunctions";
 import Button from "components/UI/Button/Button";
+import Loading from "components/UI/Loading/Loading";
 import classes from "./Products.module.css";
 import useHttp from "hooks/use-http";
+import Modal from "components/UI/Modal/Modal";
 
 const requestConfig = {
   url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json",
 };
 
-const applyData = (data) => {
-  try {
-    let transformedData = [];
-    for (let key in data) {
-      transformedData.push(data[key]);
-    }
-
-    if (!transformedData) {
-      throw new Error("Wystąpił błąd: Nie można znaleźć transformaedData");
-    }
-
-    return transformedData;
-  } catch (err) {
-    console.log(err.message);
-  }
-};
+let defaultItems = [];
 
 const Products = () => {
-  const { sendRequest, result } = useHttp();
-
-  useEffect(() => {
-    sendRequest(requestConfig, applyData);
-  }, [sendRequest]);
-
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(defaultItems);
   const [sortBy, setSortBy] = useState("none");
+  const [filterBy, setFilterBy] = useState("none");
+
+  const { isLoading, error, sendRequest } = useHttp();
+
+  const getProducts = (data) => {
+    try {
+      let transformedData = [];
+      for (let key in data) {
+        transformedData.push(data[key]);
+      }
+  
+      if (!transformedData) {
+        throw new Error("Wystąpił błąd: Nie można znaleźć listy produktów");
+      }
+  
+      setItems(transformedData);
+      defaultItems = transformedData;
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
   useEffect(() => {
-    if (result !== undefined) {
-      setItems(result);
-    }
-  }, [result]);
-
-  const sortItems = () => {
-    if (sortBy === "titleA") {
-      setItems((prevItems) => {
-        return [...prevItems.sort(SortFunctions.titleA)];
-      });
-    }
-
-    if (sortBy === "titleZ") {
-      setItems((prevItems) => {
-        return [...prevItems.sort(SortFunctions.titleZ)];
-      });
-    }
-
-    if (sortBy === "priceMax") {
-      setItems((prevItems) => {
-        return [...prevItems.sort(SortFunctions.priceMax)];
-      });
-    }
-
-    if (sortBy === "priceMin") {
-      setItems((prevItems) => {
-        return [...prevItems.sort(SortFunctions.priceMin)];
-      });
-    }
-
-    if (sortBy === "reviews") {
-      setItems((prevItems) => {
-        return [...prevItems.sort(SortFunctions.reviews)];
-      });
-    }
-
-    if (sortBy === "none") {
-      setItems([...result]);
-    }
-  };
-
-  const filterPrice = (data, filter) => {
-    if (filter.minValue === 0) {
-      setItems([...data.filter((value) => value.price <= filter.maxValue)]);
-    } else if (filter.maxValue === 0) {
-      setItems([...data.filter((value) => value.price >= filter.minValue)]);
-    } else {
-      setItems([
-        ...data.filter(
-          (value) =>
-            value.price >= filter.minValue && value.price <= filter.maxValue
-        ),
-      ]);
-    }
-  };
-
-  const filterItems = (type, filter) => {
-    if (type !== "none") {
-      if (type === "price") {
-        filterPrice(result, filter);
-      }
-
-      let newList = [];
-
-      if (type === "categories") {
-        for (let checkbox of filter) {
-          newList.push(
-            ...result.filter((value) => value.category === checkbox.value)
-          );
-        }
-
-        setItems(newList);
-      }
-
-      if (type === "combined") {
-        for (let checkbox of filter.checkboxes) {
-          newList.push(
-            ...result.filter((value) => value.category === checkbox.value)
-          );
-        }
-
-        filterPrice(newList, filter);
-      }
-
-      if (sortBy !== "none") {
-        sortItems();
-      }
-    }
-  };
+    sendRequest(requestConfig, getProducts);
+  }, [sendRequest]);
 
   const sortSelectChangeHandler = (ev) => {
     setSortBy(ev.target.value);
@@ -137,27 +52,34 @@ const Products = () => {
   const sortSubmitHandler = (ev) => {
     ev.preventDefault();
 
-    sortItems();
+    // sortItems();
+  };
+
+  const filterItems = () => {
+
   };
 
   const resetItems = () => {
-    setItems(result);
+    setItems(defaultItems);
 
-    if (sortBy !== "none") {
-      sortItems();
-    }
+    // if (sortBy !== "none") {
+    //   sortItems();
+    // }
   };
 
   return (
     <div className={classes["products-container"]}>
-      <Aside onFilter={filterItems} onReset={resetItems} />
+      <Aside
+        onFilter={filterItems}
+        onReset={resetItems}
+      />
       <section className={classes["products-catalog"]}>
         <div className={classes.sort}>
           <form onSubmit={sortSubmitHandler}>
             <select
               id="sortBy"
               onChange={sortSelectChangeHandler}
-              defaultValue={sortBy}
+              // defaultValue={sortBy}
             >
               <option value="none">Trafność - największa</option>
               <option value="titleA">Nazwa (A-Z)</option>
@@ -174,7 +96,8 @@ const Products = () => {
             </Link>
           </div>
         </div>
-        {items.length > 0 &&
+        <SortProducts items={items} />
+        {/* {items.length > 0 &&
           items.map((item) => (
             <Product
               key={item.id}
@@ -188,7 +111,14 @@ const Products = () => {
                 category: item.category,
               }}
             />
-          ))}
+          ))} */}
+          {error && <Modal modalInfo={{
+            show: true,
+            error: true,
+            title: "Wystapil Błąd",
+            message: error,
+          }} />}
+          {isLoading && <Loading />}
       </section>
     </div>
   );

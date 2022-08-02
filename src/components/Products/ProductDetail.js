@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 
 import Amount from "components/UI/Amount/Amount";
@@ -81,7 +81,7 @@ const ProductDetail = () => {
       error: false,
       title: "Dodano do koszyka",
       message: (
-        <Fragment>
+        <React.Fragment>
           Produkt został dodany do koszyka.
           <Button
             onClick={messageBtnClickHandler}
@@ -89,7 +89,7 @@ const ProductDetail = () => {
           >
             Przejdź do koszyka
           </Button>
-        </Fragment>
+        </React.Fragment>
       ),
     });
   };
@@ -112,7 +112,7 @@ const ProductDetail = () => {
       </nav>
       <div className={classes.description}>
         {item.isFound ? (
-          <Fragment>
+          <React.Fragment>
             <div className={classes["image-wrapper"]}>
               <h1>{item.title}</h1>
               <img
@@ -145,7 +145,7 @@ const ProductDetail = () => {
                 }}
               />
             )}
-          </Fragment>
+          </React.Fragment>
         ) : (
           <h1>Taki produkt nie istnieje</h1>
         )}

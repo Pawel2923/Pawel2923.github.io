@@ -1,195 +1,100 @@
-import React, { useState } from "react";
-import emailjs from "@emailjs/browser";
+import React, { useState, useEffect } from "react";
 
 import Button from "components/UI/Button/Button";
 import Modal from "components/UI/Modal/Modal";
+import Loading from "components/UI/Loading/Loading";
+import Input from "components/UI/Input";
 import classes from "./Appointments.module.css";
+import useEmail from "hooks/use-email";
 
-const checkValidity = (type, value) => {
-  if (type === "TEXT") {
-    if (value.trim() !== "" && value.trim().length >= 3) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  if (type === "EMAIL") {
-    if (value.trim() !== "") {
-      if (value.includes("@")) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }
-
-  if (type === "PHONE_NUMBER") {
-    if (value.trim() !== "") {
-      const re1 = /[0-9]{3} [0-9]{3} [0-9]{3}/g;
-      const re2 = /[0-9]{3}[0-9]{3}[0-9]{3}/g;
-      const re3 = /[0-9]{3}-[0-9]{3}-[0-9]{3}/g;
-
-      if (re1.test(value) || re2.test(value) || re3.test(value)) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }
-
-  console.error(
-    "Funkcja checkValidity potrzebuje prawidłowego paremetru type do poprawnego działania."
-  );
-  return false;
+const defaultModalState = {
+  show: false,
+  error: false,
+  title: "",
+  message: "",
 };
+
+const phoneNumberPattern =
+  "[0-9]{3} [0-9]{3} [0-9]{3}|[0-9]{3}[0-9]{3}[0-9]{3}|[0-9]{3}-[0-9]{3}-[0-9]{3}";
 
 const Appointments = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
+  const { isLoading, modalState: emailModalState, sendEmail } = useEmail();
 
-  const [modalState, setModalState] = useState({
-    show: false,
-    error: false,
-    title: "",
-    message: "",
-  });
-  const [showLoading, setShowLoading] = useState(false);
+  const [modalState, setModalState] = useState(defaultModalState);
+  const [isInputValid, setIsInputValid] = useState(new Array(4).fill(false));
 
-  const nameChangeHandler = (ev) => {
-    setName(ev.target.value);
-
-    if (!ev.target.validity.valid) {
-      ev.target.classList.add("invalid");
-    } else {
-      ev.target.classList.remove("invalid");
+  useEffect(() => {
+    if (emailModalState) {
+      setModalState(emailModalState);
     }
-  };
+  }, [emailModalState]);
 
-  const emailChangeHandler = (ev) => {
-    setEmail(ev.target.value);
-
-    if (!ev.target.validity.valid) {
-      ev.target.classList.add("invalid");
-    } else {
-      ev.target.classList.remove("invalid");
+  const inputChangeHandler = (ev, inputId) => {
+    if (inputId === "name") {
+      setName(ev.target.value);
     }
-  };
-
-  const phoneChangeHandler = (ev) => {
-    setPhoneNumber(ev.target.value);
-
-    if (!ev.target.validity.valid) {
-      ev.target.classList.add("invalid");
-    } else {
-      ev.target.classList.remove("invalid");
+    if (inputId === "email") {
+      setEmail(ev.target.value);
     }
-  };
-
-  const messageChangeHandler = (ev) => {
-    setMessage(ev.target.value);
-
-    if (!ev.target.validity.valid) {
-      ev.target.classList.add("invalid");
-    } else {
-      ev.target.classList.remove("invalid");
+    if (inputId === "phoneNumber") {
+      setPhoneNumber(ev.target.value);
     }
-  };
-
-  const validateForm = () => {
-    let isValid = true;
-
-    if (!checkValidity("TEXT", name)) {
-      isValid = false;
+    if (inputId === "message") {
+      setMessage(ev.target.value);
     }
-    if (!checkValidity("EMAIL", email)) {
-      isValid = false;
-    }
-    if (!checkValidity("PHONE_NUMBER", phoneNumber)) {
-      isValid = false;
-    }
-    if (!checkValidity("TEXT", message)) {
-      isValid = false;
-    }
-
-    return isValid;
   };
 
   const submitHandler = (ev) => {
     ev.preventDefault();
+    let isValid = false;
 
-    if (validateForm()) {
-      setShowLoading(true);
+    const falseIndex = isInputValid.findIndex(val => val === false);
+    if (falseIndex === -1) {
+      isValid = true;
+    }
 
-      setTimeout(() => {
-        setShowLoading(false);
-      }, 7000);
-
-      emailjs
-        .send(
-          "service_mt81aag",
-          "template_j69osgm",
-          {
-            from_name: name,
-            from_email: email,
-            reply_to: email,
-            message: message,
-            phone_number: phoneNumber,
-          },
-          "vSOVWrVLzBl721pXk"
-        )
-        .then(
-          () => {
-            setModalState({
-              show: true,
-              error: false,
-              title: "Wysłano wiadomość",
-              message: "Twoja wiadomość została pomyślnie przesłana.",
-            });
-          },
-          (error) => {
-            setMessage({
-              show: true,
-              error: true,
-              title: `Wystąpił błąd ${error.status}`,
-              message: (
-                <span>
-                  Nie udało się wysłać twojej wiadomości.
-                  <br />
-                  Sprawdź czy wprowadziłeś poprawne dane lub spróbuj ponownie
-                  później.
-                </span>
-              ),
-            });
-          }
-        );
+    if (isValid) {
+      sendEmail({
+        name,
+        email,
+        phoneNumber,
+        message,
+      });
     } else {
-      console.warn("Błąd walidacji maila");
+      setModalState({
+        show: true,
+        error: true,
+        title: `Wypełnij formularz`,
+        message: "Sprawdź czy poprawnie wypełniłeś wszystkie pola formularza.",
+      });
+      return;
     }
 
     setName("");
     setEmail("");
     setPhoneNumber("");
     setMessage("");
+    setIsInputValid(new Array(4).fill(false));
   };
 
-  const messageCloseHandler = () => {
-    document.getElementById("overlay").style.animationName = "fadeOut";
-    document.getElementById("card").style.animationName = "hide";
+  const modalCloseHandler = () => {
+    setModalState(defaultModalState);
+  };
 
-    setTimeout(() => {
-      setModalState((prevState) => {
-        let newState = { ...prevState };
-        newState.show = false;
-        return newState;
+  const inputValidateHandler = (isValid, index) => {
+    if (index !== -1) {
+      setIsInputValid((prevState) => {
+        let updatedState = prevState;
+        updatedState[index] = isValid;
+        return updatedState;
       });
-    }, 200);
+      return;
+    }
+    setIsInputValid(new Array(4).fill(false));
   };
 
   return (
@@ -207,63 +112,73 @@ const Appointments = () => {
             <p>
               Imię i nazwisko <span className={classes.asterisk}>*</span>
             </p>
-            <input
-              type="text"
-              id="name"
-              placeholder="np. Adam Kowalski"
-              value={name}
-              minLength="3"
-              onChange={nameChangeHandler}
-              required
+            <Input
+              attributes={{
+                type: "text",
+                id: "name",
+                value: name,
+                minLength: "3",
+                required: true,
+              }}
+              onChange={inputChangeHandler}
+              onValidate={inputValidateHandler}
             />
           </label>
-          <label>
+          <label className={classes.email}>
             <p>
               E-mail <span className={classes.asterisk}>*</span>
             </p>
-            <input
-              type="email"
-              id="email"
-              placeholder="np. email@gmail.com"
-              value={email}
-              onChange={emailChangeHandler}
-              required
+            <Input
+              attributes={{
+                type: "email",
+                type: "text",
+                id: "email",
+                value: email,
+                required: true,
+              }}
+              onChange={inputChangeHandler}
+              onValidate={inputValidateHandler}
             />
           </label>
-          <label>
+          <label className={classes.phone}>
             <p>
               Nr telefonu <span className={classes.asterisk}>*</span>
             </p>
-            <input
-              type="tel"
-              id="phoneNumber"
-              placeholder="np. 123 456 789"
-              value={phoneNumber}
-              pattern="[0-9]{3} [0-9]{3} [0-9]{3}|[0-9]{3}[0-9]{3}[0-9]{3}|[0-9]{3}-[0-9]{3}-[0-9]{3}"
-              onChange={phoneChangeHandler}
-              required
+            <Input
+              attributes={{
+                type: "tel",
+                type: "text",
+                id: "phoneNumber",
+                value: phoneNumber,
+                pattern: phoneNumberPattern,
+                required: true,
+              }}
+              onValidate={inputValidateHandler}
+              onChange={inputChangeHandler}
             />
           </label>
           <label className={classes.message}>
             <p>
               Wiadomość <span className={classes.asterisk}>*</span>
             </p>
-            <textarea
-              id="message"
-              minLength="3"
-              value={message}
-              onChange={messageChangeHandler}
-              required
+            <Input
+              attributes={{
+                id: "message",
+                minLength: "3",
+                value: message,
+                required: true,
+              }}
+              isTextarea={true}
+              onChange={inputChangeHandler}
+              onValidate={inputValidateHandler}
             />
           </label>
           <Button type="submit">Wyślij</Button>
         </form>
       </section>
-      {showLoading && (
-        <i className={`fa-solid fa-spinner ${classes.loading}`}></i>
-      )}
+      {isLoading && <Loading />}
       {modalState.show && (
-        <Modal onClose={messageCloseHandler} modalInfo={modalState} />
+        <Modal modalInfo={modalState} onClose={modalCloseHandler} />
       )}
     </React.Fragment>
   );

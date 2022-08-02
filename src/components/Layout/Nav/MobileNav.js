@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 
@@ -60,7 +60,7 @@ const MobileNav = () => {
   };
 
   return (
-    <Fragment>
+    <React.Fragment>
       <li>
         <i className="fa-solid fa-bars" onClick={openHandler}></i>
       </li>
@@ -74,7 +74,7 @@ const MobileNav = () => {
           <NavOverlay closeHandler={closeHandler} />,
           portalContainer
         )}
-    </Fragment>
+    </React.Fragment>
   );
 };
 

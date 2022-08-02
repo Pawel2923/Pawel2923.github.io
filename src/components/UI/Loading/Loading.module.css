@@ -1,0 +1,45 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.overlay p {
+  font-size: 2rem;
+}
+
+.overlay > div {
+  text-align: center;
+}
+
+.loading {
+  margin-top: 1rem;
+  font-size: 4rem;
+  -webkit-animation-name: rotating;
+  animation-name: rotating;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  z-index: 5;
+}
+
+.overlay p > span {
+  display: none;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
