@@ -8,6 +8,7 @@ import classes from "./Products.module.css";
 import Modal from "components/UI/Modal/Modal";
 import useHttp from "hooks/use-http";
 import sortProducts from "./sortProducts";
+import filterProducts from "./filterProducts";
 
 const requestConfig = {
   url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json",
@@ -19,7 +20,6 @@ const Products = () => {
   const [items, setItems] = useState(defaultItems);
   const { error, sendRequest } = useHttp();
   const [sortBy, setSortBy] = useState("none");
-  const [filterBy, setFilterBy] = useState("none");
 
   const getProducts = (data) => {
     try {
@@ -54,7 +54,12 @@ const Products = () => {
     setItems(sortProducts(defaultItems, sortBy));
   };
 
-  const filterItems = () => {};
+  const filterItems = (filterBy, filterVal) => {
+    let filteredProducts = filterProducts(defaultItems, { filterBy, filterVal });
+    // filteredProducts = sortProducts(filteredProducts, sortBy);
+
+    setItems(filteredProducts);
+  };
 
   const resetItems = () => {
     setItems(sortProducts(defaultItems, sortBy));

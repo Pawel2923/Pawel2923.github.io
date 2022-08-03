@@ -75,7 +75,7 @@ const SortFunctions = {
 };
 
 export const sortProducts = (data, sortBy) => {
-  let updatedData = [ ...data ];
+  let updatedData = [...data];
 
   if (sortBy === "titleA") {
     updatedData.sort(SortFunctions.titleA);
