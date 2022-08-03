@@ -12,15 +12,6 @@ const requestConfig = {
   url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json"
 };
 
-const applyData = (data) => {
-  let transformedData = [];
-  for (let key in data) {
-    transformedData.push(data[key]);
-  }
-
-  return transformedData;
-};
-
 const defaultCart = [];
 
 const cartReducer = (state, action) => {
@@ -63,11 +54,11 @@ const Cart = () => {
   const { sendRequest, result } = useHttp();
 
   useEffect(() => {
-    sendRequest(requestConfig, applyData);
+    sendRequest(requestConfig);
   }, [sendRequest]);
 
   useEffect(() => {
-    if (result !== undefined) {
+    if (result) {
       dispatchCart({ type: "FIND_ITEMS", items: cartCtx.items, products: result });
     }
   }, [cartCtx.items, result]);

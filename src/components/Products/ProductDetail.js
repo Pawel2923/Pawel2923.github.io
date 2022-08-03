@@ -14,15 +14,6 @@ const requestConfig = {
   url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json",
 };
 
-const applyData = (data) => {
-  let transformedData = [];
-  for (let key in data) {
-    transformedData.push(data[key]);
-  }
-
-  return transformedData;
-};
-
 const findProduct = (productId, productsData) => {
   for (const product of productsData) {
     if (product.id === productId) {
@@ -36,11 +27,11 @@ const ProductDetail = () => {
   const { productId } = useParams();
   const history = useHistory();
   const cartCtx = useContext(CartContext);
-  const [item, setItem] = useState([]);
+  const [targetItem, setTargetItem] = useState([]);
   const { sendRequest, result } = useHttp();
 
   useEffect(() => {
-    sendRequest(requestConfig, applyData);
+    sendRequest(requestConfig);
   }, [sendRequest]);
 
   const [amount, setAmount] = useState(1);
@@ -52,8 +43,8 @@ const ProductDetail = () => {
   });
 
   useEffect(() => {
-    if (result !== undefined) {
-      setItem(findProduct(productId, result));
+    if (result) {
+      setTargetItem(findProduct(productId, result));
     }
   }, [result, productId]);
 
@@ -111,31 +102,31 @@ const ProductDetail = () => {
         </ul>
       </nav>
       <div className={classes.description}>
-        {item.isFound ? (
+        {targetItem.isFound ? (
           <React.Fragment>
             <div className={classes["image-wrapper"]}>
-              <h1>{item.title}</h1>
+              <h1>{targetItem.title}</h1>
               <img
-                src={require(`assets/product-img/${item.imagePath}`)}
+                src={require(`assets/product-img/${targetItem.imagePath}`)}
                 className={classes.image}
                 alt="Zdjęcie produktu"
               />
             </div>
             <div className={classes.right}>
               <div>
-                {parseFloat(item.price)
+                {parseFloat(targetItem.price)
                   .toFixed(2)
                   .toString()
                   .replace(/\./g, ",")}{" "}
                 zł
               </div>
-              <Ratings score={parseInt(item.score)} />
+              <Ratings score={parseInt(targetItem.score)} />
               <Amount onAmountChange={amountChangeHandler} />
               <Button onClick={buttonClickHandler}>Dodaj do koszyka</Button>
             </div>
             <div className={classes.bottom}>
               <h1>Opis produktu</h1>
-              {item.description}
+              {targetItem.description}
             </div>
             {modalState.show && (
               <Modal

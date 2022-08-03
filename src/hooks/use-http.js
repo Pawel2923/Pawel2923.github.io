@@ -1,8 +1,27 @@
 import { useState, useCallback } from "react";
 
+const getProducts = (data) => {
+  try {
+    let transformedData = [];
+    for (let key in data) {
+      transformedData.push(data[key]);
+    }
+
+    for (let item of transformedData) {  
+      item.price = parseFloat(item.price);
+      item.score = parseInt(item.score);
+    }
+
+    return transformedData;
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [result, setResult] = useState(null);
 
   const sendRequest = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
@@ -19,7 +38,7 @@ const useHttp = () => {
 
       const data = await response.json();
 
-      applyData(data);
+      setResult(getProducts(data));
     } catch (err) {
       setError(err.message);
     }
@@ -29,7 +48,8 @@ const useHttp = () => {
   return {
     isLoading,
     error,
-    sendRequest
+    sendRequest,
+    result
   };
 };
 

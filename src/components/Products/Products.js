@@ -18,31 +18,18 @@ let defaultItems = [];
 
 const Products = () => {
   const [items, setItems] = useState(defaultItems);
-  const { error, sendRequest } = useHttp();
+  const { error, sendRequest, result } = useHttp();
   const [sortBy, setSortBy] = useState("none");
 
-  const getProducts = (data) => {
-    try {
-      let transformedData = [];
-      for (let key in data) {
-        transformedData.push(data[key]);
-      }
-
-      for (let item of transformedData) {  
-        item.price = parseFloat(item.price);
-        item.score = parseInt(item.score);
-      }
-
-      setItems(transformedData);
-      defaultItems = transformedData;
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  useEffect(() => {
+    sendRequest(requestConfig)
+  }, [sendRequest]);
 
   useEffect(() => {
-    sendRequest(requestConfig, getProducts);
-  }, [sendRequest]);
+    if (result) {
+      setItems(result);
+    }
+  }, [result]);
 
   const sortSelectChangeHandler = (ev) => {
     setSortBy(ev.target.value);
@@ -51,12 +38,12 @@ const Products = () => {
   const sortSubmitHandler = (ev) => {
     ev.preventDefault();
 
-    setItems(sortProducts(defaultItems, sortBy));
+    setItems(sortProducts(items, sortBy));
   };
 
   const filterItems = (filterBy, filterVal) => {
     let filteredProducts = filterProducts(defaultItems, { filterBy, filterVal });
-    // filteredProducts = sortProducts(filteredProducts, sortBy);
+    filteredProducts = sortProducts(filteredProducts, sortBy);
 
     setItems(filteredProducts);
   };
