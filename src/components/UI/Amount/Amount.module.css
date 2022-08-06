@@ -6,6 +6,7 @@
 }
 
 .amount > * {
+  height: 2rem;
   margin-right: 0.5rem;
   border-radius: 10px;
   display: -webkit-box;
@@ -17,7 +18,6 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 0.2rem 0.5rem;
 }
 
 .amount > *:last-child {
@@ -25,10 +25,12 @@
 }
 
 .amount-value {
+  width: 2rem;
   background: #e9e9e9;
 }
 
 .amount i {
+  width: 3rem;
   cursor: pointer;
   background: #21ba46;
   border: 1px solid green;

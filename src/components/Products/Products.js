@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Product from "./Product";
 import Aside from "./Aside/Aside";
 import Button from "components/UI/Button/Button";
+import Loading from "components/UI/Loading/Loading";
 import classes from "./Products.module.css";
 import Modal from "components/UI/Modal/Modal";
 import useHttp from "hooks/use-http";
@@ -14,22 +15,48 @@ const requestConfig = {
   url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json",
 };
 
-let defaultItems = [];
+const sliceIntoChunks = (arr, chunkSize) => {
+  if (!arr) {
+    return;
+  }
+
+  const result = [];
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    const chunk = arr.slice(i, i + chunkSize);
+    result.push(chunk);
+  }
+  return result;
+};
 
 const Products = () => {
+  const [defaultItems, setDefaultItems] = useState([]);
   const [items, setItems] = useState(defaultItems);
-  const { error, sendRequest, result } = useHttp();
+  const { error, isLoading, sendRequest, result } = useHttp();
   const [sortBy, setSortBy] = useState("none");
+  const [isFiltered, setIsFiltered] = useState(false);
+  const [currPageIndex, setCurrPageIndex] = useState(0);
+  const [pageLength, setPageLength] = useState(0);
 
   useEffect(() => {
-    sendRequest(requestConfig)
+    setPageLength(sliceIntoChunks(defaultItems, 10).length);
+  }, [defaultItems]);
+
+  useEffect(() => {
+    sendRequest(requestConfig);
   }, [sendRequest]);
 
   useEffect(() => {
     if (result) {
+      setDefaultItems(result);
       setItems(result);
     }
   }, [result]);
+
+  useEffect(() => {
+    if (pageLength > 0) {
+      setItems(sliceIntoChunks(defaultItems, 10)[currPageIndex]);
+    }
+  }, [currPageIndex, pageLength, defaultItems]);
 
   const sortSelectChangeHandler = (ev) => {
     setSortBy(ev.target.value);
@@ -42,19 +69,58 @@ const Products = () => {
   };
 
   const filterItems = (filterBy, filterVal) => {
-    let filteredProducts = filterProducts(defaultItems, { filterBy, filterVal });
+    let filteredProducts = filterProducts(defaultItems, {
+      filterBy,
+      filterVal,
+    });
     filteredProducts = sortProducts(filteredProducts, sortBy);
 
+    setIsFiltered(true);
     setItems(filteredProducts);
   };
 
   const resetItems = () => {
+    setIsFiltered(false);
     setItems(sortProducts(defaultItems, sortBy));
+  };
+
+  const nextPageClickHandler = () => {
+    setCurrPageIndex((prevIndex) => {
+      let nextIndex = prevIndex + 1;
+      if (nextIndex > pageLength - 1) {
+        return 0;
+      }
+      return nextIndex;
+    });
+    window.scroll({
+      top: 0,
+    });
+  };
+
+  const prevPageClickhandler = () => {
+    setCurrPageIndex((prevIndex) => {
+      let nextIndex = prevIndex - 1;
+      if (nextIndex < 0) {
+        return pageLength - 1;
+      }
+      return nextIndex;
+    });
+    window.scroll({
+      top: 0,
+    });
+  };
+
+  const pageIndexClickHandler = (index) => {
+    setCurrPageIndex(index);
+    
+    window.scroll({
+      top: 0,
+    });
   };
 
   let products = <h3>Nie znaleziono produktów</h3>;
 
-  if (items.length > 0) {
+  if (items && items.length > 0) {
     products = items.map((item) => (
       <Product
         key={item.id}
@@ -69,6 +135,12 @@ const Products = () => {
         }}
       />
     ));
+  }
+
+  let pages = [];
+
+  for (let i = 0; i < pageLength; i++) {
+    pages.push(i + 1);
   }
 
   return (
@@ -107,6 +179,32 @@ const Products = () => {
               message: error,
             }}
           />
+        )}
+        {isLoading && <Loading />}
+        {!isFiltered && !isLoading && (
+          <div className={classes["page-index"]}>
+            <Button onClick={prevPageClickhandler}>
+              <i className="fa-solid fa-chevron-left"></i>
+            </Button>
+            {pages.map((pageIndex, index) => {
+              let highlight = "";
+              if (currPageIndex === index) {
+                highlight = classes.highlighted;
+              }
+              return (
+                <span
+                  key={index}
+                  className={highlight}
+                  onClick={pageIndexClickHandler.bind(null, index)}
+                >
+                  {pageIndex}
+                </span>
+              );
+            })}
+            <Button onClick={nextPageClickHandler}>
+              <i className="fa-solid fa-chevron-right"></i>
+            </Button>
+          </div>
         )}
       </section>
     </div>

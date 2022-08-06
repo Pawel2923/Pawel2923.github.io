@@ -3,13 +3,14 @@ import { Link, useHistory } from "react-router-dom";
 
 import Button from "components/UI/Button/Button";
 import Amount from "components/UI/Amount/Amount";
+import Loading from "components/UI/Loading/Loading";
 import CartContext from "store/cart-context";
 import Modal from "components/UI/Modal/Modal";
 import classes from "./Cart.module.css";
 import useHttp from "hooks/use-http";
 
 const requestConfig = {
-  url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+  url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json",
 };
 
 const defaultCart = [];
@@ -50,16 +51,31 @@ const Cart = () => {
   const history = useHistory();
   const cartCtx = useContext(CartContext);
   const [showPayment, setShowPayment] = useState(false);
+  const [total, setTotal] = useState(0);
   const [cart, dispatchCart] = useReducer(cartReducer, defaultCart);
-  const { sendRequest, result } = useHttp();
+  const { error, isLoading, sendRequest, result } = useHttp();
 
   useEffect(() => {
     sendRequest(requestConfig);
   }, [sendRequest]);
 
   useEffect(() => {
+    if (cart.length > 0) {
+      let total = 0;
+      for (let item of cart) {
+        total += item.price * item.amount;
+      }
+      setTotal(total);
+    }
+  }, [cart]);
+
+  useEffect(() => {
     if (result) {
-      dispatchCart({ type: "FIND_ITEMS", items: cartCtx.items, products: result });
+      dispatchCart({
+        type: "FIND_ITEMS",
+        items: cartCtx.items,
+        products: result,
+      });
     }
   }, [cartCtx.items, result]);
 
@@ -174,6 +190,10 @@ const Cart = () => {
         )}
         {cart.length > 0 && (
           <div>
+            <p>
+              Do zapłaty:{" "}
+              <b>{total.toFixed(2).toString().replace(/\./g, ",")} zł</b>
+            </p>
             <Button
               onClick={resetClickHandler}
               className={classes["reset-btn"]}
@@ -193,6 +213,17 @@ const Cart = () => {
             }}
           />
         )}
+        {error && (
+          <Modal
+            modalInfo={{
+              show: true,
+              error: true,
+              title: "Wystapił Błąd",
+              message: error,
+            }}
+          />
+        )}
+        {isLoading && <Loading />}
       </div>
     </section>
   );
