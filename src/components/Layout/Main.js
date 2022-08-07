@@ -8,7 +8,6 @@ import Cart from "components/Cart/Cart";
 import ContactPage from "components/ContactPage/ContactPage";
 
 import classes from "./Main.module.css";
-import AddProduct from "components/Products/AddProducts/AddProduct";
 
 const Main = () => {
   return (
@@ -34,9 +33,6 @@ const Main = () => {
         </Route>
         <Route path="/contact">
           <ContactPage />
-        </Route>
-        <Route path="/add-product">
-          <AddProduct />
         </Route>
         <Route path="*">
           <section>

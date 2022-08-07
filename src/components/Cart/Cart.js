@@ -1,12 +1,13 @@
-import { useState, useContext, useReducer, useEffect } from "react";
+import React, { useState, useContext, useReducer, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { Link, useHistory } from "react-router-dom";
 
 import Button from "components/UI/Button/Button";
 import Amount from "components/UI/Amount/Amount";
 import Loading from "components/UI/Loading/Loading";
-import CartContext from "store/cart-context";
 import Modal from "components/UI/Modal/Modal";
 import classes from "./Cart.module.css";
+import CartContext from "store/cart-context";
 import useHttp from "hooks/use-http";
 
 const requestConfig = {
@@ -40,10 +41,8 @@ const cartReducer = (state, action) => {
         }
       }
     }
-
     return cartItems;
   }
-
   return defaultCart;
 };
 
@@ -54,6 +53,7 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const [cart, dispatchCart] = useReducer(cartReducer, defaultCart);
   const { error, isLoading, sendRequest, result } = useHttp();
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     sendRequest(requestConfig);
@@ -66,6 +66,7 @@ const Cart = () => {
         total += item.price * item.amount;
       }
       setTotal(total);
+      setShowMenu(new Array(cart.length).fill(false));
     }
   }, [cart]);
 
@@ -86,7 +87,6 @@ const Cart = () => {
   const resetClickHandler = () => {
     cartCtx.resetItems();
     dispatchCart({ type: "RESET" });
-    setShowPayment(false);
   };
 
   const amountClickHandler = (id, number) => {
@@ -97,7 +97,7 @@ const Cart = () => {
     cartCtx.removeItem(id);
   };
 
-  const payClickHandler = () => {
+  const payBtnClickHandler = () => {
     setShowPayment(true);
   };
 
@@ -109,6 +109,14 @@ const Cart = () => {
 
   const payCloseHandler = () => {
     setShowPayment(false);
+  };
+
+  const menuShowHandler = (id) => {
+    setShowMenu((prevState) => {
+      let newState = [...prevState];
+      newState[id] = !prevState[id];
+      return newState;
+    });
   };
 
   const today = new Date();
@@ -144,6 +152,13 @@ const Cart = () => {
     </div>
   );
 
+  const modalInfo = {
+    show: true,
+    error: false,
+    title: "Dokonaj zapłaty",
+    message: paymentElement,
+  };
+
   return (
     <section className={classes.cart}>
       <nav>
@@ -155,19 +170,20 @@ const Cart = () => {
         <h1>Koszyk</h1>
         {cart.length > 0 ? (
           <ul>
-            {cart.map((item) => (
+            {cart.map((item, index) => (
               <li key={item.id} className={classes.item}>
-                <div className={classes.left}>
+                <div className={classes["image-wrapper"]}>
                   <img
                     src={require(`assets/product-img/${item.imagePath}`)}
                     className={classes.image}
                     alt="Zdjęcie produktu"
                   />
                 </div>
-                <div className={classes.right}>
+                <div className={classes["desc-wrapper"]}>
                   <Link to={`/products/${item.id}`}>
                     <h3>{item.title}</h3>
                   </Link>
+                  {item.price.toFixed(2).toString().replace(/\./g, ",")} zł
                   <Amount
                     onAmountClick={amountClickHandler}
                     value={{
@@ -175,12 +191,35 @@ const Cart = () => {
                       key: item.id,
                     }}
                   />
-                  <i
-                    className={`fa-solid fa-trash-can ${classes["trash-can"]}`}
-                    onClick={() => {
-                      removeClickHandler(item.id);
-                    }}
-                  ></i>
+                </div>
+                <div className={classes["menu-wrapper"]}>
+                  <button onClick={menuShowHandler.bind(null, index)}>
+                    <i className={"fa-solid fa-ellipsis-vertical"}></i>
+                  </button>
+                  {showMenu[index] && (
+                    <React.Fragment>
+                      {ReactDOM.createPortal(
+                        <div
+                          className={classes["menu-overlay"]}
+                          onClick={menuShowHandler.bind(null, index)}
+                        ></div>,
+                        document.getElementById("overlays")
+                      )}
+                      <div className={classes.menu}>
+                        <ul>
+                          <li>
+                            <button
+                              onClick={removeClickHandler.bind(null, item.id)}
+                            >
+                              <span>
+                                <i className="fa-solid fa-trash-can"></i> Usuń
+                              </span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  )}
                 </div>
               </li>
             ))}
@@ -200,18 +239,11 @@ const Cart = () => {
             >
               Wyczyść koszyk
             </Button>
-            <Button onClick={payClickHandler}>Zapłać</Button>
+            <Button onClick={payBtnClickHandler}>Zapłać</Button>
           </div>
         )}
         {showPayment && (
-          <Modal
-            modalInfo={{
-              title: "Dokonaj płatność",
-              message: paymentElement,
-              error: false,
-              onClose: payCloseHandler,
-            }}
-          />
+          <Modal modalInfo={modalInfo} onClose={payCloseHandler} />
         )}
         {error && (
           <Modal
