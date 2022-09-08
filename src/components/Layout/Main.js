@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Home from "components/Home/Home";
 import Appointments from "components/Appointments/Appointments";
@@ -14,7 +14,7 @@ const Main = () => {
     <main className={classes.main}>
       <Switch>
         <Route path="/" exact>
-          <Redirect to="/home" />
+          <Home />
         </Route>
         <Route path="/home">
           <Home />

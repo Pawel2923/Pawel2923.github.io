@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Button from "components/UI/Button/Button";
 import classes from "./HomeProducts.module.css";
 
-const HomeProducts = (props) => {
+const HomeProducts = () => {
   const history = useHistory();
 
   const buttonClickHandler = () => {

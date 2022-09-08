@@ -1,19 +1,19 @@
-.overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+.wrapper {
   z-index: 4;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
 }
 
-.overlay p {
+.wrapper p {
   font-size: 2rem;
 }
 
-.overlay > div {
+.wrapper p > span {
+  display: none;
+}
+
+.wrapper > div {
   text-align: center;
 }
 
@@ -29,10 +29,6 @@
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
   z-index: 5;
-}
-
-.overlay p > span {
-  display: none;
 }
 
 @keyframes rotating {

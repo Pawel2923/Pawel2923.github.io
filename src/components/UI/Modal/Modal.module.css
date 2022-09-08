@@ -3,6 +3,9 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: fadeIn ease 200ms both;
 }
 
@@ -13,18 +16,10 @@
   border: 2px solid #594e4c;
   border-radius: 20px;
   padding: 5rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-left: auto;
-  margin-right: auto;
   text-align: center;
   z-index: 6;
+  position: absolute;
+  top: 8rem;
   animation: show ease 200ms both;
 }
 
@@ -59,10 +54,10 @@
 
 @keyframes show {
   from {
-    transform: translate(-50%, -50%) scaleY(0);
+    transform: scaleY(0);
   }
   to {
-    transform: translate(-50%, -50%) scaleY(1);
+    transform: scaleY(1);
   }
 }
 
