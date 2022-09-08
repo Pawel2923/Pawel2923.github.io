@@ -31,8 +31,8 @@ const Modal = (props) => {
   const closeHandler = () => {
     setShowModal(false);
     document.body.style.overflow = "initial";
-    if (props.onClose) {
-      props.onClose();
+    if (props.modalInfo.onClose) {
+      props.modalInfo.onClose();
     }
   };
 
