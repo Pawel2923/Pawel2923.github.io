@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 import classes from "./Modal.module.css";
@@ -6,15 +6,14 @@ import classes from "./Modal.module.css";
 const portalContainer = document.getElementById("overlays");
 
 const ModalOverlay = (props) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+  }, []);
+
   const cardClasses = `${classes.card} ${props.error ? classes.error : ""}`;
 
   return (
-    <React.Fragment>
-      <div
-        className={classes.overlay}
-        id="overlay"
-        onClick={props.onClose}
-      ></div>
+    <div className={classes.overlay} id="overlay" onClick={props.onClose}>
       <div id="card" className={cardClasses}>
         <h1>{props.modalInfo.title}</h1>
         {props.modalInfo.message}
@@ -22,7 +21,7 @@ const ModalOverlay = (props) => {
           <i className="fa-solid fa-xmark" onClick={props.onClose}></i>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
@@ -31,6 +30,7 @@ const Modal = (props) => {
 
   const closeHandler = () => {
     setShowModal(false);
+    document.body.style.overflow = "initial";
     if (props.onClose) {
       props.onClose();
     }

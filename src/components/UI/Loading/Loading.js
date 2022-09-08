@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
 
 import classes from "./Loading.module.css";
-
-const containerElement = document.getElementById("overlays");
 
 const Loading = () => {
   useEffect(() => {
@@ -30,8 +27,8 @@ const Loading = () => {
     };
   }, []);
 
-  return ReactDOM.createPortal(
-    <div className={classes.overlay}>
+  return (
+    <div className={classes.wrapper}>
       <div>
         <p>
           Ładowanie
@@ -41,8 +38,7 @@ const Loading = () => {
         </p>
         <i className={`fa-solid fa-spinner ${classes.loading}`}></i>
       </div>
-    </div>,
-    containerElement
+    </div>
   );
 };
 
