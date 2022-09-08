@@ -18,12 +18,12 @@ export const NavOverlay = (props) => {
       <nav>
         <div className={classes["close-wrapper"]}>
           <i className="fa-solid fa-xmark" onClick={closeHandler}></i>
-          <Link to="/home" className={classes["image-wrapper"]}>
+          <Link to="/" className={classes["image-wrapper"]}>
             <Logo />
           </Link>
         </div>
         <ul>
-          <Option link={{ to: "/home", onClick: closeHandler }}>
+          <Option link={{ to: "/", onClick: closeHandler }}>
             Strona główna
           </Option>
           <Option link={{ to: "/appointments", onClick: closeHandler }}>
@@ -65,7 +65,7 @@ const MobileNav = () => {
         <i className="fa-solid fa-bars" onClick={openHandler}></i>
       </li>
       <li>
-        <Link to="/home" className={classes["image-wrapper"]}>
+        <Link to="/" className={classes["image-wrapper"]}>
           <Logo />
         </Link>
       </li>
