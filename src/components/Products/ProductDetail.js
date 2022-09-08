@@ -7,8 +7,8 @@ import Modal from "components/UI/Modal/Modal";
 import Ratings from "./Ratings";
 import classes from "./ProductDetail.module.css";
 import CartContext from "store/cart-context";
-
 import useHttp from "hooks/use-http";
+import Loading from "components/UI/Loading/Loading";
 
 const requestConfig = {
   url: "https://barber-shop-react-default-rtdb.europe-west1.firebasedatabase.app/products.json",
@@ -28,7 +28,7 @@ const ProductDetail = () => {
   const history = useHistory();
   const cartCtx = useContext(CartContext);
   const [targetItem, setTargetItem] = useState([]);
-  const { sendRequest, result } = useHttp();
+  const { sendRequest, isLoading, result } = useHttp();
 
   useEffect(() => {
     sendRequest(requestConfig);
@@ -102,7 +102,7 @@ const ProductDetail = () => {
         </ul>
       </nav>
       <div className={classes.description}>
-        {targetItem.isFound ? (
+        {(targetItem.isFound && !isLoading) ? (
           <React.Fragment>
             <div className={classes["image-wrapper"]}>
               <h1>{targetItem.title}</h1>
@@ -138,9 +138,10 @@ const ProductDetail = () => {
             )}
           </React.Fragment>
         ) : (
-          <h1>Taki produkt nie istnieje</h1>
+          !isLoading && <h1>Taki produkt nie istnieje</h1>
         )}
       </div>
+      {isLoading && <Loading />}
       <br />
     </section>
   );
