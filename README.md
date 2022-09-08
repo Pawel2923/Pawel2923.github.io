@@ -1,2 +1,2 @@
 # Strona projektu
-## http://barber-shop-react.netlify.app/
+## https://barber-shop-react.netlify.app/
