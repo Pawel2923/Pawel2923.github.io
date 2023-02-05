@@ -5,7 +5,7 @@ import classes from "./Product.module.css";
 
 const Product = (props) => {
   const productInfo = props.info;
-  productInfo.price = props.info.price.toFixed(2).toString().replace(/\./g, ",");
+  productInfo.price = parseFloat(productInfo.price).toFixed(2).toString().replace(/\./g, ",") + "zł";
 
   return (
     <Link to={`products/${productInfo.id}`}>
@@ -20,9 +20,7 @@ const Product = (props) => {
         <div className={classes["desc-wrapper"]}>
           <h3>{productInfo.title}</h3>
           <div>{productInfo.description}</div>
-          <div>
-            Cena: {productInfo.price} zł
-          </div>
+          <div>Cena: {productInfo.price}</div>
           <Ratings score={productInfo.score} />
         </div>
       </div>
