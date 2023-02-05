@@ -17,14 +17,8 @@
 
 .main h1,
 .main h2 {
-  font-family: 'Merriweather', serif;
+  font-family: "Merriweather", serif;
   font-weight: 600;
   font-size: 1.3em;
   letter-spacing: 1px;
-}
-
-@media screen and (min-width: 700px) {
-  .main {
-    font-size: 1em;
-  }
 }

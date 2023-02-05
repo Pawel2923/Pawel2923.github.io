@@ -46,8 +46,16 @@
 
 .page-index span {
   margin-left: 0.5rem;
-  padding: 0.2rem 0.5rem;
+  padding: 0.1rem 0.2rem;
   cursor: pointer;
+  color: #93653E;
+  text-underline-offset: 2px;
+}
+
+.page-button {
+  font-size: .9em;
+  padding: 0.4em 0.7em;
+  border-radius: 13px;
 }
 
 .page-index span:first-of-type {
@@ -59,8 +67,8 @@
 }
 
 .highlighted {
-  background-color: #fdb06f;
-  border-radius: 20px;
+  text-decoration: underline;
+  color: inherit !important;
 }
 
 @media screen and (min-width: 700px) {

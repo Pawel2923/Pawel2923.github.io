@@ -63,6 +63,7 @@ form select,
 form textarea {
   border-radius: 20px;
   padding: 0.6em 1em;
+  font-size: inherit;
   background: #fff;
   color: #000;
   border: 1px solid #5b5b5b;

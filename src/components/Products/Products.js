@@ -183,7 +183,7 @@ const Products = () => {
         {isLoading && <Loading />}
         {!isFiltered && !isLoading && (
           <div className={classes["page-index"]}>
-            <Button onClick={prevPageClickhandler}>
+            <Button onClick={prevPageClickhandler} className={classes["page-button"]}>
               <i className="fa-solid fa-chevron-left"></i>
             </Button>
             {pages.map((pageIndex, index) => {
@@ -201,7 +201,7 @@ const Products = () => {
                 </span>
               );
             })}
-            <Button onClick={nextPageClickHandler}>
+            <Button onClick={nextPageClickHandler} className={classes["page-button"]}>
               <i className="fa-solid fa-chevron-right"></i>
             </Button>
           </div>
