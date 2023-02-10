@@ -60,12 +60,7 @@ const Products = () => {
 
   const sortSelectChangeHandler = (ev) => {
     setSortBy(ev.target.value);
-  };
-
-  const sortSubmitHandler = (ev) => {
-    ev.preventDefault();
-
-    setItems(sortProducts(items, sortBy));
+    setItems(sortProducts(items, ev.target.value));
   };
 
   const filterItems = (filterBy, filterVal) => {
@@ -148,20 +143,19 @@ const Products = () => {
       <Aside onFilter={filterItems} onReset={resetItems} />
       <section className={classes["products-catalog"]}>
         <div className={classes.sort}>
-          <form onSubmit={sortSubmitHandler}>
+          <form>
             <select
               id="sortBy"
               onChange={sortSelectChangeHandler}
               defaultValue={sortBy}
             >
-              <option value="none">Trafność - największa</option>
+              <option value="none">Sortuj wyniki</option>
               <option value="titleA">Nazwa (A-Z)</option>
               <option value="titleZ">Nazwa (Z-A)</option>
               <option value="priceMax">Cena - malejąco</option>
               <option value="priceMin">Cena - rosnąco</option>
               <option value="score">Najwyżej oceniane</option>
             </select>
-            <Button type="submit">Sortuj</Button>
           </form>
           <div className={classes["cart-wrapper"]}>
             <Link to="/cart">
