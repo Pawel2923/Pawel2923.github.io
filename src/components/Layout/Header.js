@@ -8,11 +8,8 @@ import WindowSizeContext from "store/window-size";
 const Header = () => {
   const windowSizeCtx = useContext(WindowSizeContext);
   let navigation;
-  if (windowSizeCtx.width > 700) {
-    navigation = <Nav />;
-  } else {
-    navigation = <MobileNav />;
-  }
+  if (windowSizeCtx.width >= 700) navigation = <Nav />;
+  else navigation = <MobileNav />;
 
   return (
     <header className={classes.header}>

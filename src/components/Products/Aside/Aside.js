@@ -1,9 +1,9 @@
-import { Fragment, useState, useContext } from 'react';
+import { Fragment, useState, useContext } from "react";
 
-import Button from 'components/UI/Button/Button';
-import { categories } from './categories';
-import classes from './Aside.module.css';
-import WindowSizeContext from 'store/window-size';
+import Button from "components/UI/Button/Button";
+import { categories } from "./categories";
+import classes from "./Aside.module.css";
+import WindowSizeContext from "store/window-size";
 
 const Aside = (props) => {
   const windowSizeCtx = useContext(WindowSizeContext);
@@ -42,17 +42,18 @@ const Aside = (props) => {
 
   const formBtnClickHandler = () => {
     const contentBtn = document.getElementsByClassName(
-      classes['form-content-btn']
+      classes["form-content-btn"]
     )[0];
-    const asideForm = document.getElementById('asideFormContent');
+    const submitBtn = document.querySelector(`.${classes["submit-btn"]}`);
+    const asideForm = document.getElementById("asideFormContent");
 
-    asideForm.classList.toggle('hideElement');
-    if (asideForm.classList.contains('hideElement')) {
-      contentBtn.innerHTML = 'Pokaż filtry';
-      contentBtn.style.marginTop = '0';
+    asideForm.classList.toggle("hideElement");
+    if (asideForm.classList.contains("hideElement")) {
+      contentBtn.style.display = "inline-block";
+      submitBtn.style.marginTop = "0";
     } else {
-      contentBtn.innerHTML = 'Schowaj filtry';
-      contentBtn.style.marginTop = '1rem';
+      contentBtn.style.display = "none";
+      submitBtn.style.marginTop = "1rem";
     }
   };
 
@@ -69,17 +70,17 @@ const Aside = (props) => {
     }
 
     if (checked.length > 0 && (priceMin > 0 || priceMax > 0)) {
-      props.onFilter('combined', {
+      props.onFilter("combined", {
         minValue: priceMin,
         maxValue: priceMax,
         checkboxes: checked,
       });
     } else if (checked.length > 0 && priceMin === 0 && priceMax === 0) {
-      props.onFilter('categories', checked);
+      props.onFilter("categories", checked);
     } else if (priceMin > 0 || priceMax > 0) {
-      props.onFilter('price', { minValue: priceMin, maxValue: priceMax });
+      props.onFilter("price", { minValue: priceMin, maxValue: priceMax });
     } else {
-      props.onFilter('none');
+      props.onFilter("none");
     }
   };
 
@@ -93,7 +94,16 @@ const Aside = (props) => {
   let formContent = (
     <Fragment>
       <div className={classes.categories}>
-        <h3>Kategoria</h3>
+        <div className={classes["aside-top"]}>
+          <h3>Kategoria</h3>
+          <Button
+            className={classes.close}
+            onClick={formBtnClickHandler}
+            closeBtn={true}
+          >
+            <i className="fa-solid fa-xmark"></i>
+          </Button>
+        </div>
         {categories.map((category, index) => (
           <label key={`category-${index}`}>
             <input
@@ -123,7 +133,11 @@ const Aside = (props) => {
         </label>
       </div>
 
-      <Button type="reset" className={classes['reset-btn']}>
+      <Button
+        type="reset"
+        onClick={formBtnClickHandler}
+        className={classes["reset-btn"]}
+      >
         Resetuj filtry
       </Button>
     </Fragment>
@@ -137,7 +151,7 @@ const Aside = (props) => {
         </div>
         <Button
           onClick={formBtnClickHandler}
-          className={classes['form-content-btn']}
+          className={classes["form-content-btn"]}
         >
           Pokaż filtry
         </Button>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
+import Button from "../Button/Button";
 import classes from "./Modal.module.css";
 
 const portalContainer = document.getElementById("overlays");
@@ -17,9 +18,13 @@ const ModalOverlay = (props) => {
       <div id="card" className={cardClasses}>
         <h1>{props.modalInfo.title}</h1>
         {props.modalInfo.message}
-        <div className={classes.close}>
-          <i className="fa-solid fa-xmark" onClick={props.onClose}></i>
-        </div>
+        <Button
+          className={classes.close}
+          onClick={props.onClose}
+          closeBtn={true}
+        >
+          <i className="fa-solid fa-xmark"></i>
+        </Button>
       </div>
     </div>
   );

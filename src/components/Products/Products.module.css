@@ -39,11 +39,6 @@
   justify-content: space-between;
 }
 
-.sort button[type="submit"] {
-  display: block;
-  margin-top: 1rem;
-}
-
 .page-index span {
   margin-left: 0.5rem;
   padding: 0.1rem 0.2rem;
@@ -94,12 +89,6 @@
     -ms-flex-align: center;
     align-items: center;
     margin: 0;
-  }
-
-  .sort button[type="submit"] {
-    display: initial;
-    margin-top: 0;
-    margin-left: 1rem;
   }
 
   .page-index span:hover {

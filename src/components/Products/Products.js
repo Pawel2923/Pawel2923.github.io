@@ -149,7 +149,7 @@ const Products = () => {
               onChange={sortSelectChangeHandler}
               defaultValue={sortBy}
             >
-              <option value="none">Sortuj wyniki</option>
+              <option value="none" hidden>Sortuj wyniki</option>
               <option value="titleA">Nazwa (A-Z)</option>
               <option value="titleZ">Nazwa (Z-A)</option>
               <option value="priceMax">Cena - malejąco</option>

@@ -43,7 +43,7 @@
 
 @media screen and (min-width: 700px) {
   .header {
-    padding: 1rem 10%;
+    padding: 1rem 8rem;
     font-size: 1em;
     position: relative;
   }

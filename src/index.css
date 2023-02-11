@@ -54,7 +54,6 @@ form label {
 form label > .text {
   position: relative;
   display: block;
-  width: calc(100% - (0.5rem + 25px));
   left: calc(25px + 0.5rem);
 }
 
