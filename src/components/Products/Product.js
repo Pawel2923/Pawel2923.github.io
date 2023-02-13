@@ -12,7 +12,7 @@ const Product = (props) => {
       <div className={classes.card}>
         <div className={classes["image-wrapper"]}>
           <img
-            src={require(`assets/product-img/${productInfo.imagePath}`)}
+            src={require(`assets/${productInfo.imagePath}`)}
             alt="Zdjęcie produktu"
             className={classes.image}
           />

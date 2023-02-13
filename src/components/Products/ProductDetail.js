@@ -130,7 +130,7 @@ const ProductDetail = () => {
             <div className={classes["image-wrapper"]}>
               <h1>{targetItem.title}</h1>
               <img
-                src={require(`assets/product-img/${targetItem.imagePath}`)}
+                src={require(`assets/${targetItem.imagePath}`)}
                 className={classes.image}
                 alt="Zdjęcie produktu"
               />

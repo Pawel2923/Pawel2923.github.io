@@ -174,7 +174,7 @@ const Cart = () => {
               <li key={item.id} className={classes.item}>
                 <div className={classes["image-wrapper"]}>
                   <img
-                    src={require(`assets/product-img/${item.imagePath}`)}
+                    src={require(`assets/${item.imagePath}`)}
                     className={classes.image}
                     alt="Zdjęcie produktu"
                   />
