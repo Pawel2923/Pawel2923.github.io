@@ -1,22 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.9c54367b.css",
-    "main.js": "/static/js/main.a515af2a.js",
+    "main.css": "/static/css/main.fe8b2a55.css",
+    "main.js": "/static/js/main.43139a78.js",
     "static/media/products.jpg": "/static/media/products.4cfa8ebd41d2a7ec459c.jpg",
     "static/media/barber.jpg": "/static/media/barber.e8b55bec66b11a874c2b.jpg",
     "static/media/procedure.jpg": "/static/media/procedure.08b92a526c5ee558908f.jpg",
     "static/media/haircut.jpg": "/static/media/haircut.6610706d814fa804888e.jpg",
-    "static/media/product2.jpg": "/static/media/product2.210aecf14882d31663de.jpg",
     "static/media/background.jpg": "/static/media/background.27c276e72cd30ce09db9.jpg",
     "static/media/trim.jpg": "/static/media/trim.aee7e7e740aabd20438f.jpg",
     "static/media/logo.svg": "/static/media/logo.a697dd3b467c587eba33488571611970.svg",
-    "static/media/product1.jpg": "/static/media/product1.b4b1cc9fe57d23142a93.jpg",
     "index.html": "/index.html",
-    "main.9c54367b.css.map": "/static/css/main.9c54367b.css.map",
-    "main.a515af2a.js.map": "/static/js/main.a515af2a.js.map"
+    "static/media/product.webp": "/static/media/product.cbc2ba146dbf2950d8b9.webp",
+    "main.fe8b2a55.css.map": "/static/css/main.fe8b2a55.css.map",
+    "main.43139a78.js.map": "/static/js/main.43139a78.js.map"
   },
   "entrypoints": [
-    "static/css/main.9c54367b.css",
-    "static/js/main.a515af2a.js"
+    "static/css/main.fe8b2a55.css",
+    "static/js/main.43139a78.js"
   ]
 }
