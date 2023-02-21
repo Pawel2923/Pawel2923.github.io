@@ -94,6 +94,7 @@
   border: 1px solid black;
   border-radius: 20px;
   padding: 0.3rem;
+  font-size: 1rem;
   background-color: white;
   transition: all 200ms ease;
   animation: show both 200ms ease;
