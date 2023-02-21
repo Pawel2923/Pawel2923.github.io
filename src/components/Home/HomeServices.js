@@ -1,8 +1,8 @@
-import trim from "assets/home-img/trim.jpg";
-import haircut from "assets/home-img/haircut.jpg";
-import procedure from "assets/home-img/procedure.jpg";
-import barber from "assets/home-img/barber.jpg";
-import products from "assets/home-img/products.jpg";
+import trim from "assets/home-img/trim.webp";
+import haircut from "assets/home-img/haircut.webp";
+import procedure from "assets/home-img/procedure.webp";
+import barber from "assets/home-img/barber.webp";
+import products from "assets/home-img/products.webp";
 import classes from "./HomeServices.module.css";
 
 const HomeServices = (props) => {

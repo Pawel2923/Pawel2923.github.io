@@ -25,7 +25,7 @@ const Contact = (props) => {
         <li className={classes["list-item"]}>
           <button onClick={showMapClickHandler} title="Pokaż na mapie">
             <i className={`fa-solid fa-location-dot ${classes.icon}`}></i>
-            <span>Jana Długosza 40, 33-300 Nowy Sącz</span>
+            <span>Ulica numer, Miasto</span>
           </button>
         </li>
         <li className={classes["list-item"]}>
@@ -37,7 +37,7 @@ const Contact = (props) => {
         <li className={classes["list-item"]}>
           <a title="Zadzwoń" href="tel:+00 123 000 000">
             <i className={`fa-solid fa-phone ${classes.icon}`}></i>
-            <span>+00 123 000 000</span>
+            <span>+00 000 000 000</span>
           </a>
         </li>
         <li className={classes["list-item"]}>
@@ -52,13 +52,13 @@ const Contact = (props) => {
         <div className={classes.map}>
           <iframe
             title="Mapa"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d646.2445579016344!2d20.6995441687172!3d49.61701505081073!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473de537b62d3f4d%3A0x754e7e58dcfda174!2sJana%20D%C5%82ugosza%2040%2C%2033-300%20Nowy%20S%C4%85cz!5e0!3m2!1spl!2spl!4v1656065124860!5m2!1spl!2spl"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d228.45653125505163!2d20.694187433606892!3d49.62243740895875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1676970274773!5m2!1spl!2spl"
             width="600"
             height="450"
-            style={{ border: 0, width: "100%" }}
-            allowFullScreen={true}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            style={{ border: 0, width: "100%" }}
+            allowFullScreen={true}
           ></iframe>
           {!(props.showMap !== undefined && props.showMap) && (
             <Button onClick={hideMapClickHandler}>Schowaj mapę</Button>
