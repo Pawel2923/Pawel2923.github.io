@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState, useContext, useEffect } from "react";
 
 import Button from "components/UI/Button/Button";
 import { categories } from "./categories";
@@ -13,6 +13,13 @@ const Aside = (props) => {
   const [isChecked, setIsChecked] = useState(
     new Array(categories.length).fill(false)
   );
+  const [showFilters, setShowFilters] = useState(true);
+
+  useEffect(() => {
+    if (windowSizeCtx.width < 700) {
+      setShowFilters(false);
+    }
+  }, [windowSizeCtx.width]);
 
   const minPriceChangeHandler = (ev) => {
     const value = parseFloat(ev.target.value.trim());
@@ -41,20 +48,9 @@ const Aside = (props) => {
   };
 
   const formBtnClickHandler = () => {
-    const contentBtn = document.getElementsByClassName(
-      classes["form-content-btn"]
-    )[0];
-    const submitBtn = document.querySelector(`.${classes["submit-btn"]}`);
-    const asideForm = document.getElementById("asideFormContent");
-
-    asideForm.classList.toggle("hideElement");
-    if (asideForm.classList.contains("hideElement")) {
-      contentBtn.style.display = "inline-block";
-      submitBtn.style.marginTop = "0";
-    } else {
-      contentBtn.style.display = "none";
-      submitBtn.style.marginTop = "1rem";
-    }
+    setShowFilters((prevValue) => {
+      return prevValue ? false : true;
+    });
   };
 
   const filterSubmitHandler = (ev) => {
@@ -146,27 +142,38 @@ const Aside = (props) => {
   if (windowSizeCtx.width < 700) {
     formContent = (
       <Fragment>
-        <div id="asideFormContent" className="hideElement">
-          {formContent}
-        </div>
-        <Button
-          onClick={formBtnClickHandler}
-          className={classes["form-content-btn"]}
-        >
-          Pokaż filtry
-        </Button>
+        {showFilters && <div id="asideFormContent">{formContent}</div>}
+        {!showFilters && (
+          <Button
+            onClick={formBtnClickHandler}
+            className={classes["form-content-btn"]}
+          >
+            Pokaż filtry
+          </Button>
+        )}
       </Fragment>
     );
   }
+
+  const submitBtn =
+    windowSizeCtx.width < 700 ? (
+      showFilters && (
+        <Button type="submit" className={classes["submit-btn"]}>
+          Filtruj
+        </Button>
+      )
+    ) : (
+      <Button type="submit" className={classes["submit-btn"]}>
+        Filtruj
+      </Button>
+    );
 
   return (
     <aside className={classes.aside}>
       <div className="filter">
         <form onSubmit={filterSubmitHandler} onReset={filterResetHandler}>
           {formContent}
-          <Button type="submit" className={classes["submit-btn"]}>
-            Filtruj
-          </Button>
+          {submitBtn}
         </form>
       </div>
     </aside>
