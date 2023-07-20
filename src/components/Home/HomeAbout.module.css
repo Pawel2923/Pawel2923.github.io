@@ -14,6 +14,8 @@
   padding-top: 15% !important;
   padding-bottom: calc(15% + 7rem) !important;
   position: relative;
+  margin: 0 !important;
+  padding: 4rem 8rem;
 }
 
 .about::before {
@@ -33,16 +35,9 @@
 
 .top {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
   z-index: 1;
 }
 
@@ -57,16 +52,10 @@
 .bottom {
   width: 100%;
   height: 7rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  padding: 0 10vw;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8rem;
   background-color: #594e4c;
   position: absolute;
   bottom: 0;
@@ -92,21 +81,19 @@
 
   .bottom {
     height: auto;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     font-size: 0.8em;
   }
 }
 
 @media screen and (max-width: 700px) {
   .bottom {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-right: 1rem;
   }
 
   .bottom > .left {
@@ -122,5 +109,6 @@
     grid-template-columns: 1fr;
     padding-top: 30% !important;
     padding-bottom: calc(30% + 7rem) !important;
+    padding: 4rem 1rem;
   }
 }

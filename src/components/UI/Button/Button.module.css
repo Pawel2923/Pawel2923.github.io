@@ -1,5 +1,7 @@
 .button {
   position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.6em 1em;
   border-radius: 20px;

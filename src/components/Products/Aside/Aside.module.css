@@ -23,6 +23,8 @@
 }
 
 .aside label {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 
@@ -70,6 +72,8 @@
 
 @media screen and (min-width: 700px) {
   .aside {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     background-color: white;
     padding: 2rem;

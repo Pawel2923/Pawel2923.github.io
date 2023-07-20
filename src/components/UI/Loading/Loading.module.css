@@ -31,6 +31,15 @@
   z-index: 5;
 }
 
+@-webkit-keyframes rotating {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
 @keyframes rotating {
   from {
     transform: rotateZ(0deg);

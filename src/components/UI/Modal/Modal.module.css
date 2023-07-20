@@ -6,7 +6,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn ease 200ms both;
+  -webkit-animation: fadeIn ease 200ms both;
+          animation: fadeIn ease 200ms both;
 }
 
 .card {
@@ -20,7 +21,8 @@
   z-index: 6;
   position: absolute;
   top: 8rem;
-  animation: show ease 200ms both;
+  -webkit-animation: show ease 200ms both;
+          animation: show ease 200ms both;
 }
 
 .card h1 {
@@ -52,12 +54,30 @@
   }
 }
 
+@-webkit-keyframes show {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
 @keyframes show {
   from {
     transform: scaleY(0);
   }
   to {
     transform: scaleY(1);
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

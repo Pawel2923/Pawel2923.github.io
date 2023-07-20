@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
@@ -23,8 +22,6 @@ body {
 a {
   color: #594e4c;
   text-decoration: none;
-  -webkit-transition: color 200ms ease;
-  -o-transition: color 200ms ease;
   transition: color 200ms ease;
 }
 
@@ -130,8 +127,6 @@ form label span.checkmark::after {
   height: 10px;
   border: solid white;
   border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 

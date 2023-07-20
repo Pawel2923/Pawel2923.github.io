@@ -6,7 +6,7 @@
 }
 
 .main section {
-  padding: 2rem 2.5rem;
+  margin: 4rem 1rem;
 }
 
 .main h3 {
@@ -25,6 +25,6 @@
 
 @media screen and (min-width: 700px) {
   .main section {
-    padding: 2rem 8rem;
+    margin: 4rem 8rem;
   }
 }
