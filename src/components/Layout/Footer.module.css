@@ -3,21 +3,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #dedede;
+  background-color: #E3E3E3;
   color: #646464;
   height: 40px;
   font-size: 0.8em;
-}
-
-.absolute {
-  position: absolute;
-  left: 0;
-  bottom: 0;
+  margin-top: auto;
 }
 
 @media screen and (min-width: 700px) {
   .footer {
     height: 50px;
-    font-size: 1em;
+    font-size: 0.9em;
   }
 }
