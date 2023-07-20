@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.72bd27f0.css",
-    "main.js": "/static/js/main.1aef10f4.js",
+    "main.css": "/static/css/main.cf6173b8.css",
+    "main.js": "/static/js/main.f8066fba.js",
     "static/media/products.webp": "/static/media/products.a3dc4d5a781bc684e7d4.webp",
     "static/media/haircut.webp": "/static/media/haircut.f9773efca41b4a462042.webp",
     "static/media/barber.webp": "/static/media/barber.f3b9cd832057fc25f694.webp",
@@ -11,11 +11,11 @@
     "static/media/logo.svg": "/static/media/logo.a697dd3b467c587eba33488571611970.svg",
     "index.html": "/index.html",
     "static/media/product.webp": "/static/media/product.cbc2ba146dbf2950d8b9.webp",
-    "main.72bd27f0.css.map": "/static/css/main.72bd27f0.css.map",
-    "main.1aef10f4.js.map": "/static/js/main.1aef10f4.js.map"
+    "main.cf6173b8.css.map": "/static/css/main.cf6173b8.css.map",
+    "main.f8066fba.js.map": "/static/js/main.f8066fba.js.map"
   },
   "entrypoints": [
-    "static/css/main.72bd27f0.css",
-    "static/js/main.1aef10f4.js"
+    "static/css/main.cf6173b8.css",
+    "static/js/main.f8066fba.js"
   ]
 }
