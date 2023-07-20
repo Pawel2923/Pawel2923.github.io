@@ -18,8 +18,8 @@ const Nav = () => {
         </Link>
       </li>
       <Option link={{ to: "/" }}>Strona główna</Option>
-      <Option link={{ to: "/appointments" }}>Wizyty</Option>
       <Option link={{ to: "/products" }}>Produkty</Option>
+      <Option link={{ to: "/appointments" }}>Wizyty</Option>
       <Option link={{ to: "/contact" }}>Kontakt</Option>
     </React.Fragment>
   );

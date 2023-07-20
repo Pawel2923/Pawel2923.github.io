@@ -26,11 +26,11 @@ export const NavOverlay = (props) => {
           <Option link={{ to: "/", onClick: closeHandler }}>
             Strona główna
           </Option>
-          <Option link={{ to: "/appointments", onClick: closeHandler }}>
-            Wizyty
-          </Option>
           <Option link={{ to: "/products", onClick: closeHandler }}>
             Produkty
+          </Option>
+          <Option link={{ to: "/appointments", onClick: closeHandler }}>
+            Wizyty
           </Option>
           <Option link={{ to: "/contact", onClick: closeHandler }}>
             Kontakt
