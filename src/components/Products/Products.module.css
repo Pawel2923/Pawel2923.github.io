@@ -5,11 +5,9 @@
 }
 
 .products-catalog {
-  width: 80%;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  padding: 0 !important;
+  margin: 0 1rem !important;
 }
 
 .products-catalog > * {
