@@ -38,7 +38,7 @@ export const NavOverlay = (props) => {
         </ul>
       </nav>
       <footer className={classes.footer}>
-        <p>Wszelkie prawa zastrzeżone &copy; 2022</p>
+        <p>Barber Shop - projekt w React.js by Paweł Poremba</p>
       </footer>
     </div>
   );
