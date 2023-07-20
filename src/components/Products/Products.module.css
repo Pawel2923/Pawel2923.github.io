@@ -7,6 +7,7 @@
 .products-catalog {
   display: flex;
   flex-direction: column;
+  width: calc(100% - 2rem);
   margin: 0 1rem !important;
 }
 
@@ -56,12 +57,8 @@
     flex-direction: row;
   }
 
-  .products-catalog {
-    margin: 0 2rem;
-  }
-
   .products-catalog > * {
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 0;
   }
 

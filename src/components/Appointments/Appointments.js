@@ -52,7 +52,7 @@ const Appointments = () => {
     ev.preventDefault();
     let isValid = false;
 
-    const falseIndex = isInputValid.findIndex(val => val === false);
+    const falseIndex = isInputValid.findIndex((val) => val === false);
     if (falseIndex === -1) {
       isValid = true;
     }
@@ -102,7 +102,7 @@ const Appointments = () => {
       <section className={classes.appointments}>
         <h1>Umów się na wizytę</h1>
         <h3>
-          Wyślij wiadomość lub zadzwoń na
+          <span>Wyślij wiadomość lub zadzwoń na </span>
           <a title="Zadzwoń" href="tel:+00 123 000 000">
             +00 123 000 000
           </a>

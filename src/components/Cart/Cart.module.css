@@ -2,15 +2,21 @@
   font-size: 1em;
   cursor: pointer;
   border: none;
-  background-color: none;
   color: #594e4c;
   text-decoration: none;
   transition: color 200ms ease;
+  display: flex;
+  align-items: center;
 }
 
 .cart nav button:hover,
 .cart nav button:active {
   color: black;
+}
+
+.cart nav button > i {
+  margin-right: 0.5rem;
+  font-size: 1.3em;
 }
 
 .cart > div {

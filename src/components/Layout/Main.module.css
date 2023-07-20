@@ -9,6 +9,14 @@
   margin: 4rem 1rem;
 }
 
+.main section:first-child {
+  margin-top: 1rem;
+}
+
+.main section:last-child {
+  margin-bottom: 1rem;
+}
+
 .main h3 {
   font-size: 1.1em;
   letter-spacing: 0.3px;
@@ -26,5 +34,13 @@
 @media screen and (min-width: 700px) {
   .main section {
     margin: 4rem 8rem;
+  }
+
+  .main section:first-child {
+    margin-top: 2rem;
+  }
+  
+  .main section:last-child {
+    margin-bottom: 2rem;
   }
 }
